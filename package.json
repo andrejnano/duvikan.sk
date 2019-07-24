@@ -1,0 +1,72 @@
+{
+  "name": "gatsby-datocms-starter",
+  "private": true,
+  "description": "An opinionated Gatsby starter",
+  "version": "1.0.0",
+  "author": "Chase Ohlson <chase@chaseohlson.com>",
+  "dependencies": {
+    "babel-plugin-styled-components": "^1.10.6",
+    "dotenv": "^8.0.0",
+    "framer-motion": "^1.2.6",
+    "gatsby": "^2.13.38",
+    "gatsby-image": "^2.2.6",
+    "gatsby-plugin-canonical-urls": "^2.1.2",
+    "gatsby-plugin-google-analytics": "^2.1.4",
+    "gatsby-plugin-layout": "^1.1.2",
+    "gatsby-plugin-manifest": "^2.2.4",
+    "gatsby-plugin-react-helmet": "^3.1.2",
+    "gatsby-plugin-robots-txt": "^1.5.0",
+    "gatsby-plugin-sharp": "^2.2.9",
+    "gatsby-plugin-sitemap": "^2.2.3",
+    "gatsby-plugin-styled-components": "^3.1.2",
+    "gatsby-plugin-webpack-size": "^1.0.0",
+    "gatsby-source-datocms": "^2.1.15",
+    "gatsby-source-filesystem": "^2.1.6",
+    "gatsby-transformer-sharp": "^2.2.4",
+    "lodash": "^4.17.15",
+    "path": "^0.12.7",
+    "prop-types": "^15.7.2",
+    "react": "16.8.0",
+    "react-dom": "16.8.0",
+    "react-helmet": "^5.2.1",
+    "react-intersection-observer": "^8.24.1",
+    "react-transition-group": "^4.2.1",
+    "styled-components": "^4.3.2",
+    "typeface-inter": "^3.7.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.0.2",
+    "directory-named-webpack-plugin": "^4.0.0",
+    "eslint": "^5.12.1",
+    "eslint-config-prettier": "^6.0.0",
+    "eslint-loader": "^2.2.1",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.0.1",
+    "eslint-plugin-react": "^7.14.3",
+    "gatsby-plugin-eslint": "^2.0.3",
+    "husky": "^3.0.1",
+    "prettier": "^1.18.2"
+  },
+  "keywords": [
+    "gatsby"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "dev": "gatsby develop",
+    "serve": "gatsby serve",
+    "ssr": "yarn build && yarn serve",
+    "format": "./node_modules/.bin/eslint --ignore-path .gitignore . --fix && prettier --config ./.prettierrc --write src/**/**/*.js && prettier --config ./.prettierrc --write src/**/*.js",
+    "build": "gatsby build",
+    "clean": "rm -rf ./node_modules && rm -rf ./.cache && yarn cache clean && yarn"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn format"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/brohlson/gatsby-datocms-starter"
+  }
+}
