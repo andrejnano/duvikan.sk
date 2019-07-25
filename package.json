@@ -1,9 +1,9 @@
 {
-  "name": "gatsby-datocms-starter",
+  "name": "duvikan-gatsby-datocms",
   "private": true,
-  "description": "An opinionated Gatsby starter",
+  "description": "Duvikan Web",
   "version": "1.0.0",
-  "author": "Chase Ohlson <chase@chaseohlson.com>",
+  "author": "Andrej Nano <nano@andrejnano.sk>",
   "dependencies": {
     "babel-plugin-styled-components": "^1.10.6",
     "dotenv": "^8.0.0",
@@ -22,6 +22,7 @@
     "gatsby-plugin-webpack-size": "^1.0.0",
     "gatsby-source-datocms": "^2.1.15",
     "gatsby-source-filesystem": "^2.1.6",
+    "gatsby-transformer-remark": "^2.6.9",
     "gatsby-transformer-sharp": "^2.2.4",
     "lodash": "^4.17.15",
     "path": "^0.12.7",
@@ -67,6 +68,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/brohlson/gatsby-datocms-starter"
+    "url": "https://github.com/andrejnano/duvikan.sk"
   }
 }

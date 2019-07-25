@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+
 import { graphql, useStaticQuery, Link } from 'gatsby';
 import { map } from 'lodash';
 
@@ -10,20 +11,17 @@ import { ScaleUp } from '../style/motion';
 
 const Wrapper = styled.div`
   height: calc(100vh - 100px);
+  overflow: auto;
   display: flex;
   justify-content: center;
-  align-items: center;
+  max-width: 100%;
+  padding: 20px;
 `;
 
 const Inner = styled.div`
-  width: 400px;
+  width: 700px;
   max-width: 100%;
-  text-align: center;
-  pre {
-    background: rgba(0, 0, 0, 0.1);
-    padding: 2px 4px;
-    font-size: 1.2rem;
-  }
+  text-align: left;
   button {
     ${font.button};
     background: ${colors.dark};
@@ -35,20 +33,44 @@ const Inner = styled.div`
 
 const Title = styled.h1`
   ${font.h1}
+  margin-bottom: 3rem;
 `;
 
 const PostLink = styled.div`
   margin-bottom: 1em;
+  max-width: 400px;
   a {
     color: ${colors.light};
-    background: ${colors.purple};
-    padding: 0.35em 0.7em;
-    font-style: italic;
+    div {
+      border: 0.25px solid ${colors.light};
+      padding: 0.35em 0.7em;
+
+      h3 {
+        border-left: 4px solid ${colors.light};
+        margin-left: calc(-0.7em + 1px);
+        padding-left: 1rem;
+        line-height: 2em;
+      }
+    }
     &:hover {
-      text-decoration: none;
-      background: ${colors.dark};
+      div {
+        text-decoration: none;
+        background: ${colors.light};
+        color: ${colors.dark};
+
+        h3 {
+          border-left: 4px solid ${colors.red};
+        }
+      }
     }
   }
+`;
+
+const Separator = styled.div`
+  width: 70px;
+  height: 5px;
+  background: #fff;
+  margin: 2rem 0;
 `;
 
 const Blog = () => {
@@ -67,7 +89,13 @@ const Blog = () => {
           node {
             id
             title
+            featured
             slug
+            contentNode {
+              childMarkdownRemark {
+                excerpt
+              }
+            }
           }
         }
       }
@@ -80,15 +108,19 @@ const Blog = () => {
       <SEO meta={seoMetaTags} />
       <Wrapper>
         <Inner>
+          <Separator/>
           <Title>{title}</Title>
           {map(edges, post => (
             <PostLink key={post.node.slug}>
-              <Link to={`/blog/${post.node.slug}/`}>{post.node.title}</Link>
+              <Link to={`/blog/${post.node.slug}/`}>
+                {/* <img></img> */}
+                <div>
+                  <h3>{post.node.title}</h3>
+                  <p>{post.node.contentNode.childMarkdownRemark.excerpt}</p>
+                </div>
+              </Link>
             </PostLink>
           ))}
-          <Link to="/">
-            <button css={{ marginLeft: '.5em' }}>Go Home</button>
-          </Link>
         </Inner>
       </Wrapper>
     </ScaleUp>

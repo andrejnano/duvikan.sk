@@ -20,9 +20,10 @@ export const font = {
 };
 
 export const colors = {
-  dark: '#222',
+  dark: '#1C1C1C',
   light: '#fafafa',
   purple: '#9135AD',
+  red: '#f93a3c',
 };
 
-export const duration = 500;
+export const duration = 300;

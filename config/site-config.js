@@ -1,7 +1,7 @@
 module.exports = {
-  siteUrl: 'https://gatsby-datocms-starter.netlify.com',
+  siteUrl: 'https://duvikan.ho',
   sitemapPath: '/sitemap.xml',
-  title: 'Gatsby DatoCMS Starter',
-  description: 'Website Description',
-  author: '@chaseohlsonweb',
+  title: 'Duvikan',
+  description: 'Karate klub Duvikan Bratislava',
+  author: '@andrejnano',
 };

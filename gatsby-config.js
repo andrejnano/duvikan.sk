@@ -12,6 +12,7 @@ module.exports = {
     'gatsby-transformer-sharp',
     'gatsby-plugin-sharp',
     'gatsby-plugin-webpack-size',
+    'gatsby-transformer-remark',
     {
       resolve: 'gatsby-plugin-styled-components',
       options: {

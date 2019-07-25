@@ -10,22 +10,24 @@ import { ScaleUp } from '../style/motion';
 
 const Wrapper = styled.div`
   height: calc(100vh - 100px);
+  overflow: auto;
   display: flex;
   justify-content: center;
-  align-items: center;
   max-width: 100%;
-  padding: 20px;
+  padding: 3rem 2rem 1rem;
+  position: relative;
 `;
 
 const Inner = styled.div`
-  width: 700px;
+  width: 750px;
   max-width: 100%;
   text-align: left;
-  pre {
-    background: rgba(0, 0, 0, 0.1);
-    padding: 2px 4px;
-    font-size: 1.2rem;
-  }
+  color: ${colors.light};
+  padding: 3rem;
+  overflow: auto;
+  position: relative;
+  z-index: 100;
+
   button {
     ${font.button};
     background: ${colors.dark};
@@ -36,19 +38,48 @@ const Inner = styled.div`
   }
 `;
 
+const Overlay = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-image: linear-gradient(
+    to bottom,
+    ${colors.dark},
+    rgba(0, 0, 0, 0)
+  );
+  background: linear-gradient(
+    180deg,
+    ${colors.dark} 0%,
+    rgba(0, 0, 0, 0) 15%,
+    rgba(0, 0, 0, 0) 85%,
+    ${colors.dark} 100%
+  );
+  z-index: 200;
+  pointer-events: none;
+`;
+
 const Title = styled.h1`
   ${font.h1}
+  line-height: 1.2;
+  margin: 1em 0;
 `;
 
 const BlogPost = ({ data }) => {
-  const { title, seoMetaTags, content } = data.project;
+  const { title, seoMetaTags, contentNode } = data.project;
   return (
     <ScaleUp>
       <SEO meta={seoMetaTags} />
       <Wrapper>
+        <Overlay />
         <Inner>
           <Title>{title}</Title>
-          <div dangerouslySetInnerHTML={{ __html: content }} />
+          <div
+            dangerouslySetInnerHTML={{
+              __html: contentNode.childMarkdownRemark.html,
+            }}
+          />
           <Link to="/blog">
             <button>Go Back</button>
           </Link>
@@ -65,7 +96,11 @@ export const projectQuery = graphql`
       seoMetaTags {
         ...GatsbyDatoCmsSeoMetaTags
       }
-      content
+      contentNode {
+        childMarkdownRemark {
+          html
+        }
+      }
     }
   }
 `;
