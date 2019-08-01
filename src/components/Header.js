@@ -171,7 +171,9 @@ class Header extends Component {
   render() {
     const isScrolling =
       this.state.scrollPositionY < this.state.scrollPositionYOld &&
-      this.state.scrollPositionY > 50;
+      this.state.scrollPositionY > 5;
+
+    // TODO: fix "scrolling up and back down again" glitch.. make it somehow smoother
 
     const { data } = this.props;
     return (

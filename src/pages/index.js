@@ -292,7 +292,8 @@ const IndexPage = () => {
                           </Moment>
                         </time>
                         <div>
-                          {post.node.contentNode.childMarkdownRemark.timeToRead} min read
+                          {post.node.contentNode.childMarkdownRemark.timeToRead}{' '}
+                          min read
                         </div>
                       </PostInfo>
                     </div>

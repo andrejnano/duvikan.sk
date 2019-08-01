@@ -101,7 +101,10 @@ const BlogIndex = ({ pageContext }) => {
       <Wrapper>
         <Container>
           <Title>
-            {title} <span>&mdash; {index}/{pageCount}</span>
+            {title}{' '}
+            <span>
+              &mdash; {index}/{pageCount}
+            </span>
           </Title>
           {group.map(node => (
             <PostLink key={node.slug}>
