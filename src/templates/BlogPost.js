@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import Moment from 'react-moment';
 import { graphql, Link } from 'gatsby';
 
 import SEO from '../components/SEO';
@@ -19,7 +20,7 @@ const Wrapper = styled.div`
 `;
 
 const Inner = styled.div`
-  width: 750px;
+  width: 950px;
   max-width: 100%;
   text-align: left;
   color: ${colors.light};
@@ -66,14 +67,68 @@ const Title = styled.h1`
   margin: 1em 0;
 `;
 
+const PostInfo = styled.header`
+  width: 100%;
+  color: ${colors.light};
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
+const LastUpdate = styled.time`
+  font-weight: bold;
+  padding: 0 1rem;
+`;
+
+const TimeToRead = styled.time`
+  font-weight: 400;
+  padding: 0 1rem;
+  &::before {
+    content: '\00B7';
+  }
+`;
+
+const GoBack = styled.div`
+  display: none;
+  /* display: flex; */
+  justify-content: center;
+  max-width: 100%;
+  height: 50px;
+  position: relative;
+  a {
+    color: ${colors.light};
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-decoration: none;
+    &::hover {
+      text-decoration: none;
+      opacity: 0.5;
+    }
+    &::before {
+      content: '← ';
+    }
+  }
+`;
+
 const BlogPost = ({ data }) => {
-  const { title, seoMetaTags, contentNode } = data.project;
+  const { title, seoMetaTags, meta, contentNode } = data.project;
   return (
     <ScaleUp>
       <SEO meta={seoMetaTags} />
+      <GoBack>
+        <Link to="/blog">Novinky</Link>
+      </GoBack>
       <Wrapper>
         <Overlay />
         <Inner>
+          <PostInfo>
+            <LastUpdate>
+              <Moment format="DD.MM.YYYY">{meta.updatedAt}</Moment>
+            </LastUpdate>
+            <TimeToRead>
+              {contentNode.childMarkdownRemark.timeToRead} min read
+            </TimeToRead>
+          </PostInfo>
           <Title>{title}</Title>
           <div
             dangerouslySetInnerHTML={{
@@ -96,9 +151,13 @@ export const projectQuery = graphql`
       seoMetaTags {
         ...GatsbyDatoCmsSeoMetaTags
       }
+      meta {
+        updatedAt
+      }
       contentNode {
         childMarkdownRemark {
           html
+          timeToRead
         }
       }
     }

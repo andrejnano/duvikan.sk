@@ -1,24 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 import { graphql, useStaticQuery } from 'gatsby';
-
+import GoogleMapReact from 'google-map-react';
 import SEO from '../components/SEO';
 
 import { ScaleUp } from '../style/motion';
 
-const Wrapper = styled.div`
-  height: calc(100vh - 100px);
-  overflow: auto;
-  display: flex;
-  justify-content: center;
-  max-width: 100%;
-  padding: 20px;
-`;
+import Container from '../containers/Container';
 
-const Inner = styled.div`
-  width: 700px;
-  max-width: 100%;
-  text-align: left;
+const Wrapper = styled.div`
+  background: transparent;
 `;
 
 const ContactPage = () => {
@@ -32,6 +23,10 @@ const ContactPage = () => {
         seoMetaTags {
           ...GatsbyDatoCmsSeoMetaTags
         }
+        location {
+          latitude
+          longitude
+        }
       }
     }
   `);
@@ -42,19 +37,31 @@ const ContactPage = () => {
     email,
     phoneNumber,
     seoMetaTags,
+    location,
   } = data.datoCmsContactPage;
+
+  const center = {
+    lat: location.latitude,
+    lng: location.longitude,
+  };
+
   return (
     <ScaleUp>
       <SEO meta={seoMetaTags} />
       <Wrapper>
-        <Inner>
+        <Container>
           <h1>{title}</h1>
           <p>{intro}</p>
           <ul>
             <li>Email: {email}</li>
             <li>Tel č.: {phoneNumber}</li>
           </ul>
-        </Inner>
+          <GoogleMapReact
+            bootstrapURLKeys={{ key: process.env.GMAPS_KEY }}
+            defaultCenter={center}
+            defaultZoom={14}
+          ></GoogleMapReact>
+        </Container>
       </Wrapper>
     </ScaleUp>
   );

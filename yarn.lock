@@ -1091,6 +1091,11 @@
   dependencies:
     core-js "^2.5.7"
 
+"@mapbox/point-geometry@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@mapbox/point-geometry/-/point-geometry-0.1.0.tgz#8a83f9335c7860effa2eeeca254332aa0aeed8f2"
+  integrity sha1-ioP5M1x4YO/6Lu7KJUMyqgru2PI=
+
 "@mikaelkristiansson/domready@^1.0.9":
   version "1.0.9"
   resolved "https://registry.yarnpkg.com/@mikaelkristiansson/domready/-/domready-1.0.9.tgz#b2b85d8ac7bb2797e577050b61aeaf1b26fbd906"
@@ -4592,6 +4597,11 @@ event-source-polyfill@^1.0.5:
   resolved "https://registry.yarnpkg.com/event-source-polyfill/-/event-source-polyfill-1.0.7.tgz#79a0a432e00ef53387309d6213d98332bab0a4ea"
   integrity sha512-TPbIjt4c3dlO7WTdsaTdwcxD1jKl+2gGD6dfauEmGqRNtpoB9ith/c4qa+X8XbTV5FsvTrkjepXfamWxntklVA==
 
+eventemitter3@^1.1.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/eventemitter3/-/eventemitter3-1.2.0.tgz#1c86991d816ad1e504750e73874224ecf3bec508"
+  integrity sha1-HIaZHYFq0eUEdQ5zh0Ik7PO+xQg=
+
 eventemitter3@^3.0.0:
   version "3.1.2"
   resolved "https://registry.yarnpkg.com/eventemitter3/-/eventemitter3-3.1.2.tgz#2d3d48f9c346698fce83a85d7d664e98535df6e7"
@@ -5440,6 +5450,13 @@ gatsby-page-utils@^0.0.5:
     micromatch "^3.1.10"
     slash "^1.0.0"
 
+gatsby-paginate@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/gatsby-paginate/-/gatsby-paginate-1.1.1.tgz#56f59910082eacb809297c89b02d31a0e3bd2f0c"
+  integrity sha512-TZSM5olaXDsdQCwHJ1a+MVRAegUH6esjGGIASPYN/CNTkaSvYr91BtHhrgxPU4yl7pmKIRVUG+rC0Pb+vUG+zQ==
+  dependencies:
+    path "^0.12.7"
+
 gatsby-plugin-canonical-urls@^2.1.2:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-canonical-urls/-/gatsby-plugin-canonical-urls-2.1.2.tgz#ee719d4df3f0b855768f8f4191071fd179ade48d"
@@ -6002,6 +6019,15 @@ globby@^8.0.1:
     ignore "^3.3.5"
     pify "^3.0.0"
     slash "^1.0.0"
+
+google-map-react@^1.1.4:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/google-map-react/-/google-map-react-1.1.4.tgz#ebf649b3cb985c645a0b7a05eb4e1c3f80482c80"
+  integrity sha512-+XcOu7QrRrlDa7Bk25oVV4FSsvMorAupuBrnDjA28Zz+HE+wEz79igqn+0KCHbemjgEHz51sHk0wm+IodvLoMg==
+  dependencies:
+    "@mapbox/point-geometry" "^0.1.0"
+    eventemitter3 "^1.1.0"
+    scriptjs "^2.5.7"
 
 got@8.0.0:
   version "8.0.0"
@@ -8422,7 +8448,7 @@ mkdirp@0.5.1, mkdirp@0.5.x, mkdirp@^0.5.0, mkdirp@^0.5.1, mkdirp@~0.5.0, mkdirp@
   dependencies:
     minimist "0.0.8"
 
-moment@^2.21.0:
+moment@^2.21.0, moment@^2.24.0:
   version "2.24.0"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.24.0.tgz#0d055d53f5052aa653c9f6eb68bb5d12bf5c2b5b"
   integrity sha512-bV7f+6l2QigeBBZSM/6yTNq4P2fNpSWj/0e7jQcy87A8e7o2nAfP/34/2ky5Vw4B9S446EtIhodAzkFCcR4dQg==
@@ -10421,6 +10447,11 @@ react-lifecycles-compat@^3.0.4:
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
 
+react-moment@^0.9.2:
+  version "0.9.2"
+  resolved "https://registry.yarnpkg.com/react-moment/-/react-moment-0.9.2.tgz#1cdc6ed02f1735282282129edf0f607f420df039"
+  integrity sha512-jpKIEvcEOTSa4RXWTjDlvja7sN+ee5Gyk5ZKa704FZxE01OxmKIpq9GUliqTrAgdDYJJUQsnqQamczn0TN+DTg==
+
 react-reconciler@^0.20.0:
   version "0.20.4"
   resolved "https://registry.yarnpkg.com/react-reconciler/-/react-reconciler-0.20.4.tgz#3da6a95841592f849cb4edd3d38676c86fd920b2"
@@ -11119,6 +11150,11 @@ schema-utils@^1.0.0:
     ajv "^6.1.0"
     ajv-errors "^1.0.0"
     ajv-keywords "^3.1.0"
+
+scriptjs@^2.5.7:
+  version "2.5.9"
+  resolved "https://registry.yarnpkg.com/scriptjs/-/scriptjs-2.5.9.tgz#343915cd2ec2ed9bfdde2b9875cd28f59394b35f"
+  integrity sha512-qGVDoreyYiP1pkQnbnFAUIS5AjenNwwQBdl7zeos9etl+hYKWahjRTfzAZZYBv5xNHx7vNKCmaLDQZ6Fr2AEXg==
 
 scroll-behavior@^0.9.9:
   version "0.9.10"

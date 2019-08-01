@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { graphql, useStaticQuery } from 'gatsby';
 
 import SEO from '../components/SEO';
+import Gallery from '../components/Gallery';
 
 import { ScaleUp } from '../style/motion';
 
@@ -42,6 +43,7 @@ const AboutPage = () => {
         <Inner>
           <h1>{title}</h1>
           <p>{intro}</p>
+          <Gallery></Gallery>
         </Inner>
       </Wrapper>
     </ScaleUp>

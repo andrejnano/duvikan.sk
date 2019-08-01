@@ -1,4 +1,5 @@
 const path = require('path');
+const createPaginatedPages = require('gatsby-paginate');
 
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
@@ -10,19 +11,42 @@ exports.createPages = async ({ graphql, actions }) => {
         {
           allDatoCmsBlogPost {
             nodes {
+              id
+              title
               slug
+              featured
+              meta {
+                updatedAt
+              }
+              contentNode {
+                childMarkdownRemark {
+                  excerpt
+                  timeToRead
+                }
+              }
             }
           }
         }
       `).then(res => {
         const posts = res.data.allDatoCmsBlogPost.nodes;
+
+        // new pagination strategy
+        createPaginatedPages({
+          edges: posts,
+          createPage: createPage,
+          pageTemplate: './src/templates/BlogIndex.js',
+          pageLength: 5,
+          pathPrefix: 'blog',
+        });
+
+        // down from here is the original page per post creation
         posts.map(post => {
           let { slug } = post;
           createPage({
             path: `/blog/${slug}`,
             component: path.resolve('./src/templates/BlogPost.js'),
             context: {
-              slug,
+              slug: slug,
             },
           });
         });

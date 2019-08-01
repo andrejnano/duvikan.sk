@@ -5,15 +5,11 @@ import { graphql, useStaticQuery } from 'gatsby';
 import SEO from '../components/SEO';
 
 import { ScaleUp } from '../style/motion';
+import Container from '../containers/Container';
 
-const Wrapper = styled.div`
-  height: calc(100vh - 100px);
-  width: 100%;
+const Wrapper = styled.main`
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
-  padding: 2rem;
-  overflow: auto;
 `;
 
 const InnerLeft = styled.div`
@@ -57,20 +53,22 @@ const HistoriaPage = () => {
   return (
     <ScaleUp>
       <SEO meta={seoMetaTags} />
-      <Wrapper>
-        <InnerLeft>
-          <img src={coverImage.url} alt={title} />
-        </InnerLeft>
-        <InnerRight>
-          <h1>{title}</h1>
+      <Container>
+        <Wrapper>
+          <InnerLeft>
+            <img src={coverImage.url} alt={title} />
+          </InnerLeft>
+          <InnerRight>
+            <h1>{title}</h1>
 
-          <div
-            dangerouslySetInnerHTML={{
-              __html: content,
-            }}
-          />
-        </InnerRight>
-      </Wrapper>
+            <div
+              dangerouslySetInnerHTML={{
+                __html: content,
+              }}
+            />
+          </InnerRight>
+        </Wrapper>
+      </Container>
     </ScaleUp>
   );
 };
