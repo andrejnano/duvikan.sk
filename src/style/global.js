@@ -19,10 +19,8 @@ body {
   word-wrap: break-word;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: ${colors.fg};
-  background-color: ${colors.bg};
-  background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(255,197,118,1) 0%, rgba(254,106,103,1) 47.7%, rgba(240,23,23,1) 92.3% );
-  ${gradients.gray2};
+  color: ${colors.black};
+  background-color: ${colors.white};
 }
 
 // links reset

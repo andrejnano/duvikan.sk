@@ -1,36 +1,68 @@
 import React from 'react';
 import styled from 'styled-components';
 import { graphql, useStaticQuery } from 'gatsby';
-
+import Img from 'gatsby-image';
 import SEO from '../components/SEO';
 
 import { ScaleUp } from '../style/motion';
 import Container from '../containers/Container';
+import { colors } from '../consts/style';
 
-const Wrapper = styled.main`
+const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
+  min-height: 100vh;
+  margin: 3rem 0;
+  padding: 3rem 0;
 `;
 
-const InnerLeft = styled.div`
-  text-align: left;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  flex-basis: 100%;
-  flex: 1;
+const SidePanel = styled.div`
+  width: 150px;
+`;
 
-  img {
-    max-width: 60%;
+const MainPanel = styled.main`
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  > section {
+    max-width: 100%;
   }
 `;
 
-const InnerRight = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex-basis: 100%;
-  flex: 1;
-  overflow: auto;
+const IntroHeadline = styled.section`
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 3rem;
+  flex: 100%;
+`;
+
+const FirstParagraph = styled.section`
+  flex: 70%;
+
+  > div {
+    padding-right: 2rem;
+    p {
+      text-align: justify;
+      font-size: 1.7rem;
+      font-weight: 500;
+      color: ${colors.gray3};
+      letter-spacing: -0.004em;
+      line-height: 1.58;
+    }
+  }
+`;
+
+const FirstImage = styled.section`
+  flex: 30%;
+`;
+
+const MainContent = styled.section`
+  flex: 100%;
+`;
+
+const Title = styled.h1`
+  font-size: 2rem;
+  font-weight: 600;
 `;
 
 const HistoriaPage = () => {
@@ -41,32 +73,54 @@ const HistoriaPage = () => {
         seoMetaTags {
           ...GatsbyDatoCmsSeoMetaTags
         }
-        coverImage {
-          url
+        introHeadline
+        firstParagraph
+        firstImage {
+          fluid(maxWidth: 720) {
+            ...GatsbyDatoCmsFluid
+          }
         }
         content
       }
     }
   `);
 
-  const { title, content, coverImage, seoMetaTags } = data.datoCmsHistoriaPage;
+  const {
+    title,
+    introHeadline,
+    firstParagraph,
+    firstImage,
+    content,
+    seoMetaTags,
+  } = data.datoCmsHistoriaPage;
   return (
     <ScaleUp>
       <SEO meta={seoMetaTags} />
       <Container>
         <Wrapper>
-          <InnerLeft>
-            <img src={coverImage.url} alt={title} />
-          </InnerLeft>
-          <InnerRight>
-            <h1>{title}</h1>
-
-            <div
-              dangerouslySetInnerHTML={{
-                __html: content,
-              }}
-            />
-          </InnerRight>
+          <SidePanel>
+            <Title>{title}</Title>
+          </SidePanel>
+          <MainPanel>
+            <IntroHeadline>{introHeadline}</IntroHeadline>
+            <FirstParagraph>
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: firstParagraph,
+                }}
+              />
+            </FirstParagraph>
+            <FirstImage>
+              <Img fluid={firstImage.fluid} />
+            </FirstImage>
+            <MainContent>
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: content,
+                }}
+              />
+            </MainContent>
+          </MainPanel>
         </Wrapper>
       </Container>
     </ScaleUp>

@@ -16,7 +16,28 @@ exports.createPages = async ({ graphql, actions }) => {
               slug
               featured
               meta {
-                updatedAt
+                createdAt
+              }
+              cover {
+                fluid(maxWidth: 720) {
+                  src
+                  srcSet
+                  sizes
+                  aspectRatio
+                  base64
+                }
+              }
+              author {
+                name
+                photo {
+                  fluid(maxWidth: 200) {
+                    src
+                    srcSet
+                    base64
+                    aspectRatio
+                    sizes
+                  }
+                }
               }
               contentNode {
                 childMarkdownRemark {

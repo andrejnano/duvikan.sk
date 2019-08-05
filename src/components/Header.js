@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import Img from 'gatsby-image';
 import { graphql, Link, StaticQuery } from 'gatsby';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import Container from '../containers/Container';
 import { colors } from '../consts/style';
@@ -12,7 +13,16 @@ const HeaderWrapper = styled.header`
   z-index: 999;
   top: 0;
   padding-top: 54px;
-  transition: background 0.4s linear;
+  background: ${colors.white};
+  color: ${colors.black};
+  transition: background 0.4s linear, color 0.4s linear;
+
+  &.isHome {
+    background: transparent;
+    transition: background 0.4s linear, color 0.4s linear;
+    color: ${colors.white};
+  }
+
   &.isScrolling {
     transition: background 0.2s linear;
     position: sticky;
@@ -28,6 +38,10 @@ const HeaderWrapper = styled.header`
     &:hover {
       opacity: 0.5;
     }
+  }
+
+  a.activePage {
+    border-bottom: 3px solid ${colors.darkWash};
   }
 `;
 
@@ -49,7 +63,7 @@ const InsideWrapper = styled.div`
 `;
 
 const LeftWrapper = styled.div`
-  width: 150px;
+  width: 200px;
 `;
 
 const RightWrapper = styled.div`
@@ -62,7 +76,7 @@ const RightWrapper = styled.div`
 
 const Logo = styled.div`
   background: transparent;
-  width: 150px;
+  width: 200px;
 `;
 
 const PageTitle = styled.div`
@@ -105,26 +119,9 @@ const Image = styled(Img)`
   width: 50px;
 `;
 
-const ToggleButton = styled.button`
-  display: none;
-  cursor: pointer;
-  user-select: none;
-  width: 24px;
-  height: 24px;
-  box-sizing: border-box;
-  padding: 8px;
-  position: relative;
-  right: -9px;
-  background-color: transparent;
-  border: 0;
-  color: inherit;
-  outline: none;
-
+const ToggleButton = styled.div`
   svg {
-    fill: currentColor;
-    display: block;
-    width: 100%;
-    height: auto;
+    color: inherit;
   }
 `;
 
@@ -176,15 +173,19 @@ class Header extends Component {
     // TODO: fix "scrolling up and back down again" glitch.. make it somehow smoother
 
     const { data } = this.props;
+
+    // eslint-disable-next-line prettier/prettier
+    const headerClasses = `${this.props.isHome ? 'isHome' : ''} ${isScrolling ? 'isScrolling' : ''}`;
+
     return (
-      <HeaderWrapper className={isScrolling ? 'isScrolling' : null}>
+      <HeaderWrapper className={headerClasses}>
         <Navigation>
           <Container>
             <InsideWrapper>
               <LeftWrapper>
                 <Logo>
                   <Link to="/">
-                    <Image fluid={data.logo.childImageSharp.fluid} />
+                    <Image fluid={this.props.isHome ? data.logoWhite.childImageSharp.fluid : data.logoBlack.childImageSharp.fluid} />
                   </Link>
                 </Logo>
               </LeftWrapper>
@@ -200,9 +201,6 @@ class Header extends Component {
                   </Link>
                 </PageTitle>
                 <NavList>
-                  <Link to="/" activeClassName="activePage">
-                    Domov
-                  </Link>
                   <Link to="/blog" activeClassName="activePage">
                     Novinky
                   </Link>
@@ -219,17 +217,9 @@ class Header extends Component {
                     Kontakt
                   </Link>
                 </NavList>
-                <ToggleButton>
-                  <svg
-                    id="mobile-nav-open"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M22,13H2a1,1,0,0,1,0-2H22a1,1,0,0,1,0,2Z"></path>
-                    <path d="M22,6H2A1,1,0,0,1,2,4H22a1,1,0,0,1,0,2Z"></path>
-                    <path d="M22,20H2a1,1,0,0,1,0-2H22a1,1,0,0,1,0,2Z"></path>
-                  </svg>
-                </ToggleButton>
+                {/* <ToggleButton>
+                  <FontAwesomeIcon icon={['far', 'bars']} />
+                </ToggleButton> */}
               </RightWrapper>
             </InsideWrapper>
           </Container>
@@ -244,7 +234,14 @@ export default props => (
   <StaticQuery
     query={graphql`
       query HeaderQuery {
-        logo: file(relativePath: { eq: "logo-white.png" }) {
+        logoWhite: file(relativePath: { eq: "logo-white.png" }) {
+          childImageSharp {
+            fluid(maxWidth: 60) {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
+        logoBlack: file(relativePath: { eq: "logo-black.png" }) {
           childImageSharp {
             fluid(maxWidth: 60) {
               ...GatsbyImageSharpFluid

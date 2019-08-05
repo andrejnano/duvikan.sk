@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
 import Moment from 'react-moment';
@@ -5,13 +6,19 @@ import { graphql, useStaticQuery, Link } from 'gatsby';
 import Img from 'gatsby-image';
 import SEO from '../components/SEO';
 import { map } from 'lodash';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { font, colors } from '../consts/style';
+import { colors } from '../consts/style';
 import { ScaleUp } from '../style/motion';
 import Container from '../containers/Container';
 
+const HomePage = styled.article`
+  color: ${colors.white};
+`;
+
 const Section = styled.section`
   margin-top: 3rem;
+  padding: 3rem 0;
   margin-bottom: 4rem;
   width: 100%;
   display: flex;
@@ -20,7 +27,7 @@ const Section = styled.section`
 
 const SectionInfo = styled.div`
   background: transparent;
-  width: 150px;
+  width: 200px;
 `;
 
 const SectionContent = styled.div`
@@ -37,15 +44,14 @@ const SectionContent = styled.div`
     text-transform: uppercase;
     font-size: 1.2rem;
 
-    &::after {
-      content: '>';
+    &:hover {
+      opacity: 0.6;
+    }
+
+    svg {
+      font-size: 1.6rem;
       vertical-align: middle;
-      line-height: 0;
-      position: relative;
-      font-size: 1.8rem;
-      font-weight: 300;
-      top: -0.11em;
-      left: 0.2em;
+      margin-top: -0.2rem;
     }
   }
 `;
@@ -59,35 +65,6 @@ const SectionSeparator = styled.hr`
   background-color: #fff;
 `;
 
-const QuickLinkGrid = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  margin-left: -0.75rem;
-  margin-right: -1.75rem;
-  a {
-    flex: 0 0 33.3333333333%;
-    max-width: 33%;
-    padding: 0.75rem;
-  }
-`;
-
-const QuickLink = styled.figure`
-  background-color: ${colors.lightWash};
-  box-shadow: 0 0 25px rgba(5, 5, 38, 0.1);
-  padding: 5%;
-  .title {
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: ${colors.black};
-    margin-bottom: 1em;
-  }
-  .coverImg {
-    background: red;
-    max-width: 100%;
-  }
-`;
-
 const Main = styled.section`
   padding-top: 3rem;
   background: ${colors.lightWash};
@@ -97,11 +74,19 @@ const Main = styled.section`
 const CenteredTextBlock = styled.div`
   font-size: 3rem;
   font-weight: 200;
-  max-width: 720px;
   padding-top: 3rem;
   padding-bottom: 6rem;
-  margin-left: auto;
+  margin-left: 150px;
   margin-right: auto;
+  .subtitle {
+    font-size: 2rem;
+  }
+  .bodyContent {
+    font-size: 2rem;
+    margin-top: 3rem;
+    text-align: left;
+    max-width: 720px;
+  }
 `;
 
 const Newsfeed = styled.section`
@@ -160,6 +145,67 @@ const PostInfo = styled.div`
   font-size: 1.3rem;
 `;
 
+const QuickLinkGrid = styled.ul`
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  position: relative;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+`;
+
+const QuickLinkCard = styled.li`
+  position: relative;
+  min-width: 250px;
+  width: 100%;
+  @media (min-width: 720px) {
+    max-width: 300px;
+  }
+  @media (min-width: 1040px) {
+    width: 33.33333%;
+  }
+
+  a.card {
+    display: block;
+    position: relative;
+    margin: 15px;
+    box-shadow: 0 2px 4px rgba(3, 27, 78, 0.06);
+    border-radius: 3px;
+    background: ${colors.white};
+    transition: box-shadow 0.25s linear, -webkit-box-shadow 0.25s linear;
+    color: ${colors.black};
+    overflow: hidden;
+    height: 100%;
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    .photo {
+      position: relative;
+      max-width: 720px;
+    }
+    .title {
+      font-size: 3rem;
+      padding: 2rem;
+    }
+  }
+`;
+
+const QuickLink = props => {
+  return (
+    <QuickLinkCard>
+      <Link className="card" to={props.url}>
+        <Img className="photo" fluid={props.imgFluid} />
+        <h3 className="title">{props.title}</h3>
+      </Link>
+    </QuickLinkCard>
+  );
+};
+
 const IndexPage = () => {
   const data = useStaticQuery(graphql`
     query indexQuery {
@@ -186,6 +232,7 @@ const IndexPage = () => {
             ...GatsbyDatoCmsFluid
           }
         }
+        body
       }
       posts: allDatoCmsBlogPost(
         sort: { fields: [meta___createdAt], order: DESC }
@@ -220,12 +267,13 @@ const IndexPage = () => {
     quickLink1Cover,
     quickLink2Cover,
     quickLink3Cover,
+    body,
   } = data.page;
 
   const { edges } = data.posts;
 
   return (
-    <>
+    <HomePage>
       <SEO meta={seoMetaTags} />
       <ScaleUp>
         <Container>
@@ -234,35 +282,31 @@ const IndexPage = () => {
             <SectionContent>
               <p>{description}</p>
               <Link className="cta" to="/about">
-                Viac info
+                Viac info{' '}
+                <FontAwesomeIcon icon={['far', 'long-arrow-alt-right']} />
               </Link>
             </SectionContent>
           </Section>
           <SectionSeparator />
           <Section>
-            {/* <SectionInfo>Najdôležitejšie informácie</SectionInfo> */}
+            <SectionInfo>Najdôležitejšie<br/>informácie</SectionInfo>
             <SectionContent>
               <QuickLinkGrid>
-                <Link to="/historia">
-                  <QuickLink>
-                    <div className="title">{quickLink1Title}</div>
-                    <Img fluid={quickLink1Cover.fluid} />
-                  </QuickLink>
-                </Link>
-
-                <Link to="/historia">
-                  <QuickLink>
-                    <div className="title">{quickLink2Title}</div>
-                    <Img fluid={quickLink2Cover.fluid} />
-                  </QuickLink>
-                </Link>
-
-                <Link to="/historia">
-                  <QuickLink>
-                    <div className="title">{quickLink3Title}</div>
-                    <Img fluid={quickLink3Cover.fluid} />
-                  </QuickLink>
-                </Link>
+                <QuickLink
+                  url="/treningy"
+                  title={quickLink1Title}
+                  imgFluid={quickLink1Cover.fluid}
+                />
+                <QuickLink
+                  url="/dojo"
+                  title={quickLink2Title}
+                  imgFluid={quickLink2Cover.fluid}
+                />
+                <QuickLink
+                  url="/historia"
+                  title={quickLink3Title}
+                  imgFluid={quickLink3Cover.fluid}
+                />
               </QuickLinkGrid>
             </SectionContent>
           </Section>
@@ -270,7 +314,17 @@ const IndexPage = () => {
       </ScaleUp>
       <Main>
         <Container>
-          <CenteredTextBlock>{description}</CenteredTextBlock>
+          <CenteredTextBlock>
+            <h3>Duvi-kan</h3>
+            <div className="subtitle">DUVI - okinawské meno šéftrénera MUDr. Divinca</div>
+            <div className="subtitle">KAN - po japonsky škola</div>
+            <div
+              className="bodyContent"
+              dangerouslySetInnerHTML={{
+                __html: body,
+              }}
+            />
+          </CenteredTextBlock>
           <SectionSeparator />
         </Container>
       </Main>
@@ -282,7 +336,6 @@ const IndexPage = () => {
               {map(edges, post => (
                 <PostLink key={post.node.slug}>
                   <Link to={`/blog/${post.node.slug}/`}>
-                    {/* <img></img> */}
                     <div>
                       <h3>{post.node.title}</h3>
                       <PostInfo>
@@ -304,7 +357,7 @@ const IndexPage = () => {
           </CenteredTextBlock>
         </Container>
       </Newsfeed>
-    </>
+    </HomePage>
   );
 };
 

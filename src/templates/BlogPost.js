@@ -3,15 +3,16 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Moment from 'react-moment';
 import { graphql, Link } from 'gatsby';
+import Img from 'gatsby-image';
 
 import SEO from '../components/SEO';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { font, colors } from '../consts/style';
 import { ScaleUp } from '../style/motion';
+import Container from '../containers/Container';
 
 const Wrapper = styled.div`
   height: calc(100vh - 100px);
-  overflow: auto;
   display: flex;
   justify-content: center;
   max-width: 100%;
@@ -23,48 +24,23 @@ const Inner = styled.div`
   width: 950px;
   max-width: 100%;
   text-align: left;
-  color: ${colors.light};
   padding: 3rem;
-  overflow: auto;
-  position: relative;
-  z-index: 100;
+  margin-left: auto;
+  margin-right: auto;
+`;
 
-  button {
-    ${font.button};
-    background: ${colors.dark};
-    border: none;
-    color: white;
-    padding: 0.35em 0.7em;
-    margin-top: 0.7em;
+const PostCover = styled.div`
+  width: 100%;
+  margin-top: 3rem;
+  div {
+    max-height: 40vh;
   }
 `;
 
-const Overlay = styled.div`
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  background-image: linear-gradient(
-    to bottom,
-    ${colors.dark},
-    rgba(0, 0, 0, 0)
-  );
-  background: linear-gradient(
-    180deg,
-    ${colors.dark} 0%,
-    rgba(0, 0, 0, 0) 15%,
-    rgba(0, 0, 0, 0) 85%,
-    ${colors.dark} 100%
-  );
-  z-index: 200;
-  pointer-events: none;
-`;
-
 const Title = styled.h1`
-  ${font.h1}
+  font-size: 4rem;
   line-height: 1.2;
-  margin: 1em 0;
+  text-align: center;
 `;
 
 const PostInfo = styled.header`
@@ -72,7 +48,8 @@ const PostInfo = styled.header`
   color: ${colors.light};
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
+  margin-bottom: 2rem;
 `;
 
 const LastUpdate = styled.time`
@@ -88,58 +65,34 @@ const TimeToRead = styled.time`
   }
 `;
 
-const GoBack = styled.div`
-  display: none;
-  /* display: flex; */
-  justify-content: center;
-  max-width: 100%;
-  height: 50px;
-  position: relative;
-  a {
-    color: ${colors.light};
-    font-weight: bold;
-    letter-spacing: 2px;
-    text-decoration: none;
-    &::hover {
-      text-decoration: none;
-      opacity: 0.5;
-    }
-    &::before {
-      content: '← ';
-    }
-  }
-`;
-
 const BlogPost = ({ data }) => {
-  const { title, seoMetaTags, meta, contentNode } = data.project;
+  const { title, seoMetaTags, meta, cover, contentNode } = data.project;
   return (
     <ScaleUp>
       <SEO meta={seoMetaTags} />
-      <GoBack>
-        <Link to="/blog">Novinky</Link>
-      </GoBack>
-      <Wrapper>
-        <Overlay />
+      <Container>
+        <PostCover>
+          <Img fluid={cover.fluid} />
+        </PostCover>
         <Inner>
+          <Title>{title}</Title>
           <PostInfo>
             <LastUpdate>
+              <FontAwesomeIcon icon={['far', 'calendar-alt']} />{' '}
               <Moment format="DD.MM.YYYY">{meta.updatedAt}</Moment>
             </LastUpdate>
             <TimeToRead>
-              {contentNode.childMarkdownRemark.timeToRead} min read
+              <FontAwesomeIcon icon={['far', 'clock']} />{' '}
+              {contentNode.childMarkdownRemark.timeToRead} min.
             </TimeToRead>
           </PostInfo>
-          <Title>{title}</Title>
           <div
             dangerouslySetInnerHTML={{
               __html: contentNode.childMarkdownRemark.html,
             }}
           />
-          <Link to="/blog">
-            <button>Go Back</button>
-          </Link>
         </Inner>
-      </Wrapper>
+      </Container>
     </ScaleUp>
   );
 };
@@ -153,6 +106,11 @@ export const projectQuery = graphql`
       }
       meta {
         updatedAt
+      }
+      cover {
+        fluid(maxWidth: 1470) {
+          ...GatsbyDatoCmsFluid
+        }
       }
       contentNode {
         childMarkdownRemark {

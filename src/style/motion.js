@@ -6,7 +6,7 @@ export const ScaleUp = ({ children }) => (
   <motion.div
     initial={{ scale: 0.25, opacity: 0 }}
     animate={{ scale: 1, opacity: 1 }}
-    transition={{ duration: 0.2, delay: 0.1, ease: 'easeInOut' }}
+    transition={{ duration: 0.2, delay: 0, ease: 'linear' }}
     exit={{ x: '100%' }}
   >
     {children}

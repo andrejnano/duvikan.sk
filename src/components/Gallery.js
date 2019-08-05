@@ -4,6 +4,7 @@ import styled from 'styled-components';
 const GalleryWrapper = styled.div`
   background: red;
   color: white;
+  flex: 100%;
   padding: 1rem 2rem;
   display: flex;
   flex-wrap: wrap;

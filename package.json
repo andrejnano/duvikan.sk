@@ -5,6 +5,11 @@
   "version": "1.0.0",
   "author": "Andrej Nano <nano@andrejnano.sk>",
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.20",
+    "@fortawesome/free-brands-svg-icons": "^5.10.0",
+    "@fortawesome/pro-regular-svg-icons": "^5.10.0",
+    "@fortawesome/pro-solid-svg-icons": "^5.10.0",
+    "@fortawesome/react-fontawesome": "^0.1.4",
     "babel-plugin-styled-components": "^1.10.6",
     "dotenv": "^8.0.0",
     "framer-motion": "^1.2.6",
@@ -40,6 +45,7 @@
     "typeface-inter": "^3.7.0"
   },
   "devDependencies": {
+    "@fortawesome/fontawesome-pro": "^5.10.0",
     "babel-eslint": "^10.0.2",
     "directory-named-webpack-plugin": "^4.0.0",
     "eslint": "^5.12.1",
