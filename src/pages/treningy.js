@@ -78,7 +78,9 @@ const Day = styled.div`
 
   @media (min-width: 1470px) {
     flex: 20%;
-    &:not(:last-child){ border-right: 1px solid #e5e8ed; }
+    &:not(:last-child) {
+      border-right: 1px solid #e5e8ed;
+    }
   }
 
   h4 {
@@ -99,18 +101,23 @@ const EventCard = styled.div`
   border-radius: 3px;
   margin-bottom: 2rem;
   color: ${colors.black};
-  
+
   &.blue {
-    time::before { background: ${colors2.lightBlue}; }
+    time::before {
+      background: ${colors2.lightBlue};
+    }
   }
 
   &.green {
-    time::before { background: ${colors2.lightGreen}; }
+    time::before {
+      background: ${colors2.lightGreen};
+    }
   }
   &.red {
-    time::before { background: ${colors2.brightRed}; }
+    time::before {
+      background: ${colors2.brightRed};
+    }
   }
-
 
   time {
     font-weight: bold;

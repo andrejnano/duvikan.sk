@@ -7,7 +7,6 @@ import { Box } from 'rebass';
 import { colors } from '../consts/style';
 
 const GalleryGrid = styled.div`
-
   a:hover {
     .galleryImage {
       transform: scale(1.025);
@@ -50,7 +49,8 @@ const Gallery = ({ images, itemsPerRow }) => {
             <Img
               fluid={image.fluid}
               style={{
-                width: `calc(${(image.fluid.aspectRatio / rowAspectRatioSum) * 100}% - 2rem)`,
+                width: `calc(${(image.fluid.aspectRatio / rowAspectRatioSum) *
+                  100}% - 2rem)`,
               }}
               className="galleryImage"
             />

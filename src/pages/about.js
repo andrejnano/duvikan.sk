@@ -83,7 +83,13 @@ const AboutPage = () => {
     }
   `);
 
-  const { title, cover, intro, seoMetaTags, imageGallery } = data.datoCmsAboutPage;
+  const {
+    title,
+    cover,
+    intro,
+    seoMetaTags,
+    imageGallery,
+  } = data.datoCmsAboutPage;
 
   return (
     <ScaleUp>
