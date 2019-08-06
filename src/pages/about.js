@@ -18,16 +18,13 @@ const Wrapper = styled.div`
 `;
 
 const SidePanel = styled.div`
-  width: 150px;
+  width: 200px;
 `;
 
 const MainPanel = styled.main`
   flex: 1;
-  display: flex;
-  flex-wrap: wrap;
-  > section {
-    max-width: 100%;
-  }
+  display: block;
+  position: relative;
 `;
 
 const Title = styled.h1`
@@ -67,11 +64,17 @@ const AboutPage = () => {
         seoMetaTags {
           ...GatsbyDatoCmsSeoMetaTags
         }
+        imageGallery {
+          fluid(maxWidth: 720) {
+            ...GatsbyDatoCmsFluid
+          }
+        }
       }
     }
   `);
 
-  const { title, intro, seoMetaTags } = data.datoCmsAboutPage;
+  const { title, intro, seoMetaTags, imageGallery } = data.datoCmsAboutPage;
+
   return (
     <ScaleUp>
       <SEO meta={seoMetaTags} />
@@ -83,7 +86,7 @@ const AboutPage = () => {
           <MainPanel>
             <IntroHeadline>{title}</IntroHeadline>
             <FirstParagraph>{intro}</FirstParagraph>
-            <Gallery></Gallery>
+            <Gallery itemsPerRow={3} images={imageGallery} />
           </MainPanel>
         </Wrapper>
       </Container>

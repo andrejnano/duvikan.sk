@@ -218,6 +218,9 @@ class Header extends Component {
                   <Link to="/about" activeClassName="activePage">
                     O nás
                   </Link>
+                  <Link to="/clenovia" activeClassName="activePage">
+                    Členovia
+                  </Link>
                   <Link to="/historia" activeClassName="activePage">
                     História
                   </Link>

@@ -39,9 +39,12 @@
     "react": "16.8.0",
     "react-dom": "16.8.0",
     "react-helmet": "^5.2.1",
+    "react-images": "^1.0.0",
     "react-intersection-observer": "^8.24.1",
     "react-moment": "^0.9.2",
+    "react-photo-gallery": "^8.0.0",
     "react-transition-group": "^4.2.1",
+    "rebass": "^4.0.1",
     "styled-components": "^4.3.2",
     "typeface-inter": "^3.7.0"
   },

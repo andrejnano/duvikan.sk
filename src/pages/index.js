@@ -226,7 +226,7 @@ const QuickLinkGrid = styled.ul`
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: center;
   position: relative;
   list-style-type: none;
   margin: 0;
@@ -246,6 +246,12 @@ const QuickLinkCard = styled.li`
     width: 33.33333%;
   }
 
+  &:first-child {
+    a.card {
+      margin-left: 0;
+    }
+  }
+
   a.card {
     display: block;
     position: relative;
@@ -259,10 +265,6 @@ const QuickLinkCard = styled.li`
     overflow: hidden;
     height: 100%;
     border-bottom: 1px solid #e5e8ed;
-
-    &:first-child {
-      margin-left: 0;
-    }
 
     .photo {
       position: relative;
@@ -440,11 +442,6 @@ const IndexPage = () => {
           </Section>
           <SectionSeparator />
           <Section>
-            <SectionInfo>
-              Najdôležitejšie
-              <br />
-              informácie
-            </SectionInfo>
             <SectionContent>
               <QuickLinkGrid>
                 <QuickLink
@@ -518,7 +515,8 @@ const IndexPage = () => {
                         {post.node.meta.createdAt}
                       </Moment>
                       <FontAwesomeIcon icon={['far', 'clock']} />{' '}
-                      {post.node.contentNode.childMarkdownRemark.timeToRead} min.
+                      {post.node.contentNode.childMarkdownRemark.timeToRead}{' '}
+                      min.
                     </div>
                     <span className="linkText">
                       Otvoriť článok{' '}

@@ -54,10 +54,6 @@ const BlogPostList = styled.ul`
     width: 100%;
     margin-bottom: 3rem;
 
-    @media (min-width: 950px) {
-      max-width: 950px;
-    }
-
     @media (min-width: 1470px) {
       width: 100%;
     }
@@ -249,7 +245,7 @@ const Pagination = styled.div`
     padding: 0 2rem;
     font-weight: 600;
     border: 0;
-    opacity: 0.50;
+    opacity: 0.5;
 
     &.next {
       margin-left: auto;
