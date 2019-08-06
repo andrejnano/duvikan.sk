@@ -83,6 +83,7 @@ const MemberCard = styled.li`
     margin: 0 1rem 1rem;
     padding: 2rem;
     color: ${colors.black};
+    background: ${colors.white};
     border-radius: 3px;
     display: block;
     box-shadow: 0 2px 4px rgba(3, 27, 78, 0.06);
@@ -101,6 +102,8 @@ const MemberCard = styled.li`
         position: absolute;
         left: -2rem;
         opacity: 0.5;
+        border-top-right-radius: 1px;
+        border-bottom-right-radius: 1px;
       }
     }
 

@@ -21,6 +21,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   color: ${colors.black};
   background-color: ${colors.white};
+  background: ${colors.lightWash};
 }
 
 // links reset

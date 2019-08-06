@@ -13,7 +13,7 @@ const HeaderWrapper = styled.header`
   z-index: 999;
   top: 0;
   padding-top: 54px;
-  background: ${colors.white};
+  background: transparent;
   color: ${colors.black};
   transition: background 0.4s linear, color 0.4s linear;
 

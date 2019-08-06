@@ -226,30 +226,30 @@ const QuickLinkGrid = styled.ul`
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  justify-content: center;
   position: relative;
+  justify-content: flex-start;
   list-style-type: none;
   margin: 0;
-  margin-bottom: -50%;
   padding: 0;
   width: 100%;
+
+  @media (min-width: 950px) {
+    margin-bottom: -50%;
+  }
 `;
 
 const QuickLinkCard = styled.li`
   position: relative;
   min-width: 250px;
-  width: 100%;
+  width: 50%;
+  margin-bottom: 2rem;
+
   @media (min-width: 720px) {
     max-width: 720px;
   }
-  @media (min-width: 1470px) {
-    width: 33.33333%;
-  }
 
-  &:first-child {
-    a.card {
-      margin-left: 0;
-    }
+  @media (min-width: 950px) {
+    width: 33.33333%;
   }
 
   a.card {

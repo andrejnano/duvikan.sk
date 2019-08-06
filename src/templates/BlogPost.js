@@ -11,36 +11,71 @@ import { font, colors } from '../consts/style';
 import { ScaleUp } from '../style/motion';
 import Container from '../containers/Container';
 
-const Wrapper = styled.div`
-  height: calc(100vh - 100px);
+const SectionWrapper = styled.section`
   display: flex;
-  justify-content: center;
-  max-width: 100%;
-  padding: 3rem 2rem 1rem;
+  flex-direction: row;
+  margin: 3rem 0;
+  padding: 3rem 0;
+`;
+
+const Cover = styled.div`
+  margin-top: 3rem;
+  width: 100%;
+  display: flex;
+  max-height: 40vh;
+  > div {
+    flex: 100%;
+    border-radius: 3px;
+    border: 1px solid #e5e8ed;
+    box-shadow: 0 2px 4px rgba(3, 27, 78, 0.06);
+  }
+`;
+
+const SidePanel = styled.div`
+  width: 200px;
+
+  .btn {
+    appearance: none;
+    overflow: visible;
+    vertical-align: middle;
+    cursor: pointer;
+    height: 4rem;
+    line-height: 4rem;
+    text-align: center;
+    white-space: nowrap;
+    text-decoration: none;
+    transition: all easeInOutCubic 0.25s;
+    border-radius: 3px;
+    color: #333;
+    background: #ececec;
+    padding: 1rem 3rem;
+    font-weight: 600;
+    border: 0;
+
+    &:hover {
+      background: #dfdfdf;
+    }
+  }
+`;
+
+const MainPanel = styled.main`
+  flex: 1;
+  display: block;
   position: relative;
 `;
 
-const Inner = styled.div`
-  width: 950px;
-  max-width: 100%;
-  text-align: left;
-  padding: 3rem;
-  margin-left: auto;
-  margin-right: auto;
-`;
-
-const PostCover = styled.div`
-  width: 100%;
-  margin-top: 3rem;
-  div {
-    max-height: 40vh;
-  }
+const Content = styled.article`
+  color: ${colors.black};
+  background: ${colors.white};
+  border-radius: 3px;
+  border: 1px solid #e5e8ed;
+  box-shadow: 0 2px 4px rgba(3, 27, 78, 0.06);
+  padding: 2rem;
 `;
 
 const Title = styled.h1`
   font-size: 4rem;
   line-height: 1.2;
-  text-align: center;
 `;
 
 const PostInfo = styled.header`
@@ -48,7 +83,6 @@ const PostInfo = styled.header`
   color: ${colors.light};
   display: flex;
   flex-direction: row;
-  justify-content: center;
   margin-bottom: 2rem;
 `;
 
@@ -71,27 +105,34 @@ const BlogPost = ({ data }) => {
     <ScaleUp>
       <SEO meta={seoMetaTags} />
       <Container>
-        <PostCover>
+        <Cover>
           <Img fluid={cover.fluid} />
-        </PostCover>
-        <Inner>
-          <Title>{title}</Title>
-          <PostInfo>
-            <LastUpdate>
-              <FontAwesomeIcon icon={['far', 'calendar-alt']} />{' '}
-              <Moment format="DD.MM.YYYY">{meta.updatedAt}</Moment>
-            </LastUpdate>
-            <TimeToRead>
-              <FontAwesomeIcon icon={['far', 'clock']} />{' '}
-              {contentNode.childMarkdownRemark.timeToRead} min.
-            </TimeToRead>
-          </PostInfo>
-          <div
-            dangerouslySetInnerHTML={{
-              __html: contentNode.childMarkdownRemark.html,
-            }}
-          />
-        </Inner>
+        </Cover>
+        <SectionWrapper>
+          <SidePanel>
+            <Link to="/blog" className="btn">
+              <FontAwesomeIcon icon={['far', 'long-arrow-alt-left']} /> Späť
+            </Link>
+          </SidePanel>
+          <MainPanel>
+            <Title>{title}</Title>
+            <PostInfo>
+              <LastUpdate>
+                <FontAwesomeIcon icon={['far', 'calendar-alt']} />{' '}
+                <Moment format="DD.MM.YYYY">{meta.updatedAt}</Moment>
+              </LastUpdate>
+              <TimeToRead>
+                <FontAwesomeIcon icon={['far', 'clock']} />{' '}
+                {contentNode.childMarkdownRemark.timeToRead} min.
+              </TimeToRead>
+            </PostInfo>
+            <Content
+              dangerouslySetInnerHTML={{
+                __html: contentNode.childMarkdownRemark.html,
+              }}
+            />
+          </MainPanel>
+        </SectionWrapper>
       </Container>
     </ScaleUp>
   );

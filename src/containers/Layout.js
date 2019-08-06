@@ -16,11 +16,19 @@ import { fab } from '@fortawesome/free-brands-svg-icons';
 import {
   faBars,
   faLongArrowAltRight,
+  faLongArrowAltLeft,
   faClock,
   faCalendarAlt,
 } from '@fortawesome/pro-regular-svg-icons';
 
-library.add(fab, faBars, faLongArrowAltRight, faClock, faCalendarAlt);
+library.add(
+  fab,
+  faBars,
+  faLongArrowAltRight,
+  faLongArrowAltLeft,
+  faClock,
+  faCalendarAlt
+);
 
 const SiteWrapper = styled.div`
   display: flex;
@@ -73,6 +81,11 @@ const SiteWrapper = styled.div`
 //   font-size: 2rem;
 // `;
 
+const ContentWrapper = styled.main`
+  min-height: calc(100vh - 100px);
+  /* remove the header height */
+`;
+
 const HeaderHr = styled.hr`
   width: 100%;
   height: 1px;
@@ -80,11 +93,12 @@ const HeaderHr = styled.hr`
   border: 0;
   margin: 0;
   background-color: ${colors.black};
-  transition: background 0.4s linear;
+  box-shadow: 0 2px 4px rgba(3, 27, 78, 0.06);
+  transition: background 0.4s linear, width 0.4s linear;
 
   &.whiteHr {
     background-color: ${colors.white};
-    transition: background 0.4s linear;
+    transition: background 0.4s linear, width 0.8s linear;
   }
 
   @media (min-width: 720px) {
@@ -94,6 +108,11 @@ const HeaderHr = styled.hr`
     width: 93.3333333333%;
     margin-left: auto;
     margin-right: auto;
+
+    &.whiteHr {
+      max-width: 1470px;
+      width: 93.3333333333%;
+    }
   }
 `;
 
@@ -109,7 +128,8 @@ const Layout = ({ children, location }) => {
       <Header isHome={isHome} />
       <HeaderHr className={isHome ? 'whiteHr' : ''} />
       {/* <JapaneseTitle>空手道場ドゥヴィ館ブラチスラバ</JapaneseTitle> */}
-      <Transition location={location}>{children}</Transition>
+      <ContentWrapper>{children}</ContentWrapper>
+      {/* <Transition location={location}>{children}</Transition> */}
       <Footer />
     </SiteWrapper>
   );

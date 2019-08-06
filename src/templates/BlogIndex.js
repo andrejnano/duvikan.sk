@@ -55,25 +55,33 @@ const BlogPostList = styled.ul`
     margin-bottom: 3rem;
 
     @media (min-width: 1470px) {
-      width: 100%;
+      width: 50%;
     }
 
     a.card {
       display: block;
       position: relative;
-      border: 1px solid #e5e8ed;
-      /* box-shadow: 0 2px 4px rgba(3, 27, 78, 0.06); */
-      background-color: ${colors.white};
-      border-radius: 3px;
       transition: box-shadow 0.25s linear, -webkit-box-shadow 0.25s linear;
       padding: 3rem 3rem 3rem 3rem;
       color: ${colors.black};
       overflow: hidden;
       height: 100%;
+      border: 1px solid #e5e8ed;
+      box-shadow: 0 2px 4px rgba(3, 27, 78, 0.06);
+      background-color: ${colors.white};
+      border-radius: 3px;
+
+      &:nth-child(odd) {
+        margin-right: 2rem;
+      }
+
+      &:nth-child(even) {
+        margin-left: 2rem;
+      }
 
       .title {
         font-size: 2.8rem;
-        font-weight: 400;
+        font-weight: 500;
         padding: 0;
         margin: 0;
       }
@@ -87,28 +95,43 @@ const BlogPostList = styled.ul`
         padding: 1.2rem 0;
         opacity: 0.75;
 
-        > * {
-          margin-right: 1rem;
-        }
-
         .authorName {
           color: ${colors.mediumBlue};
           font-weight: 500;
+          margin-right: 1rem;
         }
 
         .authorPhoto {
           width: 25px;
           height: 25px;
+          margin-right: 1rem;
           img {
             border-radius: 50%;
           }
+        }
+
+        .calendarIcon {
+          margin-right: 0.5em;
+        }
+
+        .createdAtTime {
+          margin-right: 1rem;
+        }
+
+        .clockIcon {
+          margin-right: 0.5em;
+        }
+
+        .timeToRead {
         }
       }
 
       .cover {
         max-height: 360px;
         position: relative;
-        border-bottom: 1px solid #e5e8ed;
+        border: 1px solid #e5e8ed;
+        box-shadow: 0 2px 4px rgba(3, 27, 78, 0.06);
+        border-radius: 3px;
       }
 
       .excerpt {
@@ -169,10 +192,17 @@ const BlogPostItem = props => {
         <div className="meta">
           <Img className="authorPhoto" fluid={props.node.author.photo.fluid} />
           <div className="authorName">{props.node.author.name} ・ </div>
-          <FontAwesomeIcon icon={['far', 'calendar-alt']} />{' '}
-          <Moment format="DD.MM.YYYY">{props.node.meta.createdAt}</Moment>
-          <FontAwesomeIcon icon={['far', 'clock']} />{' '}
-          {props.node.contentNode.childMarkdownRemark.timeToRead} min.
+          <FontAwesomeIcon
+            className="calendarIcon"
+            icon={['far', 'calendar-alt']}
+          />{' '}
+          <Moment className="createdAtTime" format="DD.MM.YYYY">
+            {props.node.meta.createdAt}
+          </Moment>
+          <FontAwesomeIcon className="clockIcon" icon={['far', 'clock']} />{' '}
+          <span className="timeToRead">
+            {props.node.contentNode.childMarkdownRemark.timeToRead} min.
+          </span>
         </div>
         <Img className="cover" fluid={props.node.cover.fluid} />
         <p className="excerpt">
@@ -187,14 +217,23 @@ const BlogPostItem = props => {
   );
 };
 
+const SectionSeparator = styled.hr`
+  width: 100%;
+  height: 1px;
+  background-color: ${colors.black};
+  opacity: 0.075;
+  border: 0;
+  margin: 0;
+  margin-bottom: 3rem;
+  overflow: visible;
+`;
+
 const Pagination = styled.div`
   width: 100%;
   display: flex;
+  align-items: center;
+  padding: 1rem;
   margin-bottom: 2rem;
-
-  @media (min-width: 950px) {
-    max-width: 950px;
-  }
 
   .pageNumber {
     color: ${colors.dark};
@@ -255,13 +294,35 @@ const Pagination = styled.div`
 
 const PaginationLink = props => {
   if (!props.test) {
-    return (
-      <Link className={props.class} to={'/blog/' + props.url}>
-        {props.text}
-      </Link>
-    );
+    if (props.class === 'next') {
+      return (
+        <Link className={props.class} to={'/blog/' + props.url}>
+          {props.text}{' '}
+          <FontAwesomeIcon icon={['far', 'long-arrow-alt-right']} />
+        </Link>
+      );
+    } else if (props.class === 'previous') {
+      return (
+        <Link className={props.class} to={'/blog/' + props.url}>
+          <FontAwesomeIcon icon={['far', 'long-arrow-alt-left']} /> {props.text}
+        </Link>
+      );
+    }
   } else {
-    return <div className={`${props.class} disabled`}>{props.text}</div>;
+    if (props.class === 'next') {
+      return (
+        <div className={`${props.class} disabled`}>
+          {props.text}{' '}
+          <FontAwesomeIcon icon={['far', 'long-arrow-alt-right']} />
+        </div>
+      );
+    } else if (props.class === 'previous') {
+      return (
+        <div className={`${props.class} disabled`}>
+          <FontAwesomeIcon icon={['far', 'long-arrow-alt-left']} /> {props.text}
+        </div>
+      );
+    }
   }
 };
 
@@ -315,11 +376,15 @@ const BlogIndex = ({ pageContext }) => {
                 class="next"
               />
             </Pagination>
+
+            <SectionSeparator />
             <BlogPostList>
               {group.map(node => (
                 <BlogPostItem key={node.slug} node={node} />
               ))}
             </BlogPostList>
+
+            <SectionSeparator />
 
             <Pagination role="navigation">
               <PaginationLink

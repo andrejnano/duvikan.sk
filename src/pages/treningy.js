@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
 import { graphql, useStaticQuery } from 'gatsby';
@@ -6,7 +7,7 @@ import SEO from '../components/SEO';
 
 import { ScaleUp } from '../style/motion';
 import Container from '../containers/Container';
-import { colors } from '../consts/style';
+import { colors, colors2 } from '../consts/style';
 
 const Wrapper = styled.div`
   display: flex;
@@ -16,16 +17,31 @@ const Wrapper = styled.div`
 `;
 
 const SidePanel = styled.aside`
-  width: 150px;
+  width: 200px;
 `;
 
 const MainPanel = styled.main`
   flex: 1;
 
   .intro {
+    background: ${colors.white};
+    border-radius: 3px;
+    border: 1px solid #e5e8ed;
+    box-shadow: 0 2px 4px rgba(3, 27, 78, 0.06);
+    padding: 2rem;
+
     p {
       font-size: 2rem;
       font-weight: 400;
+    }
+
+    a {
+      color: ${colors.mediumBlue};
+      text-decoration: underline;
+
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
 `;
@@ -37,61 +53,97 @@ const Title = styled.h1`
   padding: 0;
 `;
 
-const BigTable = styled.table`
+const SectionSeparator = styled.hr`
   width: 100%;
-  padding: 1rem;
-  margin: 1rem 0;
-  /* temp solution REMOVE LATER */
-  margin-bottom: 60rem;
-  background-color: ${colors.white};
+  height: 1px;
+  background-color: ${colors.black};
+  opacity: 0.075;
+  border: 0;
+  margin: 0;
+  margin-bottom: 3rem;
+  overflow: visible;
+`;
 
-  thead {
-    td {
-      width: 20%;
-      font-weight: bold;
-      border: 2px solid ${colors.black};
-      text-align: left;
-      vertical-align: middle;
-      padding: 1rem 2rem;
-      text-transform: uppercase;
-      letter-spacing: 0.2em;
-      font-size: 1.7rem;
-    }
+const Calendar = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 1rem;
+`;
+
+const Day = styled.div`
+  height: 100%;
+  flex: 100%;
+  padding: 2rem;
+
+  @media (min-width: 1470px) {
+    flex: 20%;
+    &:not(:last-child){ border-right: 1px solid #e5e8ed; }
   }
 
-  tbody {
-    td {
-      width: 20%;
-      border: 2px solid ${colors.black};
-      vertical-align: middle;
-      padding: 1rem 2rem 2rem;
-
-      &.one {
-        background: #c5c5d240;
-      }
-
-      &.two {
-        background: #8e8ea060;
-      }
-
-      &.three {
-        background: #6e6e8090;
-      }
-
-      > time {
-        color: #f93a3c;
-        font-weight: 600;
-        font-size: 1.4rem;
-      }
-      > div {
-        margin-top: 0.6rem;
-        color: ${colors.gray4};
-        font-size: 1.7rem;
-        font-weight: 700;
-      }
-    }
+  h4 {
+    text-align: left;
+    font-size: 1.6rem;
+    margin-bottom: 2rem;
+    margin-left: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
   }
 `;
+
+const EventCard = styled.div`
+  padding: 2rem;
+  border: 1px solid #e5e8ed;
+  box-shadow: 0 2px 4px rgba(3, 27, 78, 0.06);
+  background-color: ${colors.white};
+  border-radius: 3px;
+  margin-bottom: 2rem;
+  color: ${colors.black};
+  
+  &.blue {
+    time::before { background: ${colors2.lightBlue}; }
+  }
+
+  &.green {
+    time::before { background: ${colors2.lightGreen}; }
+  }
+  &.red {
+    time::before { background: ${colors2.brightRed}; }
+  }
+
+
+  time {
+    font-weight: bold;
+    position: relative;
+
+    &:before {
+      content: ' ';
+      height: 1.6em;
+      width: 3px;
+      background-color: currentColor;
+      position: absolute;
+      left: -2rem;
+      opacity: 1;
+      border-top-right-radius: 2px;
+      border-bottom-right-radius: 2px;
+    }
+  }
+
+  div {
+    font-weight: 500;
+  }
+`;
+
+const Event = props => {
+  return (
+    <EventCard className={props.color}>
+      <time>
+        {props.start} - {props.end}
+      </time>
+      <div>{props.description}</div>
+    </EventCard>
+  );
+};
 
 const TreningyPage = () => {
   const data = useStaticQuery(graphql`
@@ -161,87 +213,79 @@ const TreningyPage = () => {
             />
           </MainPanel>
         </Wrapper>
+
+        <SectionSeparator />
+
         <Wrapper>
           <SidePanel>
             <Title>Rozpis tréningov</Title>
           </SidePanel>
           <MainPanel>
-            <BigTable>
-              <thead>
-                <tr>
-                  <td>Pondelok</td>
-                  <td>Utorok</td>
-                  <td>Streda</td>
-                  <td>Štvrtok</td>
-                  <td>Piatok</td>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td className="one">
-                    <time>
-                      {isTreningPondelok
-                        ? `${treningPondelokStart} - ${treningPondelokEnd}`
-                        : null}
-                    </time>
-                    <div>9. - 3. kyu</div>
-                  </td>
-                  <td>
-                    <time>
-                      {isTreningUtorok
-                        ? `${treningUtorokStart} - ${treningUtorokEnd}`
-                        : null}
-                    </time>
-                  </td>
-                  <td className="one">
-                    <time>
-                      {isTreningStreda
-                        ? `${treningStredaStart} - ${treningStredaEnd}`
-                        : null}
-                    </time>
-                    <div>9. - 3. kyu</div>
-                  </td>
-                  <td>
-                    <time>
-                      {isTreningStvrtok
-                        ? `${treningStvrtokStart} - ${treningStvrtokEnd}`
-                        : null}
-                    </time>
-                  </td>
-                  <td className="one">
-                    <time>
-                      {isTreningPiatok
-                        ? `${treningPiatokStart} - ${treningPiatokEnd}`
-                        : null}
-                    </time>
-                    <div>9. - 3. kyu</div>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td className="two">
-                    <time>18:00 - 20:00</time>
-                    <div>2. kyu - DAN</div>
-                  </td>
-                  <td className="one">
-                    <time>18:00 - 20:00</time>
-                    <div>9. - 3. kyu</div>
-                  </td>
-                  <td className="two">
-                    <time>18:00 - 20:00</time>
-                    <div>2. kyu - DAN</div>
-                  </td>
-                  <td className="two">
-                    <time>18:00 - 20:00</time>
-                    <div>2. kyu - DAN</div>
-                  </td>
-                  <td className="three">
-                    <time>18:00 - 20:00</time>
-                    <div>Mix dospelí</div>
-                  </td>
-                </tr>
-              </tbody>
-            </BigTable>
+            <Calendar>
+              <Day>
+                <h4>Pondelok</h4>
+                <Event
+                  start={treningPondelokStart}
+                  end={treningPondelokEnd}
+                  description="9. - 3. kyu"
+                  color="red"
+                />
+                <Event
+                  start="18:00"
+                  end="20:00"
+                  description="2. kyu - DAN"
+                  color="blue"
+                />
+              </Day>
+              <Day>
+                <h4>Utorok</h4>
+                <Event
+                  start="18:00"
+                  end="20:00"
+                  description="9. - 3. kyu"
+                  color="red"
+                />
+              </Day>
+              <Day>
+                <h4>Streda</h4>
+                <Event
+                  start={treningStredaStart}
+                  end={treningStredaEnd}
+                  description="9. - 3. kyu"
+                  color="red"
+                />
+                <Event
+                  start="18:00"
+                  end="20:00"
+                  description="2. kyu - DAN"
+                  color="blue"
+                />
+              </Day>
+              <Day>
+                <h4>Štvrtok</h4>
+                <Event
+                  start="18:00"
+                  end="20:00"
+                  description="2. kyu - DAN"
+                  color="blue"
+                />
+              </Day>
+              <Day>
+                <h4>Piatok</h4>
+                <Event
+                  start={treningPiatokStart}
+                  end={treningPiatokEnd}
+                  description="9. - 3. kyu"
+                  color="red"
+                />
+                <Event
+                  start="18:00"
+                  end="20:00"
+                  description="Mix dospelí"
+                  color="green"
+                />
+              </Day>
+            </Calendar>
           </MainPanel>
         </Wrapper>
       </Container>
