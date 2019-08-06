@@ -128,7 +128,7 @@ const Layout = ({ children, location }) => {
       <Header isHome={isHome} />
       <HeaderHr className={isHome ? 'whiteHr' : ''} />
       {/* <JapaneseTitle>空手道場ドゥヴィ館ブラチスラバ</JapaneseTitle> */}
-      <ContentWrapper>{children}</ContentWrapper>
+      <ContentWrapper location={location}>{children}</ContentWrapper>
       {/* <Transition location={location}>{children}</Transition> */}
       <Footer />
     </SiteWrapper>

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Layout from '../containers/Layout';
+// import Layout from '../containers/Layout';
 import SEO from '../components/SEO';
 
 const Wrapper = styled.div`
@@ -11,12 +11,12 @@ const Wrapper = styled.div`
 `;
 
 const NotFoundPage = () => (
-  <Layout>
+  <>
     <SEO title="404: Not found" />
     <Wrapper>
       <h1>404</h1>
     </Wrapper>
-  </Layout>
+  </>
 );
 
 export default NotFoundPage;
