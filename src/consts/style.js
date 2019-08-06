@@ -56,4 +56,35 @@ export const colors = {
   fg: '#ffffff',
 };
 
+export const colors2 = {
+  white: '#FBF8FF',
+  black: '#1E1927',
+  blue: '#171AB6',
+  pink: '#F9006D',
+  magenta: '#B90097',
+  red: '#bd1c5f',
+  brightRed: '#ef4146',
+  orange: '#FF6F4B',
+  golden: '#FFB843',
+  yellow: '#F9F871',
+  lightGreen: '#68de7a',
+  darkGreen: '#10a37f',
+  teal: '#2ff3ce',
+  lightBlue: '#27b5ea',
+  mediumBlue: '#2e95d3',
+  darkBlue: '#5436da',
+  navyBlue: '#3b2479',
+  lightPurple: '#6b40d8',
+  darkPurple: '#412991',
+  gray1: '#c5c5d2',
+  gray2: '#8e8ea0',
+  gray3: '#6e6e80',
+  gray4: '#404452',
+  lightWash: '#f7fbfb',
+  mediumWash: '#eff7f8',
+  darkWash: '#e6f3f3',
+  bg: '#1D1D1D',
+  fg: '#ffffff',
+};
+
 export const duration = 300;

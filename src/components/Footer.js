@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link, useStaticQuery, graphql } from 'gatsby';
-import { colors } from '../consts/style';
+import { colors, colors2 } from '../consts/style';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Img } from 'gatsby-image';
 import Container from '../containers/Container';
@@ -11,14 +11,11 @@ import logoImage from '../images/logo.svg';
 
 const Wrapper = styled.footer`
   color: ${colors.white};
-  background-image: url(${logoImage});
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: contain;
+  background: ${colors.black};
 `;
 
-const NavList = styled.ul`
-  margin: 6rem 0;
+const NavList = styled.nav`
+  margin: 3rem 0;
   a {
     letter-spacing: 0.2em;
     font-weight: bold;

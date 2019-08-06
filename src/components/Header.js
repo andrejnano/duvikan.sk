@@ -175,7 +175,9 @@ class Header extends Component {
     const { data } = this.props;
 
     // eslint-disable-next-line prettier/prettier
-    const headerClasses = `${this.props.isHome ? 'isHome' : ''} ${isScrolling ? 'isScrolling' : ''}`;
+    const headerClasses = `${this.props.isHome ? 'isHome' : ''} ${
+      isScrolling ? 'isScrolling' : ''
+    }`;
 
     return (
       <HeaderWrapper className={headerClasses}>
@@ -185,7 +187,13 @@ class Header extends Component {
               <LeftWrapper>
                 <Logo>
                   <Link to="/">
-                    <Image fluid={this.props.isHome ? data.logoWhite.childImageSharp.fluid : data.logoBlack.childImageSharp.fluid} />
+                    <Image
+                      fluid={
+                        this.props.isHome
+                          ? data.logoWhite.childImageSharp.fluid
+                          : data.logoBlack.childImageSharp.fluid
+                      }
+                    />
                   </Link>
                 </Logo>
               </LeftWrapper>

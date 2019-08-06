@@ -9,7 +9,9 @@ exports.createPages = async ({ graphql, actions }) => {
     try {
       graphql(`
         {
-          allDatoCmsBlogPost {
+          allDatoCmsBlogPost(
+            sort: { fields: [meta___createdAt], order: DESC }
+          ) {
             nodes {
               id
               title

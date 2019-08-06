@@ -9,7 +9,6 @@ import Img from 'gatsby-image';
 import SEO from '../components/SEO';
 
 import { colors } from '../consts/style';
-import { ScaleUp } from '../style/motion';
 import Container from '../containers/Container';
 
 const Wrapper = styled.div`
@@ -21,157 +20,252 @@ const Wrapper = styled.div`
 `;
 
 const SidePanel = styled.aside`
-  width: 150px;
+  width: 200px;
 `;
 
 const Title = styled.h1`
   font-size: 2rem;
   font-weight: 600;
-  span {
-    display: none;
-    font-size: 3rem;
-    color: ${colors.mediumWash};
+  .pages {
+    font-size: 1.8rem;
+    color: ${colors.gray1};
     font-weight: 400;
   }
 `;
 
 const Feed = styled.main`
   flex: 1;
+`;
+
+const BlogPostList = styled.ul`
+  width: 100%;
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding: 0;
+  margin: 0;
+  position: relative;
+  list-style-type: none;
 
-  a {
-    flex: 50%;
-    border: 1rem solid transparent;
+  li {
+    position: relative;
+    min-width: 250px;
+    width: 100%;
+    margin-bottom: 3rem;
 
-    &.featured {
-      flex: 100%;
+    @media (min-width: 950px) {
+      max-width: 950px;
     }
-  }
-`;
 
-const PostCardInner = styled.div`
-  padding: 1rem;
-  border: 2px solid ${colors.darkWash};
-  background-color: ${colors.white};
-  display: flex;
-  flex-direction: column;
-  h2 {
-    color: ${colors.black};
-    font-weight: bold;
-  }
-  p {
-    text-align: left;
-    color: ${colors.gray2};
-  }
-`;
+    @media (min-width: 1470px) {
+      width: 100%;
+    }
 
-const PostBody = styled.main`
-  display: flex;
-  flex-direction: row;
-  .leftPostColumn {
-    flex: 1;
-  }
-  figure {
-    flex: 1;
-  }
-`;
+    a.card {
+      display: block;
+      position: relative;
+      border: 1px solid #e5e8ed;
+      /* box-shadow: 0 2px 4px rgba(3, 27, 78, 0.06); */
+      background-color: ${colors.white};
+      border-radius: 3px;
+      transition: box-shadow 0.25s linear, -webkit-box-shadow 0.25s linear;
+      padding: 3rem 3rem 3rem 3rem;
+      color: ${colors.black};
+      overflow: hidden;
+      height: 100%;
 
-const PostFooter = styled.footer`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  border-top: 1px solid ${colors.darkWash};
-  padding-top: 1rem;
-  padding-left: 1rem;
-  .author {
-    flex: 1;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    .authorPhoto {
-      flex: 1;
-      max-width: 30px;
-      img {
-        border-radius: 50%;
+      .title {
+        font-size: 2.8rem;
+        font-weight: 400;
+        padding: 0;
+        margin: 0;
+      }
+
+      .meta {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        font-size: 0.8em;
+        font-weight: 400;
+        padding: 1.2rem 0;
+        opacity: 0.75;
+
+        > * {
+          margin-right: 1rem;
+        }
+
+        .authorName {
+          color: ${colors.mediumBlue};
+          font-weight: 500;
+        }
+
+        .authorPhoto {
+          width: 25px;
+          height: 25px;
+          img {
+            border-radius: 50%;
+          }
+        }
+      }
+
+      .cover {
+        max-height: 360px;
+        position: relative;
+        border-bottom: 1px solid #e5e8ed;
+      }
+
+      .excerpt {
+        font-size: 1.8rem;
+        padding-top: 2rem;
+        padding-bottom: 3rem;
+        line-height: 1.7;
+      }
+
+      .linkText {
+        position: absolute;
+        display: inline-block;
+        bottom: 3rem;
+        left: 3rem;
+        color: ${colors.mediumBlue};
+        font-weight: 500;
+        svg {
+          margin-left: 2px;
+          font-size: 1.2em;
+          vertical-align: middle;
+          position: relative;
+          top: -1px;
+        }
+
+        &:after {
+          content: ' ';
+          position: absolute;
+          left: 0;
+          bottom: -2px;
+          width: 100%;
+          height: 1px;
+          background: ${colors.mediumBlue};
+          transition: opacity 0.25s linear;
+          opacity: 0;
+        }
+      }
+
+      &:hover {
+        .linkText {
+          &:after {
+            opacity: 1;
+          }
+        }
       }
     }
-    .authorName {
-      flex: 1;
-      margin-left: 1rem;
-      font-weight: 600;
-      color: ${colors.gray1};
-    }
-  }
-  .postMeta {
-    flex: 1;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    .postDate {
-      color: ${colors.gray1};
-    }
-    .timeToRead {
-      color: ${colors.gray1};
-    }
   }
 `;
 
-// todo: have 2 types of post links, featured with the image on top
-// and regular, which will have picture on side. or the opposite
-
-const PostCard = props => {
+const BlogPostItem = props => {
   return (
-    <Link key={props.node.slug} to={`/blog/${props.node.slug}/`} className={props.node.featured ? 'featured' : ''}>
-      <PostCardInner>
-        <PostBody>
-          <div className="leftPostColumn">
-            <h2>{props.node.title}</h2>
-            <p>{props.node.contentNode.childMarkdownRemark.excerpt}</p>
-          </div>
-          <figure>
-            <Img fluid={props.node.cover.fluid} />
-          </figure>
-        </PostBody>
-        <PostFooter>
-          <div className="author">
-            <div className="authorPhoto"><Img fluid={props.node.author.photo.fluid} /></div>
-            <div className="authorName">{props.node.author.name}</div>
-          </div>
-          <div className="postMeta">
-            <div className="postDate">
-              <FontAwesomeIcon icon={['far', 'calendar-alt']} />{' '}
-              <Moment format="DD.MM.YYYY">{props.node.meta.createdAt}</Moment>
-            </div>
-            <div className="timeToRead">
-              <FontAwesomeIcon icon={['far', 'clock']} />{' '}
-              {props.node.contentNode.childMarkdownRemark.timeToRead} min.
-            </div>
-          </div>
-        </PostFooter>
-      </PostCardInner>
-    </Link>
+    <li>
+      <Link
+        key={props.node.slug}
+        to={`/blog/${props.node.slug}/`}
+        className={props.node.featured ? 'featured card' : 'card'}
+      >
+        <h2 className="title">{props.node.title}</h2>
+        <div className="meta">
+          <Img className="authorPhoto" fluid={props.node.author.photo.fluid} />
+          <div className="authorName">{props.node.author.name} ・ </div>
+          <FontAwesomeIcon icon={['far', 'calendar-alt']} />{' '}
+          <Moment format="DD.MM.YYYY">{props.node.meta.createdAt}</Moment>
+          <FontAwesomeIcon icon={['far', 'clock']} />{' '}
+          {props.node.contentNode.childMarkdownRemark.timeToRead} min.
+        </div>
+        <Img className="cover" fluid={props.node.cover.fluid} />
+        <p className="excerpt">
+          {props.node.contentNode.childMarkdownRemark.excerpt}
+        </p>
+        <span className="linkText">
+          Otvoriť článok{' '}
+          <FontAwesomeIcon icon={['far', 'long-arrow-alt-right']} />{' '}
+        </span>
+      </Link>
+    </li>
   );
 };
 
 const Pagination = styled.div`
   width: 100%;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  font-weight: bold;
-  font-size: 1rem;
-  padding: 1rem 0;
+  margin-bottom: 2rem;
+
+  @media (min-width: 950px) {
+    max-width: 950px;
+  }
+
+  .pageNumber {
+    color: ${colors.dark};
+    margin-left: auto;
+  }
+
+  a {
+    appearance: none;
+    overflow: visible;
+    vertical-align: middle;
+    cursor: pointer;
+    height: 4rem;
+    line-height: 4rem;
+    text-align: center;
+    white-space: nowrap;
+    text-decoration: none;
+    transition: all easeInOutCubic 0.25s;
+    border-radius: 3px;
+    color: #333;
+    background: #ececec;
+    padding: 0 2rem;
+    font-weight: 600;
+    border: 0;
+
+    &:hover {
+      background: #dfdfdf;
+    }
+
+    &.next {
+      margin-left: auto;
+    }
+  }
+
+  .disabled {
+    appearance: none;
+    overflow: visible;
+    vertical-align: middle;
+    cursor: not-allowed;
+    height: 4rem;
+    line-height: 4rem;
+    text-align: center;
+    white-space: nowrap;
+    text-decoration: none;
+    transition: all easeInOutCubic 0.25s;
+    border-radius: 3px;
+    color: #333;
+    background: #ececec;
+    padding: 0 2rem;
+    font-weight: 600;
+    border: 0;
+    opacity: 0.50;
+
+    &.next {
+      margin-left: auto;
+    }
+  }
 `;
 
 const PaginationLink = props => {
   if (!props.test) {
-    return <Link to={'/blog/' + props.url}>{props.text}</Link>;
+    return (
+      <Link className={props.class} to={'/blog/' + props.url}>
+        {props.text}
+      </Link>
+    );
   } else {
-    return null;
+    return <div className={`${props.class} disabled`}>{props.text}</div>;
   }
 };
 
@@ -195,41 +289,63 @@ const BlogIndex = ({ pageContext }) => {
 
   const { title, seoMetaTags } = data.page;
   return (
-    <ScaleUp>
+    <>
       <SEO meta={seoMetaTags} />
       <Container>
         <Wrapper>
           <SidePanel>
             <Title>
               {title}{' '}
-              <span>
+              <div className="pages">
                 &mdash; {index}/{pageCount}
-              </span>
+              </div>
             </Title>
           </SidePanel>
           <Feed>
-            {group.map(node => (
-              <PostCard key={node.slug} node={node} />
-            ))}
-
-            <Pagination>
+            <Pagination role="navigation">
               <PaginationLink
                 test={first}
                 url={previousUrl}
-                text="Predchádzajúca stránka"
-                className="previousPageLink"
+                text="Novší obsah"
+                class="previous"
               />
+              <div className="pageNumber">
+                {index}/{pageCount}
+              </div>
               <PaginationLink
                 test={last}
                 url={nextUrl}
-                text="Nasledujúca stránka"
-                className="nextPageLink"
+                text="Starší obsah"
+                class="next"
+              />
+            </Pagination>
+            <BlogPostList>
+              {group.map(node => (
+                <BlogPostItem key={node.slug} node={node} />
+              ))}
+            </BlogPostList>
+
+            <Pagination role="navigation">
+              <PaginationLink
+                test={first}
+                url={previousUrl}
+                text="Novší obsah"
+                class="previous"
+              />
+              <div className="pageNumber">
+                {index}/{pageCount}
+              </div>
+              <PaginationLink
+                test={last}
+                url={nextUrl}
+                text="Starší obsah"
+                class="next"
               />
             </Pagination>
           </Feed>
         </Wrapper>
       </Container>
-    </ScaleUp>
+    </>
   );
 };
 

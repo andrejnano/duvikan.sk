@@ -8,9 +8,10 @@ import SEO from '../components/SEO';
 import { map } from 'lodash';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { colors } from '../consts/style';
+import { colors, colors2 } from '../consts/style';
 import { ScaleUp } from '../style/motion';
 import Container from '../containers/Container';
+import Logo from '../images/logo-black.svg';
 
 const HomePage = styled.article`
   color: ${colors.white};
@@ -66,26 +67,46 @@ const SectionSeparator = styled.hr`
 `;
 
 const Main = styled.section`
-  padding-top: 3rem;
+  padding-top: 400px;
   background: ${colors.lightWash};
   color: ${colors.black};
 `;
 
 const CenteredTextBlock = styled.div`
   font-size: 3rem;
-  font-weight: 200;
   padding-top: 3rem;
   padding-bottom: 6rem;
-  margin-left: 150px;
+  margin-left: auto;
   margin-right: auto;
-  .subtitle {
-    font-size: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  svg {
+    color: #000;
+    fill: currentColor;
   }
+  .title {
+    font-size: 6rem;
+    text-transform: uppercase;
+    font-weight: 800;
+  }
+  .japaneseTitle {
+    font-weight: 400;
+  }
+
+  .subtitle {
+    font-size: 2.4rem;
+  }
+
   .bodyContent {
     font-size: 2rem;
+    font-weight: 400;
+    display: relative;
     margin-top: 3rem;
-    text-align: left;
+    text-align: justify;
     max-width: 720px;
+    color: #5b6987;
   }
 `;
 
@@ -104,45 +125,101 @@ const NewsfeedTitle = styled.h2`
   margin-bottom: 2rem;
 `;
 
-const PostGrid = styled.div`
+const BlogPostGrid = styled.div`
+  width: 100%;
   display: flex;
-  flex-direction: column;
   flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding: 0;
+  margin: 0;
+  position: relative;
+  list-style-type: none;
 `;
 
-const PostLink = styled.div`
-  max-width: 720px;
+const BlogPostItem = styled.li`
+  position: relative;
+  width: 100%;
   margin-bottom: 1rem;
-  a {
-    > div {
-      border-top: 1px solid ${colors.gray1};
-      padding: 1rem;
+  > a {
+    position: relative;
+    border: 1px solid #e5e8ed;
+    background-color: ${colors.white};
+    border-radius: 3px;
+    padding: 3rem;
+    color: ${colors.black};
+    overflow: hidden;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
 
-      h3 {
-        color: ${colors.gray2};
-        font-size: 1.8rem;
-        font-weight: 400;
-      }
+    .cover {
+      flex: 100%;
     }
 
-    &:hover {
-      > div {
-        h3 {
-          color: ${colors.gray3};
+    .title {
+      margin-left: 1rem;
+      font-size: 2rem;
+      font-weight: 400;
+    }
+
+    .meta {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      font-size: 1.4rem;
+      font-weight: 400;
+      padding: 1.2rem 0;
+      opacity: 0.75;
+
+      > * {
+        margin-right: 1rem;
+      }
+
+      .authorName {
+        color: ${colors.mediumBlue};
+        font-weight: 500;
+      }
+
+      .authorPhoto {
+        width: 25px;
+        height: 25px;
+        img {
+          border-radius: 50%;
         }
       }
     }
-  }
-`;
 
-const PostInfo = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  font-weight: bold;
-  color: #ccc;
-  font-size: 1.3rem;
+    .linkText {
+      position: absolute;
+      display: inline-block;
+      bottom: 2rem;
+      right: 2rem;
+      color: ${colors.mediumBlue};
+      font-weight: 400;
+      font-size: 2rem;
+      svg {
+        margin-left: 2px;
+        font-size: 1.2em;
+        vertical-align: middle;
+        position: relative;
+        top: -1px;
+        color: ${colors.mediumBlue};
+      }
+      &:after {
+        content: ' ';
+        position: absolute;
+        left: 0;
+        bottom: -2px;
+        width: 100%;
+        height: 1px;
+        background: ${colors.mediumBlue};
+        transition: opacity 0.25s linear;
+        opacity: 0;
+      }
+    }
+  }
 `;
 
 const QuickLinkGrid = styled.ul`
@@ -153,6 +230,7 @@ const QuickLinkGrid = styled.ul`
   position: relative;
   list-style-type: none;
   margin: 0;
+  margin-bottom: -50%;
   padding: 0;
   width: 100%;
 `;
@@ -162,16 +240,17 @@ const QuickLinkCard = styled.li`
   min-width: 250px;
   width: 100%;
   @media (min-width: 720px) {
-    max-width: 300px;
+    max-width: 720px;
   }
-  @media (min-width: 1040px) {
+  @media (min-width: 1470px) {
     width: 33.33333%;
   }
 
   a.card {
     display: block;
     position: relative;
-    margin: 15px;
+    margin: 0 2rem;
+    margin-bottom: 1rem;
     box-shadow: 0 2px 4px rgba(3, 27, 78, 0.06);
     border-radius: 3px;
     background: ${colors.white};
@@ -179,6 +258,7 @@ const QuickLinkCard = styled.li`
     color: ${colors.black};
     overflow: hidden;
     height: 100%;
+    border-bottom: 1px solid #e5e8ed;
 
     &:first-child {
       margin-left: 0;
@@ -187,10 +267,50 @@ const QuickLinkCard = styled.li`
     .photo {
       position: relative;
       max-width: 720px;
+      border-bottom: 1px solid #e5e8ed;
     }
+
     .title {
-      font-size: 3rem;
+      font-size: 2.4rem;
       padding: 2rem;
+      padding-bottom: 0.4rem;
+    }
+
+    .description {
+      color: #5b6987;
+      font-size: 1.8rem;
+      padding-left: 2rem;
+      padding-right: 2rem;
+      padding-bottom: 4rem;
+    }
+
+    .linkText {
+      position: absolute;
+      display: inline-block;
+      bottom: 2rem;
+      left: 2rem;
+      color: ${colors.mediumBlue};
+      font-weight: bold;
+      &:after {
+        content: ' ';
+        position: absolute;
+        left: 0;
+        bottom: -2px;
+        width: 100%;
+        height: 1px;
+        background: ${colors.mediumBlue};
+        transition: opacity 0.25s linear;
+        opacity: 0;
+      }
+    }
+
+    &:hover {
+      box-shadow: 0 10px 20px rgba(3, 27, 78, 0.1);
+      .linkText {
+        &:after {
+          opacity: 1;
+        }
+      }
     }
   }
 `;
@@ -201,6 +321,8 @@ const QuickLink = props => {
       <Link className="card" to={props.url}>
         <Img className="photo" fluid={props.imgFluid} />
         <h3 className="title">{props.title}</h3>
+        <p className="description">{props.description}</p>
+        <span className="linkText">{props.linkText}</span>
       </Link>
     </QuickLinkCard>
   );
@@ -232,6 +354,12 @@ const IndexPage = () => {
             ...GatsbyDatoCmsFluid
           }
         }
+        quickLink1Description
+        quickLink1LinkText
+        quickLink2Description
+        quickLink2LinkText
+        quickLink3Description
+        quickLink3LinkText
         body
       }
       posts: allDatoCmsBlogPost(
@@ -244,8 +372,25 @@ const IndexPage = () => {
             title
             featured
             slug
+            cover {
+              fluid(maxWidth: 720) {
+                ...GatsbyDatoCmsFluid
+              }
+            }
+            author {
+              name
+              photo {
+                fluid(maxWidth: 200) {
+                  src
+                  srcSet
+                  base64
+                  aspectRatio
+                  sizes
+                }
+              }
+            }
             meta {
-              updatedAt
+              createdAt
             }
             contentNode {
               childMarkdownRemark {
@@ -267,6 +412,12 @@ const IndexPage = () => {
     quickLink1Cover,
     quickLink2Cover,
     quickLink3Cover,
+    quickLink1Description,
+    quickLink1LinkText,
+    quickLink2Description,
+    quickLink2LinkText,
+    quickLink3Description,
+    quickLink3LinkText,
     body,
   } = data.page;
 
@@ -289,23 +440,33 @@ const IndexPage = () => {
           </Section>
           <SectionSeparator />
           <Section>
-            <SectionInfo>Najdôležitejšie<br/>informácie</SectionInfo>
+            <SectionInfo>
+              Najdôležitejšie
+              <br />
+              informácie
+            </SectionInfo>
             <SectionContent>
               <QuickLinkGrid>
                 <QuickLink
                   url="/treningy"
                   title={quickLink1Title}
                   imgFluid={quickLink1Cover.fluid}
+                  description={quickLink1Description}
+                  linkText={quickLink1LinkText}
                 />
                 <QuickLink
                   url="/dojo"
                   title={quickLink2Title}
                   imgFluid={quickLink2Cover.fluid}
+                  description={quickLink2Description}
+                  linkText={quickLink2LinkText}
                 />
                 <QuickLink
                   url="/historia"
                   title={quickLink3Title}
                   imgFluid={quickLink3Cover.fluid}
+                  description={quickLink3Description}
+                  linkText={quickLink3LinkText}
                 />
               </QuickLinkGrid>
             </SectionContent>
@@ -315,9 +476,15 @@ const IndexPage = () => {
       <Main>
         <Container>
           <CenteredTextBlock>
-            <h3>Duvi-kan</h3>
-            <div className="subtitle">DUVI - okinawské meno šéftrénera MUDr. Divinca</div>
-            <div className="subtitle">KAN - po japonsky škola</div>
+            <Logo />
+            <h4 className="japaneseTitle">空手道場ドゥヴィ館ブラチスラバ</h4>
+            <h3 className="title">Duvi-kan</h3>
+            <div className="subtitle">
+              <strong>DUVI</strong> - okinawské meno šéftrénera MUDr. Divinca
+            </div>
+            <div className="subtitle">
+              <strong>KAN</strong> - po japonsky škola
+            </div>
             <div
               className="bodyContent"
               dangerouslySetInnerHTML={{
@@ -332,28 +499,35 @@ const IndexPage = () => {
         <Container>
           <CenteredTextBlock>
             <NewsfeedTitle>Najnovšie príspevky</NewsfeedTitle>
-            <PostGrid>
+            <BlogPostGrid>
               {map(edges, post => (
-                <PostLink key={post.node.slug}>
+                <BlogPostItem key={post.node.slug}>
                   <Link to={`/blog/${post.node.slug}/`}>
-                    <div>
-                      <h3>{post.node.title}</h3>
-                      <PostInfo>
-                        <time>
-                          <Moment format="DD.MM.YYYY">
-                            {post.node.meta.updatedAt}
-                          </Moment>
-                        </time>
-                        <div>
-                          {post.node.contentNode.childMarkdownRemark.timeToRead}{' '}
-                          min read
-                        </div>
-                      </PostInfo>
+                    <Img className="cover" fluid={post.node.cover.fluid} />
+                    <h3 className="title">{post.node.title}</h3>
+                    <div className="meta">
+                      <Img
+                        className="authorPhoto"
+                        fluid={post.node.author.photo.fluid}
+                      />
+                      <div className="authorName">
+                        {post.node.author.name} ・{' '}
+                      </div>
+                      <FontAwesomeIcon icon={['far', 'calendar-alt']} />{' '}
+                      <Moment format="DD.MM.YYYY">
+                        {post.node.meta.createdAt}
+                      </Moment>
+                      <FontAwesomeIcon icon={['far', 'clock']} />{' '}
+                      {post.node.contentNode.childMarkdownRemark.timeToRead} min.
                     </div>
+                    <span className="linkText">
+                      Otvoriť článok{' '}
+                      <FontAwesomeIcon icon={['far', 'long-arrow-alt-right']} />{' '}
+                    </span>
                   </Link>
-                </PostLink>
+                </BlogPostItem>
               ))}
-            </PostGrid>
+            </BlogPostGrid>
           </CenteredTextBlock>
         </Container>
       </Newsfeed>

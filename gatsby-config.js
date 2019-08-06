@@ -75,5 +75,13 @@ module.exports = {
         apiToken: process.env.DATO_CMS_KEY,
       },
     },
+    {
+      resolve: 'gatsby-plugin-react-svg',
+      options: {
+        rule: {
+          include: /images/,
+        },
+      },
+    },
   ],
 };

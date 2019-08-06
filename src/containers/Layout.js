@@ -49,7 +49,12 @@ const SiteWrapper = styled.div`
       #562bb3,
       #5d2baf
     );
-    background-image: linear-gradient( 114.9deg,  rgba(34,34,34,1) 8.3%, rgba(0,40,60,1) 41.6%, rgba(0,143,213,1) 93.4% );
+    /* background-image: linear-gradient(
+      114.9deg,
+      rgba(34, 34, 34, 1) 8.3%,
+      rgba(0, 40, 60, 1) 41.6%,
+      rgba(0, 143, 213, 1) 93.4%
+    ); */
     /* background-image: url('https://images.unsplash.com/photo-1525198104776-f6e8a873f9b7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3450&q=80');
     background-size: contain;
     background-repeat: no-repeat; */
