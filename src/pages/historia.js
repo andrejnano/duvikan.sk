@@ -4,48 +4,40 @@ import { graphql, useStaticQuery } from 'gatsby';
 import Img from 'gatsby-image';
 import SEO from '../components/SEO';
 
-import { ScaleUp } from '../style/motion';
+import {
+  SectionWrapper,
+  Cover,
+  SidePanel,
+  MainPanel,
+} from '../components/common/LayoutParts';
+
 import Container from '../containers/Container';
 import { colors } from '../consts/style';
 
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  min-height: 100vh;
-  margin: 3rem 0;
-  padding: 3rem 0;
-`;
-
-const SidePanel = styled.div`
-  width: 150px;
-`;
-
-const MainPanel = styled.main`
-  flex: 1;
-  display: flex;
-  flex-wrap: wrap;
-  > section {
-    max-width: 100%;
-  }
-`;
-
-const IntroHeadline = styled.section`
+const IntroHeadline = styled.div`
   font-size: 3rem;
   font-weight: 800;
   margin-bottom: 3rem;
-  flex: 100%;
 `;
 
-const FirstParagraph = styled.section`
-  flex: 70%;
+const Row = styled.div`
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+`;
 
+const FirstParagraph = styled.div`
+  flex: 70%;
   > div {
     padding-right: 2rem;
     p {
+      max-width: 720px;
       text-align: justify;
-      font-size: 1.7rem;
-      font-weight: 500;
-      color: ${colors.gray3};
+      font-size: 2rem;
+      font-weight: 400;
+      color: ${colors.gray4};
       letter-spacing: -0.004em;
       line-height: 1.58;
     }
@@ -58,6 +50,40 @@ const FirstImage = styled.section`
 
 const MainContent = styled.section`
   flex: 100%;
+
+  ul {
+    li {
+      padding: 2rem 0;
+      margin: 0;
+      list-style-type: none;
+      position: relative;
+
+      &::before {
+        content: ' ';
+        height: 100%;
+        width: 3px;
+        background-color: currentColor;
+        position: absolute;
+        left: -2rem;
+        top: 0;
+        opacity: 0.5;
+        border-top-right-radius: 1px;
+        border-bottom-right-radius: 1px;
+      }
+      &::after {
+        content: ' ';
+        height: 10px;
+        width: 10px;
+        background-color: currentColor;
+        position: absolute;
+        left: -2.3rem;
+        top: 50%;
+        transform: translateY(-50%);
+        opacity: 1;
+        border-radius: 50%;
+      }
+    }
+  }
 `;
 
 const Title = styled.h1`
@@ -94,25 +120,27 @@ const HistoriaPage = () => {
     seoMetaTags,
   } = data.datoCmsHistoriaPage;
   return (
-    <ScaleUp>
+    <>
       <SEO meta={seoMetaTags} />
       <Container>
-        <Wrapper>
+        <SectionWrapper>
           <SidePanel>
             <Title>{title}</Title>
           </SidePanel>
           <MainPanel>
             <IntroHeadline>{introHeadline}</IntroHeadline>
-            <FirstParagraph>
-              <div
-                dangerouslySetInnerHTML={{
-                  __html: firstParagraph,
-                }}
-              />
-            </FirstParagraph>
-            <FirstImage>
-              <Img fluid={firstImage.fluid} />
-            </FirstImage>
+            <Row>
+              <FirstParagraph>
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: firstParagraph,
+                  }}
+                />
+              </FirstParagraph>
+              <FirstImage>
+                <Img fluid={firstImage.fluid} />
+              </FirstImage>
+            </Row>
             <MainContent>
               <div
                 dangerouslySetInnerHTML={{
@@ -121,9 +149,9 @@ const HistoriaPage = () => {
               />
             </MainContent>
           </MainPanel>
-        </Wrapper>
+        </SectionWrapper>
       </Container>
-    </ScaleUp>
+    </>
   );
 };
 

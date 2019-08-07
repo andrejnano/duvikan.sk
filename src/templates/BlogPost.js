@@ -11,58 +11,12 @@ import { font, colors } from '../consts/style';
 import { ScaleUp } from '../style/motion';
 import Container from '../containers/Container';
 
-const SectionWrapper = styled.section`
-  display: flex;
-  flex-direction: row;
-  margin: 3rem 0;
-  padding: 3rem 0;
-`;
-
-const Cover = styled.div`
-  margin-top: 3rem;
-  width: 100%;
-  display: flex;
-  max-height: 40vh;
-  > div {
-    flex: 100%;
-    border-radius: 3px;
-    border: 1px solid #e5e8ed;
-    box-shadow: 0 2px 4px rgba(3, 27, 78, 0.06);
-  }
-`;
-
-const SidePanel = styled.div`
-  width: 200px;
-
-  .btn {
-    appearance: none;
-    overflow: visible;
-    vertical-align: middle;
-    cursor: pointer;
-    height: 4rem;
-    line-height: 4rem;
-    text-align: center;
-    white-space: nowrap;
-    text-decoration: none;
-    transition: all easeInOutCubic 0.25s;
-    border-radius: 3px;
-    color: #333;
-    background: #ececec;
-    padding: 1rem 3rem;
-    font-weight: 600;
-    border: 0;
-
-    &:hover {
-      background: #dfdfdf;
-    }
-  }
-`;
-
-const MainPanel = styled.main`
-  flex: 1;
-  display: block;
-  position: relative;
-`;
+import {
+  SectionWrapper,
+  Cover,
+  SidePanel,
+  MainPanel,
+} from '../components/common/LayoutParts';
 
 const Content = styled.article`
   color: ${colors.black};
@@ -75,7 +29,9 @@ const Content = styled.article`
 
 const Title = styled.h1`
   font-size: 4rem;
-  line-height: 1.2;
+  margin: 0;
+  padding: 0;
+  margin-bottom: 1rem;
 `;
 
 const PostInfo = styled.header`
@@ -84,6 +40,22 @@ const PostInfo = styled.header`
   display: flex;
   flex-direction: row;
   margin-bottom: 2rem;
+
+  .authorName {
+    color: ${colors.mediumBlue};
+    font-weight: 500;
+    margin-right: 1rem;
+    border-bottom: 1px solid ${colors.mediumBlue};
+  }
+
+  .authorPhoto {
+    width: 25px;
+    height: 25px;
+    margin-right: 1rem;
+    img {
+      border-radius: 50%;
+    }
+  }
 `;
 
 const LastUpdate = styled.time`
@@ -100,7 +72,7 @@ const TimeToRead = styled.time`
 `;
 
 const BlogPost = ({ data }) => {
-  const { title, seoMetaTags, meta, cover, contentNode } = data.project;
+  const { title, seoMetaTags, meta, author, cover, contentNode } = data.project;
   return (
     <ScaleUp>
       <SEO meta={seoMetaTags} />
@@ -117,6 +89,8 @@ const BlogPost = ({ data }) => {
           <MainPanel>
             <Title>{title}</Title>
             <PostInfo>
+              <Img className="authorPhoto" fluid={author.photo.fluid} />
+              <div className="authorName">{author.name}</div>
               <LastUpdate>
                 <FontAwesomeIcon icon={['far', 'calendar-alt']} />{' '}
                 <Moment format="DD.MM.YYYY">{meta.updatedAt}</Moment>
@@ -150,7 +124,15 @@ export const projectQuery = graphql`
       }
       cover {
         fluid(maxWidth: 1470) {
-          ...GatsbyDatoCmsFluid
+          ...GatsbyDatoCmsFluid_tracedSVG
+        }
+      }
+      author {
+        name
+        photo {
+          fluid(maxWidth: 25) {
+            ...GatsbyDatoCmsFluid
+          }
         }
       }
       contentNode {

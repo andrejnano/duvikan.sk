@@ -19,6 +19,10 @@ import {
   faLongArrowAltLeft,
   faClock,
   faCalendarAlt,
+  faTimes,
+  faEnvelope,
+  faEnvelopeSquare,
+  faPhone,
 } from '@fortawesome/pro-regular-svg-icons';
 
 library.add(
@@ -27,7 +31,11 @@ library.add(
   faLongArrowAltRight,
   faLongArrowAltLeft,
   faClock,
-  faCalendarAlt
+  faCalendarAlt,
+  faTimes,
+  faEnvelope,
+  faEnvelopeSquare,
+  faPhone
 );
 
 const SiteWrapper = styled.div`
@@ -35,14 +43,14 @@ const SiteWrapper = styled.div`
   min-height: 100%;
   flex-direction: column;
   &.bgGradient {
-    background-image: radial-gradient(
+    /* background-image: radial-gradient(
       circle farthest-corner at 10% 20%,
       rgba(255, 197, 118, 1) 0%,
       rgba(254, 106, 103, 1) 47.7%,
       rgba(240, 23, 23, 1) 92.3%
-    );
+    ); */
     background: #1a1a1a;
-    background-image: radial-gradient(
+    /* background-image: radial-gradient(
       circle,
       #171ab6,
       #171fb9,
@@ -56,16 +64,21 @@ const SiteWrapper = styled.div`
       #4d2cb7,
       #562bb3,
       #5d2baf
-    );
+    ); */
     /* background-image: linear-gradient(
       114.9deg,
       rgba(34, 34, 34, 1) 8.3%,
       rgba(0, 40, 60, 1) 41.6%,
       rgba(0, 143, 213, 1) 93.4%
     ); */
+    
     /* background-image: url('https://images.unsplash.com/photo-1525198104776-f6e8a873f9b7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3450&q=80');
     background-size: contain;
     background-repeat: no-repeat; */
+    background: #8A2387;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #F27121, #E94057, #8A2387);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #F27121, #E94057, #8A2387); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
   }
 `;
 
@@ -82,7 +95,12 @@ const SiteWrapper = styled.div`
 // `;
 
 const ContentWrapper = styled.main`
-  min-height: calc(100vh - 100px);
+  min-height: calc(100vh - (54px + 2rem));
+  margin-top: calc(54px + 2rem);
+
+  @media (min-width: 950px) {
+    margin-top: 0;
+  }
   /* remove the header height */
 `;
 
@@ -128,8 +146,9 @@ const Layout = ({ children, location }) => {
       <Header isHome={isHome} />
       <HeaderHr className={isHome ? 'whiteHr' : ''} />
       {/* <JapaneseTitle>空手道場ドゥヴィ館ブラチスラバ</JapaneseTitle> */}
-      <ContentWrapper location={location}>{children}</ContentWrapper>
-      {/* <Transition location={location}>{children}</Transition> */}
+      <Transition location={location}>
+        <ContentWrapper>{children}</ContentWrapper>
+      </Transition>
       <Footer />
     </SiteWrapper>
   );

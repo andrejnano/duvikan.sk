@@ -31,7 +31,6 @@ body {
   font-weight: 400;
   line-height: 1.5;
   text-align: left;
-  background-color: ${colors.light};
 }
 
 [tabindex="-1"]:focus {

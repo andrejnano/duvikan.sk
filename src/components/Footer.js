@@ -9,13 +9,36 @@ import Container from '../containers/Container';
 // webpack import image path
 import logoImage from '../images/logo.svg';
 
-const Wrapper = styled.footer`
-  color: ${colors.white};
-  background: ${colors.black};
+import { SidePanel, MainPanel } from '../components/common/LayoutParts';
+
+const FooterOutsideWrapper = styled.footer`
+  width: 100%;
+  background: ${colors.lightWash};
+`;
+
+const FooterWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 3rem 0;
+  padding: 3rem 0;
+
+  @media (min-width: 950px) {
+    flex-direction: row;
+  }
+`;
+
+const SectionSeparator = styled.hr`
+  width: 100%;
+  height: 1px;
+  background-color: ${colors.black};
+  opacity: 0.075;
+  border: 0;
+  margin: 0;
+  margin-bottom: 3rem;
+  overflow: visible;
 `;
 
 const NavList = styled.nav`
-  margin: 3rem 0;
   a {
     letter-spacing: 0.2em;
     font-weight: bold;
@@ -24,19 +47,16 @@ const NavList = styled.nav`
     &:not(:last-of-type) {
       margin-right: 2em;
     }
-  }
-`;
 
-const BottomRow = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
+    &:hover {
+      opacity: 0.5;
+    }
+  }
 `;
 
 const Copyright = styled.div`
   font-size: 1.4rem;
+  margin-top: 1rem;
   a {
     margin-left: 0.7rem;
     text-decoration: none;
@@ -46,14 +66,14 @@ const Copyright = styled.div`
 `;
 
 const SocialIcons = styled.div`
-  padding: 1rem;
   a {
+    margin-right: 1rem;
     &:hover {
-      opacity: 0.8;
+      opacity: 0.5;
     }
     svg {
-      color: ${colors.white};
-      height: 2rem;
+      color: ${colors.black};
+      font-size: 2rem;
       fill: currentColor;
     }
   }
@@ -64,40 +84,51 @@ const Footer = () => {
   const year = today.getFullYear();
 
   return (
-    <Wrapper>
+    <FooterOutsideWrapper>
       <Container>
-        <NavList>
-          <Link to="/" activeClassName="activePage">
-            Domov
-          </Link>
-          <Link to="/blog" activeClassName="activePage">
-            Novinky
-          </Link>
-          <Link to="/treningy" activeClassName="activePage">
-            Tréningy
-          </Link>
-          <Link to="/about" activeClassName="activePage">
-            O nás
-          </Link>
-          <Link to="/historia" activeClassName="activePage">
-            História
-          </Link>
-          <Link to="/contact" activeClassName="activePage">
-            Kontakt
-          </Link>
-        </NavList>
-        <BottomRow>
-          <Copyright>
-            Duvikan {year} <a href="https://anano.dev">@andrejnano</a>
-          </Copyright>
-          <SocialIcons>
-            <a href="https://facebook.com/duvikanBratislava">
-              <FontAwesomeIcon icon={['fab', 'facebook-square']} />
-            </a>
-          </SocialIcons>
-        </BottomRow>
+        <SectionSeparator />
+        <FooterWrapper>
+          <SidePanel>
+            <SocialIcons>
+              <a href="https://facebook.com/duvikanBratislava">
+                <FontAwesomeIcon icon={['fab', 'facebook-square']} />
+              </a>
+              <a href="https://facebook.com/duvikanBratislava">
+                <FontAwesomeIcon icon={['fab', 'instagram']} />
+              </a>
+              <a href="mailto:duvikan@gmail.com">
+                <FontAwesomeIcon icon={['far', 'envelope']} />
+              </a>
+            </SocialIcons>
+          </SidePanel>
+          <MainPanel>
+            <NavList>
+              <Link to="/" activeClassName="activePage">
+                Domov
+              </Link>
+              <Link to="/blog" activeClassName="activePage">
+                Novinky
+              </Link>
+              <Link to="/treningy" activeClassName="activePage">
+                Tréningy
+              </Link>
+              <Link to="/about" activeClassName="activePage">
+                O nás
+              </Link>
+              <Link to="/historia" activeClassName="activePage">
+                História
+              </Link>
+              <Link to="/contact" activeClassName="activePage">
+                Kontakt
+              </Link>
+            </NavList>
+            <Copyright>
+              Duvikan {year} <a href="https://anano.dev">@andrejnano</a>
+            </Copyright>
+          </MainPanel>
+        </FooterWrapper>
       </Container>
-    </Wrapper>
+    </FooterOutsideWrapper>
   );
 };
 

@@ -9,35 +9,12 @@ import { ScaleUp } from '../style/motion';
 import Container from '../containers/Container';
 import { colors } from '../consts/style';
 
-const SectionWrapper = styled.section`
-  display: flex;
-  flex-direction: row;
-  margin: 3rem 0;
-  padding: 3rem 0;
-`;
-
-const Cover = styled.div`
-  margin-top: 3rem;
-  width: 100%;
-  display: flex;
-  max-height: 40vh;
-  > div {
-    flex: 100%;
-    border-radius: 3px;
-    border: 1px solid #e5e8ed;
-    box-shadow: 0 2px 4px rgba(3, 27, 78, 0.06);
-  }
-`;
-
-const SidePanel = styled.div`
-  width: 200px;
-`;
-
-const MainPanel = styled.main`
-  flex: 1;
-  display: block;
-  position: relative;
-`;
+import {
+  SectionWrapper,
+  Cover,
+  SidePanel,
+  MainPanel,
+} from '../components/common/LayoutParts';
 
 const Title = styled.h1`
   font-size: 2rem;

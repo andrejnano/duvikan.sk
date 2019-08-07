@@ -8,32 +8,21 @@ import { ScaleUp } from '../style/motion';
 import Container from '../containers/Container';
 import { colors } from '../consts/style';
 
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  min-height: 100vh;
-  margin: 3rem 0;
-  padding: 3rem 0;
-`;
+import {
+  SectionWrapper,
+  Cover,
+  SidePanel,
+  MainPanel,
+} from '../components/common/LayoutParts';
 
 const Title = styled.h1`
   font-size: 2rem;
   font-weight: 600;
 `;
 
-const SidePanel = styled.div`
-  width: 200px;
-`;
-
-const MainPanel = styled.main`
-  flex: 1;
-  display: block;
-  position: relative;
-
-  > h2 {
-    font-weight: 500;
-    margin-bottom: 2rem;
-  }
+const MemberCategory = styled.h2`
+  font-weight: 500;
+  margin-bottom: 2rem;
 `;
 
 const SectionSeparator = styled.hr`
@@ -169,13 +158,13 @@ const ClenoviaPage = () => {
     <ScaleUp>
       <SEO meta={seoMetaTags} />
       <Container>
-        <Wrapper>
+        <SectionWrapper>
           <SidePanel>
             <Title>Členovia klubu</Title>
             <p>{description}</p>
           </SidePanel>
           <MainPanel>
-            <h2>Čestný prezident KK Duvikan</h2>
+            <MemberCategory>Čestný prezident KK Duvikan</MemberCategory>
             <MemberGrid>
               {map(members1, member => (
                 <MemberCard>
@@ -190,7 +179,7 @@ const ClenoviaPage = () => {
 
             <SectionSeparator />
 
-            <h2>Vedenie klubu</h2>
+            <MemberCategory>Vedenie klubu</MemberCategory>
             <MemberGrid>
               {map(members2, member => (
                 <MemberCard>
@@ -205,7 +194,7 @@ const ClenoviaPage = () => {
 
             <SectionSeparator />
 
-            <h2>Trénerská rada klubu</h2>
+            <MemberCategory>Trénerská rada klubu</MemberCategory>
             <MemberGrid>
               {map(members2, member => (
                 <MemberCard>
@@ -218,7 +207,7 @@ const ClenoviaPage = () => {
               ))}
             </MemberGrid>
           </MainPanel>
-        </Wrapper>
+        </SectionWrapper>
       </Container>
     </ScaleUp>
   );

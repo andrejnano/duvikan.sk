@@ -11,17 +11,12 @@ import SEO from '../components/SEO';
 import { colors } from '../consts/style';
 import Container from '../containers/Container';
 
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  min-height: 100vh;
-  margin: 3rem 0;
-  padding: 3rem 0;
-`;
-
-const SidePanel = styled.aside`
-  width: 200px;
-`;
+import {
+  SectionWrapper,
+  Cover,
+  SidePanel,
+  MainPanel,
+} from '../components/common/LayoutParts';
 
 const Title = styled.h1`
   font-size: 2rem;
@@ -31,10 +26,6 @@ const Title = styled.h1`
     color: ${colors.gray1};
     font-weight: 400;
   }
-`;
-
-const Feed = styled.main`
-  flex: 1;
 `;
 
 const BlogPostList = styled.ul`
@@ -52,7 +43,7 @@ const BlogPostList = styled.ul`
     position: relative;
     min-width: 250px;
     width: 100%;
-    margin-bottom: 3rem;
+    margin-bottom: 6rem;
 
     @media (min-width: 1470px) {
       width: 50%;
@@ -61,8 +52,7 @@ const BlogPostList = styled.ul`
     a.card {
       display: block;
       position: relative;
-      transition: box-shadow 0.25s linear, -webkit-box-shadow 0.25s linear;
-      padding: 3rem 3rem 3rem 3rem;
+      padding: 3rem 0 1rem;
       color: ${colors.black};
       overflow: hidden;
       height: 100%;
@@ -70,35 +60,46 @@ const BlogPostList = styled.ul`
       box-shadow: 0 2px 4px rgba(3, 27, 78, 0.06);
       background-color: ${colors.white};
       border-radius: 3px;
-
-      &:nth-child(odd) {
-        margin-right: 2rem;
-      }
-
-      &:nth-child(even) {
-        margin-left: 2rem;
-      }
+      margin: 2rem;
+      box-shadow: rgba(46, 41, 51, 0.08) 0px 1px 2px,
+        rgba(71, 63, 79, 0.08) 0px 2px 4px;
+      transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1) 0s,
+        box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0s,
+        padding 250ms cubic-bezier(0.4, 0, 0.2, 1) 0s;
 
       .title {
-        font-size: 2.8rem;
-        font-weight: 500;
-        padding: 0;
+        font-size: 3rem;
+        font-weight: 600;
+        padding: 0 3rem;
         margin: 0;
+        position: relative;
+
+        &::before {
+          content: ' ';
+          height: 1.6em;
+          width: 3px;
+          background-color: ${colors.black};
+          position: absolute;
+          left: -2rem;
+          opacity: 0.5;
+          border-top-right-radius: 1px;
+          border-bottom-right-radius: 1px;
+        }
       }
 
       .meta {
         display: flex;
         flex-direction: row;
         align-items: center;
-        font-size: 0.8em;
         font-weight: 400;
-        padding: 1.2rem 0;
+        padding: 1rem 3rem 2rem;
         opacity: 0.75;
 
         .authorName {
           color: ${colors.mediumBlue};
           font-weight: 500;
           margin-right: 1rem;
+          border-bottom: 0.5px solid ${colors.mediumBlue};
         }
 
         .authorPhoto {
@@ -129,23 +130,23 @@ const BlogPostList = styled.ul`
       .cover {
         max-height: 360px;
         position: relative;
-        border: 1px solid #e5e8ed;
+        border-top: 1px solid #e5e8ed;
+        border-bottom: 1px solid #e5e8ed;
         box-shadow: 0 2px 4px rgba(3, 27, 78, 0.06);
-        border-radius: 3px;
       }
 
       .excerpt {
-        font-size: 1.8rem;
-        padding-top: 2rem;
-        padding-bottom: 3rem;
+        font-size: 2rem;
+        padding: 3rem 2rem 0rem;
         line-height: 1.7;
+        color: ${colors.gray3};
       }
 
       .linkText {
         position: absolute;
         display: inline-block;
         bottom: 3rem;
-        left: 3rem;
+        left: 2rem;
         color: ${colors.mediumBlue};
         font-weight: 500;
         svg {
@@ -170,6 +171,10 @@ const BlogPostList = styled.ul`
       }
 
       &:hover {
+        transform: translateY(-0.25rem);
+        box-shadow: rgba(46, 41, 51, 0.08) 0px 4px 8px,
+          rgba(71, 63, 79, 0.16) 0px 8px 16px;
+
         .linkText {
           &:after {
             opacity: 1;
@@ -191,7 +196,7 @@ const BlogPostItem = props => {
         <h2 className="title">{props.node.title}</h2>
         <div className="meta">
           <Img className="authorPhoto" fluid={props.node.author.photo.fluid} />
-          <div className="authorName">{props.node.author.name} ・ </div>
+          <div className="authorName">{props.node.author.name}</div>
           <FontAwesomeIcon
             className="calendarIcon"
             icon={['far', 'calendar-alt']}
@@ -208,10 +213,10 @@ const BlogPostItem = props => {
         <p className="excerpt">
           {props.node.contentNode.childMarkdownRemark.excerpt}
         </p>
-        <span className="linkText">
-          Otvoriť článok{' '}
+        {/* <span className="linkText">
+          Prečítať
           <FontAwesomeIcon icon={['far', 'long-arrow-alt-right']} />{' '}
-        </span>
+        </span> */}
       </Link>
     </li>
   );
@@ -232,7 +237,7 @@ const Pagination = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
-  padding: 1rem;
+  padding: 1rem 0;
   margin-bottom: 2rem;
 
   .pageNumber {
@@ -349,7 +354,7 @@ const BlogIndex = ({ pageContext }) => {
     <>
       <SEO meta={seoMetaTags} />
       <Container>
-        <Wrapper>
+        <SectionWrapper>
           <SidePanel>
             <Title>
               {title}{' '}
@@ -358,12 +363,12 @@ const BlogIndex = ({ pageContext }) => {
               </div>
             </Title>
           </SidePanel>
-          <Feed>
+          <MainPanel>
             <Pagination role="navigation">
               <PaginationLink
                 test={first}
                 url={previousUrl}
-                text="Novší obsah"
+                text="Novšie príspevky"
                 class="previous"
               />
               <div className="pageNumber">
@@ -372,7 +377,7 @@ const BlogIndex = ({ pageContext }) => {
               <PaginationLink
                 test={last}
                 url={nextUrl}
-                text="Starší obsah"
+                text="Staršie príspevky"
                 class="next"
               />
             </Pagination>
@@ -390,7 +395,7 @@ const BlogIndex = ({ pageContext }) => {
               <PaginationLink
                 test={first}
                 url={previousUrl}
-                text="Novší obsah"
+                text="Novšie príspevky"
                 class="previous"
               />
               <div className="pageNumber">
@@ -399,12 +404,12 @@ const BlogIndex = ({ pageContext }) => {
               <PaginationLink
                 test={last}
                 url={nextUrl}
-                text="Starší obsah"
+                text="Staršie príspevky"
                 class="next"
               />
             </Pagination>
-          </Feed>
-        </Wrapper>
+          </MainPanel>
+        </SectionWrapper>
       </Container>
     </>
   );

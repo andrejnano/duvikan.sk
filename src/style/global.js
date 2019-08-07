@@ -1,6 +1,6 @@
 import 'typeface-inter';
 import { createGlobalStyle } from 'styled-components';
-import { colors, gradients } from '../consts/style';
+import { colors, colors2, gradients } from '../consts/style';
 
 const Global = createGlobalStyle`
 
@@ -17,8 +17,6 @@ html {
 body {
   overflow-x: hidden;
   word-wrap: break-word;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   color: ${colors.black};
   background-color: ${colors.white};
   background: ${colors.lightWash};
@@ -49,7 +47,7 @@ a {
 
 ::-webkit-scrollbar-thumb
 {
-	background-color: #f93a3c;
+	background-color: ${colors2.red};
 	background-image: -webkit-linear-gradient(90deg, rgba(255, 255, 255, .2) 25%,
                     transparent 25%,
                     transparent 50%,

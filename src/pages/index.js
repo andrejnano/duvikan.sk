@@ -12,9 +12,19 @@ import { colors, colors2 } from '../consts/style';
 import { ScaleUp } from '../style/motion';
 import Container from '../containers/Container';
 import Logo from '../images/logo-black.svg';
+import { SidePanel } from '../components/common/LayoutParts';
+import Gallery from '../components/Gallery';
 
 const HomePage = styled.article`
   color: ${colors.white};
+`;
+
+const MainPanelRow = styled.main`
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  position: relative;
 `;
 
 const Section = styled.section`
@@ -24,6 +34,10 @@ const Section = styled.section`
   width: 100%;
   display: flex;
   flex-direction: row;
+
+  &.antialiased {
+    -webkit-font-smoothing: antialiased;
+  }
 `;
 
 const SectionInfo = styled.div`
@@ -66,21 +80,59 @@ const SectionSeparator = styled.hr`
   background-color: #fff;
 `;
 
+const DarkSeparator = styled.hr`
+  width: 100%;
+  height: 1px;
+  background-color: ${colors.black};
+  opacity: 0.075;
+  border: 0;
+  margin: 0;
+  overflow: visible;
+`;
+
+const SectionWrapper = styled.section`
+  display: flex;
+  flex-direction: column;
+  margin: 3rem 0;
+  padding: 3rem 0;
+
+  @media (min-width: 950px) {
+    flex-direction: row;
+  }
+`;
+
 const Main = styled.section`
-  padding-top: 400px;
   background: ${colors.lightWash};
   color: ${colors.black};
+  box-shadow: 0 2px 4px rgba(3, 27, 78, 0.06);
+  border-bottom: 1px solid #e5e8ed;
+
+  @media (min-width: 950px) {
+    padding-top: 500px;
+  }
+`;
+
+const JapaneseTitle = styled.div`
+  position: relative;
+  height: 100%;
+  text-align: center;
+  vertical-align: middle;
+  writing-mode: vertical-rl;
+  font-size: 4rem;
+  display: none;
+
+  @media (min-width: 950px) {
+    display: block;
+  }
 `;
 
 const CenteredTextBlock = styled.div`
+  flex: 60%;
   font-size: 3rem;
-  padding-top: 3rem;
-  padding-bottom: 6rem;
   margin-left: auto;
   margin-right: auto;
   display: flex;
   flex-direction: column;
-  align-items: center;
 
   svg {
     color: #000;
@@ -89,7 +141,8 @@ const CenteredTextBlock = styled.div`
   .title {
     font-size: 6rem;
     text-transform: uppercase;
-    font-weight: 800;
+    font-weight: 1000;
+    letter-spacing: 0.05em;
   }
   .japaneseTitle {
     font-weight: 400;
@@ -100,23 +153,31 @@ const CenteredTextBlock = styled.div`
   }
 
   .bodyContent {
-    font-size: 2rem;
+    font-size: 1.6rem;
     font-weight: 400;
     display: relative;
     margin-top: 3rem;
     text-align: justify;
-    max-width: 720px;
-    color: #5b6987;
+    max-width: 575px;
+    padding-right: 1rem;
+    color: ${colors.black};
   }
 `;
 
+const SideGallery = styled.div`
+  flex: 40%;
+  align-self: center;
+  padding: 2rem 0;
+`;
+
 const Newsfeed = styled.section`
-  background: ${colors.mediumWash};
-  color: ${colors.black};
-  padding: 6rem 0;
+  color: ${colors.white};
+  background: ${colors.black};
+  padding: 4rem 0;
   width: 100%;
   display: flex;
   flex-direction: row;
+  -webkit-font-smoothing: antialiased;
 `;
 
 const NewsfeedTitle = styled.h2`
@@ -131,10 +192,14 @@ const BlogPostGrid = styled.div`
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: flex-start;
-  padding: 0;
+  padding: 2rem 0;
   margin: 0;
   position: relative;
   list-style-type: none;
+  /* border: 1px solid #e5e8ed;
+  background-color: ${colors.white};
+  border-radius: 3px;
+  box-shadow: 0 2px 4px rgba(3, 27, 78, 0.06); */
 `;
 
 const BlogPostItem = styled.li`
@@ -143,69 +208,43 @@ const BlogPostItem = styled.li`
   margin-bottom: 1rem;
   > a {
     position: relative;
-    border: 1px solid #e5e8ed;
-    background-color: ${colors.white};
-    border-radius: 3px;
-    padding: 3rem;
-    color: ${colors.black};
+    padding: 1rem;
+    color: ${colors.white};
     overflow: hidden;
     height: 100%;
     display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
 
-    .cover {
-      flex: 100%;
+    .timePosted {
+      font-size: 1.4rem;
+      width: auto;
+      margin-right: 2rem;
+
+      @media (min-width: 950px) {
+        width: 200px;
+        margin: 0;
+      }
     }
 
     .title {
-      margin-left: 1rem;
-      font-size: 2rem;
+      font-size: 1.6rem;
       font-weight: 400;
-    }
-
-    .meta {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      font-size: 1.4rem;
-      font-weight: 400;
-      padding: 1.2rem 0;
-      opacity: 0.75;
-
-      > * {
-        margin-right: 1rem;
-      }
-
-      .authorName {
-        color: ${colors.mediumBlue};
-        font-weight: 500;
-      }
-
-      .authorPhoto {
-        width: 25px;
-        height: 25px;
-        img {
-          border-radius: 50%;
-        }
-      }
     }
 
     .linkText {
-      position: absolute;
-      display: inline-block;
-      bottom: 2rem;
-      right: 2rem;
-      color: ${colors.mediumBlue};
+      margin-left: auto;
+      color: ${colors.white};
       font-weight: 400;
-      font-size: 2rem;
+      font-size: 1.4rem;
+      display: none;
       svg {
         margin-left: 2px;
         font-size: 1.2em;
         vertical-align: middle;
         position: relative;
         top: -1px;
-        color: ${colors.mediumBlue};
+        color: ${colors.white};
       }
       &:after {
         content: ' ';
@@ -214,10 +253,17 @@ const BlogPostItem = styled.li`
         bottom: -2px;
         width: 100%;
         height: 1px;
-        background: ${colors.mediumBlue};
+        background: ${colors.white};
         transition: opacity 0.25s linear;
-        opacity: 0;
       }
+
+      @media (min-width: 950px) {
+        display: block;
+      }
+    }
+
+    &:hover {
+      opacity: 0.5;
     }
   }
 `;
@@ -243,14 +289,6 @@ const QuickLinkCard = styled.li`
   min-width: 250px;
   width: 50%;
   margin-bottom: 2rem;
-
-  @media (min-width: 720px) {
-    max-width: 720px;
-  }
-
-  @media (min-width: 950px) {
-    width: 33.33333%;
-  }
 
   a.card {
     display: block;
@@ -315,6 +353,26 @@ const QuickLinkCard = styled.li`
       }
     }
   }
+
+  @media (min-width: 720px) {
+    max-width: 720px;
+  }
+
+  @media (min-width: 950px) {
+    width: 33.33333%;
+
+    &:first-child {
+      > a.card {
+        margin-left: 0;
+      }
+    }
+
+    &:last-child {
+      > a.card {
+        margin-right: 0;
+      }
+    }
+  }
 `;
 
 const QuickLink = props => {
@@ -363,6 +421,11 @@ const IndexPage = () => {
         quickLink3Description
         quickLink3LinkText
         body
+        imageGallery {
+          fluid(maxWidth: 950) {
+            ...GatsbyDatoCmsFluid
+          }
+        }
       }
       posts: allDatoCmsBlogPost(
         sort: { fields: [meta___createdAt], order: DESC }
@@ -421,6 +484,7 @@ const IndexPage = () => {
     quickLink3Description,
     quickLink3LinkText,
     body,
+    imageGallery,
   } = data.page;
 
   const { edges } = data.posts;
@@ -430,7 +494,7 @@ const IndexPage = () => {
       <SEO meta={seoMetaTags} />
       <ScaleUp>
         <Container>
-          <Section>
+          <Section className="antialiased">
             <SectionInfo>O nás</SectionInfo>
             <SectionContent>
               <p>{description}</p>
@@ -472,61 +536,62 @@ const IndexPage = () => {
       </ScaleUp>
       <Main>
         <Container>
-          <CenteredTextBlock>
-            <Logo />
-            <h4 className="japaneseTitle">空手道場ドゥヴィ館ブラチスラバ</h4>
-            <h3 className="title">Duvi-kan</h3>
-            <div className="subtitle">
-              <strong>DUVI</strong> - okinawské meno šéftrénera MUDr. Divinca
-            </div>
-            <div className="subtitle">
-              <strong>KAN</strong> - po japonsky škola
-            </div>
-            <div
-              className="bodyContent"
-              dangerouslySetInnerHTML={{
-                __html: body,
-              }}
-            />
-          </CenteredTextBlock>
+          <SectionWrapper>
+            <SidePanel>
+              <JapaneseTitle>空手道場ドゥヴィ館ブラチスラバ</JapaneseTitle>
+            </SidePanel>
+            <MainPanelRow>
+              <CenteredTextBlock>
+                <Logo />
+                <h4 className="japaneseTitle">
+                  空手道場ドゥヴィ館ブラチスラバ
+                </h4>
+                <h3 className="title">Duvi-kan</h3>
+                <div className="subtitle">
+                  <strong>DUVI</strong> - okinawské meno šéftrénera MUDr.
+                  Divinca
+                </div>
+                <div className="subtitle">
+                  <strong>KAN</strong> - po japonsky škola
+                </div>
+                <div
+                  className="bodyContent"
+                  dangerouslySetInnerHTML={{
+                    __html: body,
+                  }}
+                />
+              </CenteredTextBlock>
+              <SideGallery>
+                <Gallery itemsPerRow={1} images={imageGallery} />
+              </SideGallery>
+            </MainPanelRow>
+          </SectionWrapper>
           <SectionSeparator />
         </Container>
       </Main>
       <Newsfeed>
         <Container>
-          <CenteredTextBlock>
-            <NewsfeedTitle>Najnovšie príspevky</NewsfeedTitle>
-            <BlogPostGrid>
-              {map(edges, post => (
-                <BlogPostItem key={post.node.slug}>
-                  <Link to={`/blog/${post.node.slug}/`}>
-                    <Img className="cover" fluid={post.node.cover.fluid} />
-                    <h3 className="title">{post.node.title}</h3>
-                    <div className="meta">
-                      <Img
-                        className="authorPhoto"
-                        fluid={post.node.author.photo.fluid}
-                      />
-                      <div className="authorName">
-                        {post.node.author.name} ・{' '}
-                      </div>
-                      <FontAwesomeIcon icon={['far', 'calendar-alt']} />{' '}
-                      <Moment format="DD.MM.YYYY">
-                        {post.node.meta.createdAt}
-                      </Moment>
-                      <FontAwesomeIcon icon={['far', 'clock']} />{' '}
-                      {post.node.contentNode.childMarkdownRemark.timeToRead}{' '}
-                      min.
-                    </div>
-                    <span className="linkText">
-                      Otvoriť článok{' '}
-                      <FontAwesomeIcon icon={['far', 'long-arrow-alt-right']} />{' '}
-                    </span>
-                  </Link>
-                </BlogPostItem>
-              ))}
-            </BlogPostGrid>
-          </CenteredTextBlock>
+          <NewsfeedTitle>Najnovšie príspevky</NewsfeedTitle>
+          <BlogPostGrid>
+            {map(edges, post => (
+              <BlogPostItem key={post.node.slug}>
+                <SectionSeparator />
+                <Link to={`/blog/${post.node.slug}/`}>
+                  <div className="timePosted">
+                    <FontAwesomeIcon icon={['far', 'calendar-alt']} />{' '}
+                    <Moment format="DD.MM.YYYY">
+                      {post.node.meta.createdAt}
+                    </Moment>
+                  </div>
+                  <h3 className="title">{post.node.title}</h3>
+                  <div className="linkText">
+                    Otvoriť článok{' '}
+                    <FontAwesomeIcon icon={['far', 'long-arrow-alt-right']} />{' '}
+                  </div>
+                </Link>
+              </BlogPostItem>
+            ))}
+          </BlogPostGrid>
         </Container>
       </Newsfeed>
     </HomePage>

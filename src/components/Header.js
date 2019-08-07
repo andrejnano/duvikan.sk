@@ -6,51 +6,66 @@ import { graphql, Link, StaticQuery } from 'gatsby';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import Container from '../containers/Container';
-import { colors } from '../consts/style';
+import { colors, colors2 } from '../consts/style';
 
 const HeaderWrapper = styled.header`
-  position: initial;
+  position: fixed;
   z-index: 999;
   top: 0;
-  padding-top: 54px;
-  background: transparent;
+  left: 0;
+  width: 100%;
+  background: ${colors.white};
   color: ${colors.black};
   transition: background 0.4s linear, color 0.4s linear;
+  padding-top: calc(54px + 2rem);
+  box-shadow: rgba(46, 41, 51, 0.08) 0px 1px 2px,
+    rgba(71, 63, 79, 0.08) 0px 2px 4px;
 
-  &.isHome {
-    background: transparent;
-    transition: background 0.4s linear, color 0.4s linear;
-    color: ${colors.white};
+  .logoBlack {
+    display: block;
   }
 
-  &.isScrolling {
-    transition: background 0.2s linear;
-    position: sticky;
-    background: ${colors.black};
-    color: ${colors.white};
+  .logoWhite {
+    display: none;
   }
 
-  @media (min-width: 720px) {
+  @media (min-width: 950px) {
+    position: initial;
     padding-top: calc(54px + 4rem);
-  }
-
-  a {
-    &:hover {
-      opacity: 0.5;
+    box-shadow: none;
+    background: transparent;
+    &.isHome {
+      background: transparent;
+      color: ${colors.white};
+      transition: background 0.4s linear, color 0.4s linear;
+      .logoWhite {
+        display: block;
+      }
+      .logoBlack {
+        display: none;
+      }
     }
-  }
 
-  a.activePage {
-    border-bottom: 3px solid ${colors.darkWash};
+    &.isScrolling {
+      transition: background 0.2s linear;
+      position: sticky;
+      background: ${colors.black};
+      color: ${colors.white};
+      .logoWhite {
+        display: block;
+      }
+      .logoBlack {
+        display: none;
+      }
+    }
   }
 `;
 
 const Navigation = styled.nav`
   position: absolute;
-  top: 0px;
+  top: 1rem;
   width: 100%;
-
-  @media (min-width: 720px) {
+  @media (min-width: 950px) {
     top: 2rem;
   }
 `;
@@ -63,7 +78,11 @@ const InsideWrapper = styled.div`
 `;
 
 const LeftWrapper = styled.div`
-  width: 200px;
+  width: auto;
+
+  @media (min-width: 950px) {
+    width: 200px;
+  }
 `;
 
 const RightWrapper = styled.div`
@@ -76,7 +95,12 @@ const RightWrapper = styled.div`
 
 const Logo = styled.div`
   background: transparent;
-  width: 200px;
+  width: auto;
+  margin-right: 1rem;
+  @media (min-width: 950px) {
+    width: 200px;
+    margin: 0;
+  }
 `;
 
 const PageTitle = styled.div`
@@ -86,9 +110,11 @@ const PageTitle = styled.div`
     font-size: 2rem;
     display: inline-block;
 
-    &::after {
-      content: '・';
-      margin-left: 1rem;
+    @media (min-width: 950px) {
+      &::after {
+        content: '・';
+        margin-left: 1rem;
+      }
     }
   }
   .headerSubtitle {
@@ -96,13 +122,17 @@ const PageTitle = styled.div`
     font-weight: 200;
     display: none;
 
-    @media (min-width: 720px) {
+    @media (min-width: 950px) {
       display: inline-block;
     }
   }
 `;
 
 const NavList = styled.ul`
+  display: none;
+  @media (min-width: 950px) {
+    display: block;
+  }
   margin-top: 1rem;
   a {
     letter-spacing: 0.2em;
@@ -112,6 +142,51 @@ const NavList = styled.ul`
     &:not(:last-of-type) {
       margin-right: 2em;
     }
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+  a.activePage {
+    border-bottom: 3px solid ${colors.darkWash};
+  }
+`;
+
+const MobileNavList = styled.ul`
+  display: flex;
+  flex-direction: column;
+  margin: 4rem;
+
+  a {
+    font-size: 4rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+
+  a.activePage {
+    color: ${colors2.red};
+  }
+`;
+
+const MobileNavOverlay = styled.div`
+  position: fixed;
+  top: calc(54px + 2rem);
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: ${colors.black};
+  color: ${colors.white};
+  padding: 2rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s linear;
+
+  &.visible {
+    opacity: 1;
+    pointer-events: all;
   }
 `;
 
@@ -120,8 +195,16 @@ const Image = styled(Img)`
 `;
 
 const ToggleButton = styled.div`
+  display: block;
+  padding: 1rem;
+  cursor: pointer;
   svg {
+    font-size: 2.4rem;
     color: inherit;
+  }
+
+  @media (min-width: 950px) {
+    display: none;
   }
 `;
 
@@ -145,6 +228,7 @@ class Header extends Component {
     this.state = {
       scrollPositionY: 0,
       scrollPositionYOld: 0,
+      mobileNavOpen: false,
     };
   }
 
@@ -164,6 +248,10 @@ class Header extends Component {
     const scrollPositionY = +window.scrollY;
     return this.setState({ scrollPositionYOld, scrollPositionY });
   };
+
+  toggleMobileNav() {
+    this.setState({ mobileNavOpen: !this.state.mobileNavOpen });
+  }
 
   render() {
     const isScrolling =
@@ -188,11 +276,12 @@ class Header extends Component {
                 <Logo>
                   <Link to="/">
                     <Image
-                      fluid={
-                        this.props.isHome
-                          ? data.logoWhite.childImageSharp.fluid
-                          : data.logoBlack.childImageSharp.fluid
-                      }
+                      className="logoWhite"
+                      fluid={data.logoWhite.childImageSharp.fluid}
+                    />
+                    <Image
+                      className="logoBlack"
+                      fluid={data.logoBlack.childImageSharp.fluid}
                     />
                   </Link>
                 </Logo>
@@ -228,13 +317,40 @@ class Header extends Component {
                     Kontakt
                   </Link>
                 </NavList>
-                {/* <ToggleButton>
-                  <FontAwesomeIcon icon={['far', 'bars']} />
-                </ToggleButton> */}
+                <ToggleButton onClick={() => this.toggleMobileNav()}>
+                  {!this.state.mobileNavOpen && (
+                    <FontAwesomeIcon icon={['far', 'bars']} />
+                  )}
+                  {this.state.mobileNavOpen && (
+                    <FontAwesomeIcon icon={['far', 'times']} />
+                  )}
+                </ToggleButton>
               </RightWrapper>
             </InsideWrapper>
           </Container>
         </Navigation>
+        <MobileNavOverlay className={this.state.mobileNavOpen && 'visible'}>
+          <MobileNavList onClick={() => this.toggleMobileNav()}>
+            <Link to="/blog" activeClassName="activePage">
+              Novinky
+            </Link>
+            <Link to="/treningy" activeClassName="activePage">
+              Tréningy
+            </Link>
+            <Link to="/about" activeClassName="activePage">
+              O nás
+            </Link>
+            <Link to="/clenovia" activeClassName="activePage">
+              Členovia
+            </Link>
+            <Link to="/historia" activeClassName="activePage">
+              História
+            </Link>
+            <Link to="/contact" activeClassName="activePage">
+              Kontakt
+            </Link>
+          </MobileNavList>
+        </MobileNavOverlay>
       </HeaderWrapper>
     );
   }

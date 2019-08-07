@@ -32,7 +32,7 @@ exports.createPages = async ({ graphql, actions }) => {
               author {
                 name
                 photo {
-                  fluid(maxWidth: 200) {
+                  fluid(maxWidth: 25) {
                     src
                     srcSet
                     base64
@@ -58,7 +58,7 @@ exports.createPages = async ({ graphql, actions }) => {
           edges: posts,
           createPage: createPage,
           pageTemplate: './src/templates/BlogIndex.js',
-          pageLength: 5,
+          pageLength: 6,
           pathPrefix: 'blog',
         });
 

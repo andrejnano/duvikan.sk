@@ -8,40 +8,33 @@ import SEO from '../components/SEO';
 import { ScaleUp } from '../style/motion';
 import Container from '../containers/Container';
 import { colors, colors2 } from '../consts/style';
+import Gallery from '../components/Gallery';
 
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  margin: 3rem 0;
-  padding: 3rem 0;
-`;
+import {
+  SectionWrapper,
+  Cover,
+  SidePanel,
+  MainPanel,
+} from '../components/common/LayoutParts';
 
-const SidePanel = styled.aside`
-  width: 200px;
-`;
+const IntroText = styled.div`
+  background: ${colors.white};
+  border-radius: 3px;
+  border: 1px solid #e5e8ed;
+  box-shadow: 0 2px 4px rgba(3, 27, 78, 0.06);
+  padding: 2rem;
 
-const MainPanel = styled.main`
-  flex: 1;
+  p {
+    font-size: 2rem;
+    font-weight: 400;
+  }
 
-  .intro {
-    background: ${colors.white};
-    border-radius: 3px;
-    border: 1px solid #e5e8ed;
-    box-shadow: 0 2px 4px rgba(3, 27, 78, 0.06);
-    padding: 2rem;
+  a {
+    color: ${colors.mediumBlue};
+    text-decoration: underline;
 
-    p {
-      font-size: 2rem;
-      font-weight: 400;
-    }
-
-    a {
-      color: ${colors.mediumBlue};
+    &:hover {
       text-decoration: underline;
-
-      &:hover {
-        text-decoration: underline;
-      }
     }
   }
 `;
@@ -162,7 +155,7 @@ const TreningyPage = () => {
           ...GatsbyDatoCmsSeoMetaTags
         }
         coverImage {
-          fluid(maxWidth: 1800) {
+          fluid(maxWidth: 1470) {
             ...GatsbyDatoCmsFluid
           }
         }
@@ -176,6 +169,11 @@ const TreningyPage = () => {
         treningStvrtokEnd
         treningPiatokStart
         treningPiatokEnd
+        imageGallery {
+          fluid(maxWidth: 1470) {
+            ...GatsbyDatoCmsFluid
+          }
+        }
       }
     }
   `);
@@ -192,6 +190,7 @@ const TreningyPage = () => {
     treningStvrtokEnd,
     treningPiatokStart,
     treningPiatokEnd,
+    imageGallery,
     seoMetaTags,
   } = data.datoCmsTreningyPage;
 
@@ -207,23 +206,22 @@ const TreningyPage = () => {
     <ScaleUp>
       <SEO meta={seoMetaTags} />
       <Container>
-        <Wrapper>
+        <SectionWrapper>
           <SidePanel>
             <Title>{title} </Title>
           </SidePanel>
           <MainPanel>
-            <div
-              className="intro"
+            <IntroText
               dangerouslySetInnerHTML={{
                 __html: introText,
               }}
             />
           </MainPanel>
-        </Wrapper>
+        </SectionWrapper>
 
         <SectionSeparator />
 
-        <Wrapper>
+        <SectionWrapper>
           <SidePanel>
             <Title>Rozpis tréningov</Title>
           </SidePanel>
@@ -294,7 +292,18 @@ const TreningyPage = () => {
               </Day>
             </Calendar>
           </MainPanel>
-        </Wrapper>
+        </SectionWrapper>
+
+        <SectionSeparator />
+
+        <SectionWrapper>
+          <SidePanel>
+            <Title>Pohľad na tréningy</Title>
+          </SidePanel>
+          <MainPanel>
+            <Gallery itemsPerRow={3} images={imageGallery} />
+          </MainPanel>
+        </SectionWrapper>
       </Container>
     </ScaleUp>
   );
