@@ -109,12 +109,17 @@ const ContactPage = () => {
                     className="icon"
                     icon={['fab', 'facebook-square']}
                   />
-                  <span className="linkText">facebook.com/duvikanBratislava</span>
+                  <span className="linkText">
+                    facebook.com/duvikanBratislava
+                  </span>
                 </a>
               </li>
               <li>
                 <a href={`mailto:${email}`}>
-                  <FontAwesomeIcon className="icon" icon={['far', 'envelope']} />
+                  <FontAwesomeIcon
+                    className="icon"
+                    icon={['far', 'envelope']}
+                  />
                   <span className="linkText">{email}</span>
                 </a>
               </li>

@@ -361,7 +361,7 @@ const QuickLinkCard = styled.li`
   @media (min-width: 950px) {
     width: 33.33333%;
 
-    &:first-child {
+    /* &:first-child {
       > a.card {
         margin-left: 0;
       }
@@ -371,7 +371,7 @@ const QuickLinkCard = styled.li`
       > a.card {
         margin-right: 0;
       }
-    }
+    } */
   }
 `;
 

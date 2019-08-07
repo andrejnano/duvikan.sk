@@ -71,14 +71,23 @@ const SiteWrapper = styled.div`
       rgba(0, 40, 60, 1) 41.6%,
       rgba(0, 143, 213, 1) 93.4%
     ); */
-    
+
     /* background-image: url('https://images.unsplash.com/photo-1525198104776-f6e8a873f9b7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3450&q=80');
     background-size: contain;
     background-repeat: no-repeat; */
-    background: #8A2387;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #F27121, #E94057, #8A2387);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #F27121, #E94057, #8A2387); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
+    background: #8a2387; /* fallback for old browsers */
+    background: -webkit-linear-gradient(
+      to right,
+      #f27121,
+      #e94057,
+      #8a2387
+    ); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(
+      to right,
+      #f27121,
+      #e94057,
+      #8a2387
+    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   }
 `;
 
