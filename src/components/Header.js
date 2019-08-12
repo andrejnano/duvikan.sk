@@ -30,7 +30,7 @@ const HeaderWrapper = styled.header`
   }
 
   @media (min-width: 950px) {
-    position: initial;
+    position: relative;
     padding-top: calc(54px + 4rem);
     box-shadow: none;
     background: transparent;
@@ -58,6 +58,30 @@ const HeaderWrapper = styled.header`
         display: none;
       }
     }
+  }
+`;
+
+const HeaderHr = styled.hr`
+  position: relative;
+  width: 100%;
+  max-width: 1470px;
+  height: 1px;
+  opacity: 0.075;
+  border: 0;
+  margin: 0;
+  background-color: ${colors.black};
+  box-shadow: 0 2px 4px rgba(3, 27, 78, 0.06);
+  transition: background 0.4s linear, width 0.4s linear;
+
+  &.whiteHr {
+    background-color: ${colors.white};
+    transition: background 0.4s linear, width 0.8s linear;
+  }
+
+  @media (min-width: 950px) {
+    margin-top: 2rem;
+    height: 2px;
+    opacity: 0.8;
   }
 `;
 
@@ -105,20 +129,16 @@ const Logo = styled.div`
 
 const PageTitle = styled.div`
   background: transparent;
+
+  > a {
+    display: flex;
+    flex-direction: column;
+  }
   .headerTitle {
     font-weight: bold;
     font-size: 2rem;
-    display: inline-block;
-
-    @media (min-width: 950px) {
-      &::after {
-        content: '・';
-        margin-left: 1rem;
-      }
-    }
   }
   .headerSubtitle {
-    margin-left: 1rem;
     font-weight: 200;
     display: none;
 
@@ -130,7 +150,7 @@ const PageTitle = styled.div`
 
 const NavList = styled.ul`
   display: none;
-  @media (min-width: 950px) {
+  @media (min-width: 1200px) {
     display: block;
   }
   margin-top: 1rem;
@@ -203,7 +223,7 @@ const ToggleButton = styled.div`
     color: inherit;
   }
 
-  @media (min-width: 950px) {
+  @media (min-width: 1200px) {
     display: none;
   }
 `;
@@ -327,6 +347,7 @@ class Header extends Component {
                 </ToggleButton>
               </RightWrapper>
             </InsideWrapper>
+            <HeaderHr className={this.props.isHome ? 'whiteHr' : ''} />
           </Container>
         </Navigation>
         <MobileNavOverlay className={this.state.mobileNavOpen && 'visible'}>

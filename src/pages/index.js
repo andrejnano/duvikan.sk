@@ -3,6 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Moment from 'react-moment';
 import { graphql, useStaticQuery, Link } from 'gatsby';
+import BackgroundImage from 'gatsby-background-image';
 import Img from 'gatsby-image';
 import SEO from '../components/SEO';
 import { map } from 'lodash';
@@ -12,11 +13,13 @@ import { colors, colors2 } from '../consts/style';
 import { ScaleUp } from '../style/motion';
 import Container from '../containers/Container';
 import Logo from '../images/logo-black.svg';
-import { SidePanel } from '../components/common/LayoutParts';
+import { SidePanel, MainPanel } from '../components/common/LayoutParts';
 import Gallery from '../components/Gallery';
 
 const HomePage = styled.article`
   color: ${colors.white};
+  position: relative;
+  margin-top: calc(-1*(54px + 4rem + 2px));
 `;
 
 const MainPanelRow = styled.main`
@@ -27,27 +30,38 @@ const MainPanelRow = styled.main`
   position: relative;
 `;
 
-const Section = styled.section`
-  margin-top: 3rem;
-  padding: 3rem 0;
-  margin-bottom: 4rem;
+const HeroSection = styled.section`
+  margin-top: 0;
+  position: relative;
+  padding-top: calc(54px + 8rem);
+  padding-bottom: 6rem;
   width: 100%;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+
+  @media (min-width: 950px) {
+    padding-top: calc(54px + 12rem);
+    flex-direction: row;
+  }
 
   &.antialiased {
     -webkit-font-smoothing: antialiased;
   }
 `;
 
-const SectionInfo = styled.div`
-  background: transparent;
-  width: 200px;
+const HeroSectionInfo = styled.div`
+  display: none;
+
+  @media (min-width: 950px) {
+    display: block;
+    padding: 0;
+    width: 200px;
+  }
 `;
 
-const SectionContent = styled.div`
+const HeroSectionContent = styled.div`
   background: transparent;
-  padding-top: 0.2em;
+  padding: 2rem;
   flex: 1;
   p {
     font-size: 2.4rem;
@@ -68,6 +82,10 @@ const SectionContent = styled.div`
       vertical-align: middle;
       margin-top: -0.2rem;
     }
+  }
+
+  @media (min-width: 950px) {
+    padding: 0;
   }
 `;
 
@@ -426,6 +444,11 @@ const IndexPage = () => {
             ...GatsbyDatoCmsFluid
           }
         }
+        backgroundImage {
+          fluid(maxWidth: 4000) {
+            ...GatsbyDatoCmsFluid
+          }
+        }
       }
       posts: allDatoCmsBlogPost(
         sort: { fields: [meta___createdAt], order: DESC }
@@ -485,28 +508,34 @@ const IndexPage = () => {
     quickLink3LinkText,
     body,
     imageGallery,
+    backgroundImage,
   } = data.page;
+
+  const backgroundFluidImageStack = [
+    backgroundImage.fluid,
+    'linear-gradient(rgba(0, 0, 0, 0.73), rgba(0, 0, 0, 0.5))',
+  ].reverse();
 
   const { edges } = data.posts;
 
   return (
     <HomePage>
       <SEO meta={seoMetaTags} />
-      <ScaleUp>
+      <BackgroundImage Tag="section" fluid={backgroundFluidImageStack}>
         <Container>
-          <Section className="antialiased">
-            <SectionInfo>O nás</SectionInfo>
-            <SectionContent>
+          <HeroSection className="antialiased">
+            <HeroSectionInfo>O nás</HeroSectionInfo>
+            <HeroSectionContent>
               <p>{description}</p>
               <Link className="cta" to="/about">
                 Viac info{' '}
                 <FontAwesomeIcon icon={['far', 'long-arrow-alt-right']} />
               </Link>
-            </SectionContent>
-          </Section>
+            </HeroSectionContent>
+          </HeroSection>
           <SectionSeparator />
-          <Section>
-            <SectionContent>
+          <SectionWrapper>
+            <MainPanel>
               <QuickLinkGrid>
                 <QuickLink
                   url="/treningy"
@@ -530,10 +559,10 @@ const IndexPage = () => {
                   linkText={quickLink3LinkText}
                 />
               </QuickLinkGrid>
-            </SectionContent>
-          </Section>
+            </MainPanel>
+          </SectionWrapper>
         </Container>
-      </ScaleUp>
+      </BackgroundImage>
       <Main>
         <Container>
           <SectionWrapper>
