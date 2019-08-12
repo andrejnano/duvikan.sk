@@ -59,13 +59,21 @@ const HeroSectionInfo = styled.div`
   }
 `;
 
+const Title = styled.h1`
+  font-size: 1.6rem;
+  font-weight: 400;
+`;
+
 const HeroSectionContent = styled.div`
   background: transparent;
   padding: 2rem;
   flex: 1;
   p {
-    font-size: 2.4rem;
+    font-size: 2.6rem;
+    line-height: 1.4;
+    font-weight: 300;
     max-width: 720px;
+    -webkit-font-smoothing: subpixel-antialiased;
   }
   .cta {
     letter-spacing: 0.2em;
@@ -92,7 +100,7 @@ const HeroSectionContent = styled.div`
 const SectionSeparator = styled.hr`
   width: 100%;
   height: 1px;
-  opacity: 0.175;
+  opacity: 0.5;
   border: 0;
   margin: 0;
   background-color: #fff;
@@ -111,7 +119,6 @@ const DarkSeparator = styled.hr`
 const SectionWrapper = styled.section`
   display: flex;
   flex-direction: column;
-  margin: 3rem 0;
   padding: 3rem 0;
 
   @media (min-width: 950px) {
@@ -126,7 +133,7 @@ const Main = styled.section`
   border-bottom: 1px solid #e5e8ed;
 
   @media (min-width: 950px) {
-    padding-top: 500px;
+    padding-top: 50px;
   }
 `;
 
@@ -293,12 +300,12 @@ const QuickLinkGrid = styled.ul`
   position: relative;
   justify-content: flex-start;
   list-style-type: none;
-  margin: 0;
+  margin: 2rem 0;
   padding: 0;
   width: 100%;
 
   @media (min-width: 950px) {
-    margin-bottom: -50%;
+    margin-bottom: 0;
   }
 `;
 
@@ -311,35 +318,32 @@ const QuickLinkCard = styled.li`
   a.card {
     display: block;
     position: relative;
-    margin: 0 2rem;
+    margin-right: 4rem;
     margin-bottom: 1rem;
-    box-shadow: 0 2px 4px rgba(3, 27, 78, 0.06);
     border-radius: 3px;
     background: ${colors.white};
-    transition: box-shadow 0.25s linear, -webkit-box-shadow 0.25s linear;
     color: ${colors.black};
-    overflow: hidden;
     height: 100%;
-    border-bottom: 1px solid #e5e8ed;
+    box-shadow: 0 2px 4px rgba(3, 27, 78, 0.06);
+    border: 1px solid #e5e8ed;
+    padding: 2rem;
 
     .photo {
+      display: none;
+      max-height: 300px;
       position: relative;
-      max-width: 720px;
       border-bottom: 1px solid #e5e8ed;
     }
 
     .title {
-      font-size: 2.4rem;
-      padding: 2rem;
-      padding-bottom: 0.4rem;
+      font-size: 1.6rem;
+      position: relative;
     }
 
     .description {
-      color: #5b6987;
-      font-size: 1.8rem;
-      padding-left: 2rem;
-      padding-right: 2rem;
-      padding-bottom: 4rem;
+      color: ${colors.gray3};
+      font-size: 1.4rem;
+      padding-bottom: 2rem;
     }
 
     .linkText {
@@ -349,6 +353,7 @@ const QuickLinkCard = styled.li`
       left: 2rem;
       color: ${colors.mediumBlue};
       font-weight: bold;
+      font-size: 1.4rem;
       &:after {
         content: ' ';
         position: absolute;
@@ -378,6 +383,7 @@ const QuickLinkCard = styled.li`
 
   @media (min-width: 950px) {
     width: 33.33333%;
+    /* width: 25%; */
 
     /* &:first-child {
       > a.card {
@@ -439,7 +445,12 @@ const IndexPage = () => {
         quickLink3Description
         quickLink3LinkText
         body
-        imageGallery {
+        firstImageGallery {
+          fluid(maxWidth: 950) {
+            ...GatsbyDatoCmsFluid
+          }
+        }
+        secondImageGallery {
           fluid(maxWidth: 950) {
             ...GatsbyDatoCmsFluid
           }
@@ -507,13 +518,14 @@ const IndexPage = () => {
     quickLink3Description,
     quickLink3LinkText,
     body,
-    imageGallery,
+    firstImageGallery,
+    secondImageGallery,
     backgroundImage,
   } = data.page;
 
   const backgroundFluidImageStack = [
     backgroundImage.fluid,
-    'linear-gradient(rgba(0, 0, 0, 0.73), rgba(0, 0, 0, 0.5))',
+    'linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.55))',
   ].reverse();
 
   const { edges } = data.posts;
@@ -524,7 +536,9 @@ const IndexPage = () => {
       <BackgroundImage Tag="section" fluid={backgroundFluidImageStack}>
         <Container>
           <HeroSection className="antialiased">
-            <HeroSectionInfo>O nás</HeroSectionInfo>
+            <HeroSectionInfo>
+              <Title>O nás</Title>
+            </HeroSectionInfo>
             <HeroSectionContent>
               <p>{description}</p>
               <Link className="cta" to="/about">
@@ -566,6 +580,12 @@ const IndexPage = () => {
       <Main>
         <Container>
           <SectionWrapper>
+            <MainPanel>
+              <Gallery itemsPerRow={3} images={firstImageGallery} />
+            </MainPanel>
+          </SectionWrapper>
+          <DarkSeparator />
+          <SectionWrapper>
             <SidePanel>
               <JapaneseTitle>空手道場ドゥヴィ館ブラチスラバ</JapaneseTitle>
             </SidePanel>
@@ -591,7 +611,7 @@ const IndexPage = () => {
                 />
               </CenteredTextBlock>
               <SideGallery>
-                <Gallery itemsPerRow={1} images={imageGallery} />
+                <Gallery itemsPerRow={1} images={secondImageGallery} />
               </SideGallery>
             </MainPanelRow>
           </SectionWrapper>

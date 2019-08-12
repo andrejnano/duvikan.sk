@@ -48,6 +48,119 @@ const ContactList = styled.ul`
   }
 `;
 
+const ContactCategory = styled.h2`
+  font-weight: 500;
+  margin-bottom: 2rem;
+`;
+
+const SectionSeparator = styled.hr`
+  width: 100%;
+  height: 1px;
+  background-color: ${colors.black};
+  opacity: 0.075;
+  border: 0;
+  margin: 0;
+  margin-bottom: 3rem;
+  overflow: visible;
+`;
+
+const ContactGrid = styled.ul`
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  margin-bottom: 3rem;
+`;
+
+const ContactCard = styled.li`
+  position: relative;
+  min-width: 250px;
+  width: 100%;
+
+  @media (min-width: 720px) {
+    max-width: 720px;
+    width: 50%;
+  }
+
+  @media (min-width: 950px) {
+    width: 33.333333%;
+  }
+
+  @media (min-width: 1470px) {
+    width: 25%;
+  }
+
+  .innerBox {
+    display: block;
+    position: relative;
+    margin: 0 1rem 1rem;
+    padding: 2rem;
+    color: ${colors.black};
+    background: ${colors.white};
+    border-radius: 3px;
+    display: block;
+    box-shadow: 0 2px 4px rgba(3, 27, 78, 0.06);
+    border: 1px solid #e5e8ed;
+    cursor: pointer;
+
+    h3 {
+      font-size: 1.6rem;
+      position: relative;
+
+      &::before {
+        content: ' ';
+        height: 1.6em;
+        width: 3px;
+        background-color: currentColor;
+        position: absolute;
+        left: -2rem;
+        opacity: 0.5;
+        border-top-right-radius: 1px;
+        border-bottom-right-radius: 1px;
+      }
+    }
+
+    p {
+      color: ${colors.gray3};
+      font-size: 1.4rem;
+      padding-bottom: 3rem;
+    }
+
+    .linkText {
+      position: absolute;
+      display: inline-block;
+      bottom: 2rem;
+      left: 2rem;
+      color: ${colors.mediumBlue};
+      font-weight: bold;
+      font-size: 1.4rem;
+      &:after {
+        content: ' ';
+        position: absolute;
+        left: 0;
+        bottom: -2px;
+        width: 100%;
+        height: 1px;
+        background: ${colors.mediumBlue};
+        transition: opacity 0.25s linear;
+        opacity: 0;
+      }
+    }
+
+    &:hover {
+      .linkText {
+        &:after {
+          opacity: 1;
+        }
+      }
+    }
+  }
+`;
+
 const ContactPage = () => {
   const data = useStaticQuery(graphql`
     query contactQuery {
@@ -100,36 +213,69 @@ const ContactPage = () => {
             <Title>Kontakt</Title>
           </SidePanel>
           <MainPanel>
-            <h1>{title}</h1>
-            <p>{intro}</p>
-            <ContactList>
-              <li>
-                <a href="https://facebook.com/duvikanBratislava">
-                  <FontAwesomeIcon
-                    className="icon"
-                    icon={['fab', 'facebook-square']}
-                  />
-                  <span className="linkText">
-                    facebook.com/duvikanBratislava
-                  </span>
-                </a>
-              </li>
-              <li>
-                <a href={`mailto:${email}`}>
-                  <FontAwesomeIcon
-                    className="icon"
-                    icon={['far', 'envelope']}
-                  />
-                  <span className="linkText">{email}</span>
-                </a>
-              </li>
-              <li>
-                <a href={`tel:${phoneNumber}`}>
-                  <FontAwesomeIcon className="icon" icon={['far', 'phone']} />
-                  <span className="linkText">{phoneNumber}</span>
-                </a>
-              </li>
-            </ContactList>
+            <ContactCategory>Klub</ContactCategory>
+            <ContactGrid>
+              <ContactCard>
+                <div className="innerBox">
+                  <h3>Adresa</h3>
+                  <p>Struková 13, 821 05 Bratislava</p>
+                  <span className="linkText">Nájsť na mape</span>
+                </div>
+              </ContactCard>
+
+              <ContactCard>
+                <div className="innerBox">
+                  <h3>
+                    <FontAwesomeIcon
+                      className="icon"
+                      icon={['fab', 'facebook-square']}
+                    />
+                    {' '} Facebook
+                  </h3>
+                  <p>facebook.com/duvikanBratislava</p>
+                  <span className="linkText">Otvoriť stránku</span>
+                </div>
+              </ContactCard>
+
+              <ContactCard>
+                <div className="innerBox">
+                  <h3>
+                    <FontAwesomeIcon
+                      className="icon"
+                      icon={['far', 'envelope']}
+                    />
+                    {' '} E-mail
+                  </h3>
+                  <p>{email}</p>
+                  <span className="linkText">Napísať správu</span>
+                </div>
+              </ContactCard>
+            </ContactGrid>
+
+            <SectionSeparator />
+
+            <ContactCategory>Vedenie klubu</ContactCategory>
+            <ContactGrid>
+              <ContactCard>
+                <div className="innerBox">
+                  <h3>Daniel Baran</h3>
+                  <p>prezident klubu</p>
+                  <span className="linkText">0903 919 943</span>
+                </div>
+              </ContactCard>
+            </ContactGrid>
+
+            <SectionSeparator />
+
+            <ContactCategory>Platby</ContactCategory>
+            <ContactGrid>
+              <ContactCard>
+                <div className="innerBox">
+                  <h3>IBAN</h3>
+                  <p>SK1211000000002635766523</p>
+                </div>
+              </ContactCard>
+            </ContactGrid>
           </MainPanel>
         </SectionWrapper>
       </Container>

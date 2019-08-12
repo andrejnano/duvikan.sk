@@ -57,6 +57,9 @@ const HeaderWrapper = styled.header`
       .logoBlack {
         display: none;
       }
+      hr {
+        display: none;
+      }
     }
   }
 `;
@@ -65,23 +68,23 @@ const HeaderHr = styled.hr`
   position: relative;
   width: 100%;
   max-width: 1470px;
-  height: 1px;
-  opacity: 0.075;
+  height: 2px;
+  opacity: 0.5;
   border: 0;
   margin: 0;
+  margin-top: 2rem;
   background-color: ${colors.black};
   box-shadow: 0 2px 4px rgba(3, 27, 78, 0.06);
   transition: background 0.4s linear, width 0.4s linear;
-
+  height: 2px;
+  display: none;
   &.whiteHr {
     background-color: ${colors.white};
     transition: background 0.4s linear, width 0.8s linear;
   }
 
   @media (min-width: 950px) {
-    margin-top: 2rem;
-    height: 2px;
-    opacity: 0.8;
+    display: block;
   }
 `;
 
