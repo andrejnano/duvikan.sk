@@ -19,7 +19,7 @@ import Gallery from '../components/Gallery';
 const HomePage = styled.article`
   color: ${colors.white};
   position: relative;
-  margin-top: calc(-1*(54px + 4rem + 2px));
+  margin-top: calc(-1 * (54px + 4rem + 2px));
 `;
 
 const MainPanelRow = styled.main`
