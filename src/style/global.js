@@ -48,13 +48,15 @@ a {
 ::-webkit-scrollbar-thumb
 {
 	background-color: #ccc;
-	${'' /* background-image: -webkit-linear-gradient(90deg, rgba(255, 255, 255, .2) 25%,
+	${
+    '' /* background-image: -webkit-linear-gradient(90deg, rgba(255, 255, 255, .2) 25%,
                     transparent 25%,
                     transparent 50%,
                     rgba(255, 255, 255, .2) 50%,
                     rgba(255, 255, 255, .2) 75%,
                     transparent 75%,
-                    transparent) */}
+                    transparent) */
+  }
 }
 
 `;

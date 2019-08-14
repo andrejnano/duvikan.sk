@@ -229,8 +229,8 @@ const ContactPage = () => {
                     <FontAwesomeIcon
                       className="icon"
                       icon={['fab', 'facebook-square']}
-                    />
-                    {' '} Facebook
+                    />{' '}
+                    Facebook
                   </h3>
                   <p>facebook.com/duvikanBratislava</p>
                   <span className="linkText">Otvoriť stránku</span>
@@ -243,8 +243,8 @@ const ContactPage = () => {
                     <FontAwesomeIcon
                       className="icon"
                       icon={['far', 'envelope']}
-                    />
-                    {' '} E-mail
+                    />{' '}
+                    E-mail
                   </h3>
                   <p>{email}</p>
                   <span className="linkText">Napísať správu</span>

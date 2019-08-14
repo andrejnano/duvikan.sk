@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { graphql, useStaticQuery } from 'gatsby';
 import Img from 'gatsby-image';
 import SEO from '../components/SEO';
-
+import { map } from 'lodash';
 import { ScaleUp } from '../style/motion';
 import Container from '../containers/Container';
 import { colors, colors2 } from '../consts/style';
@@ -95,21 +95,8 @@ const EventCard = styled.div`
   margin-bottom: 2rem;
   color: ${colors.black};
 
-  &.blue {
-    time::before {
-      background: ${colors2.lightBlue};
-    }
-  }
-
-  &.green {
-    time::before {
-      background: ${colors2.lightGreen};
-    }
-  }
-  &.red {
-    time::before {
-      background: ${colors2.brightRed};
-    }
+  time::before {
+    background: ${props => props.color || 'gray'};
   }
 
   time {
@@ -120,7 +107,6 @@ const EventCard = styled.div`
       content: ' ';
       height: 1.6em;
       width: 3px;
-      background-color: currentColor;
       position: absolute;
       left: -2rem;
       opacity: 1;
@@ -136,7 +122,7 @@ const EventCard = styled.div`
 
 const Event = props => {
   return (
-    <EventCard className={props.color}>
+    <EventCard color={props.color}>
       <time>
         {props.start} - {props.end}
       </time>
@@ -148,7 +134,7 @@ const Event = props => {
 const TreningyPage = () => {
   const data = useStaticQuery(graphql`
     query TreningyQuery {
-      datoCmsTreningyPage {
+      page: datoCmsTreningyPage {
         title
         introText
         seoMetaTags {
@@ -159,48 +145,102 @@ const TreningyPage = () => {
             ...GatsbyDatoCmsFluid
           }
         }
-        treningPondelokStart
-        treningPondelokEnd
-        treningUtorokStart
-        treningUtorokEnd
-        treningStredaStart
-        treningStredaEnd
-        treningStvrtokStart
-        treningStvrtokEnd
-        treningPiatokStart
-        treningPiatokEnd
         imageGallery {
           fluid(maxWidth: 1470) {
             ...GatsbyDatoCmsFluid
           }
         }
       }
+      mondayEvents: allDatoCmsTrainingEvent(
+        filter: { day: { eq: "Pondelok" }, locale: { eq: "sk" } }
+        sort: { fields: timeStart }
+      ) {
+        edges {
+          node {
+            day
+            timeStart
+            timeEnd
+            description
+            color {
+              hex
+            }
+          }
+        }
+      }
+      tuesdayEvents: allDatoCmsTrainingEvent(
+        filter: { day: { eq: "Utorok" }, locale: { eq: "sk" } }
+        sort: { fields: timeStart }
+      ) {
+        edges {
+          node {
+            day
+            timeStart
+            timeEnd
+            description
+            color {
+              hex
+            }
+          }
+        }
+      }
+      wednesdayEvents: allDatoCmsTrainingEvent(
+        filter: { day: { eq: "Streda" }, locale: { eq: "sk" } }
+        sort: { fields: timeStart }
+      ) {
+        edges {
+          node {
+            day
+            timeStart
+            timeEnd
+            description
+            color {
+              hex
+            }
+          }
+        }
+      }
+      thursdayEvents: allDatoCmsTrainingEvent(
+        filter: { day: { eq: "Štvrtok" }, locale: { eq: "sk" } }
+        sort: { fields: timeStart }
+      ) {
+        edges {
+          node {
+            day
+            timeStart
+            timeEnd
+            description
+            color {
+              hex
+            }
+          }
+        }
+      }
+      fridayEvents: allDatoCmsTrainingEvent(
+        filter: { day: { eq: "Piatok" }, locale: { eq: "sk" } }
+        sort: { fields: timeStart }
+      ) {
+        edges {
+          node {
+            day
+            timeStart
+            timeEnd
+            description
+            color {
+              hex
+            }
+          }
+        }
+      }
     }
   `);
-  const {
-    title,
-    introText,
-    treningPondelokStart,
-    treningPondelokEnd,
-    treningUtorokStart,
-    treningUtorokEnd,
-    treningStredaStart,
-    treningStredaEnd,
-    treningStvrtokStart,
-    treningStvrtokEnd,
-    treningPiatokStart,
-    treningPiatokEnd,
-    imageGallery,
-    seoMetaTags,
-  } = data.datoCmsTreningyPage;
 
-  // check if trening is set (!= '-')
+  const { title, introText, imageGallery, seoMetaTags } = data.page;
 
-  const isTreningPondelok = treningPondelokStart == '-' ? false : true;
-  const isTreningUtorok = treningUtorokStart == '-' ? false : true;
-  const isTreningStreda = treningStredaStart == '-' ? false : true;
-  const isTreningStvrtok = treningStvrtokStart == '-' ? false : true;
-  const isTreningPiatok = treningPiatokStart == '-' ? false : true;
+  const mondayEvents = data.mondayEvents.edges;
+  const tuesdayEvents = data.tuesdayEvents.edges;
+  const wednesdayEvents = data.wednesdayEvents.edges;
+  const thursdayEvents = data.thursdayEvents.edges;
+  const fridayEvents = data.fridayEvents.edges;
 
   return (
     <ScaleUp>
@@ -229,66 +269,58 @@ const TreningyPage = () => {
             <Calendar>
               <Day>
                 <h4>Pondelok</h4>
-                <Event
-                  start={treningPondelokStart}
-                  end={treningPondelokEnd}
-                  description="9. - 3. kyu"
-                  color="red"
-                />
-                <Event
-                  start="18:00"
-                  end="20:00"
-                  description="2. kyu - DAN"
-                  color="blue"
-                />
+                {map(mondayEvents, event => (
+                  <Event
+                    start={event.node.timeStart}
+                    end={event.node.timeEnd}
+                    description={event.node.description}
+                    color={event.node.color.hex}
+                  />
+                ))}
               </Day>
               <Day>
                 <h4>Utorok</h4>
-                <Event
-                  start="18:00"
-                  end="20:00"
-                  description="9. - 3. kyu"
-                  color="red"
-                />
+                {map(tuesdayEvents, event => (
+                  <Event
+                    start={event.node.timeStart}
+                    end={event.node.timeEnd}
+                    description={event.node.description}
+                    color={event.node.color.hex}
+                  />
+                ))}
               </Day>
               <Day>
                 <h4>Streda</h4>
-                <Event
-                  start={treningStredaStart}
-                  end={treningStredaEnd}
-                  description="9. - 3. kyu"
-                  color="red"
-                />
-                <Event
-                  start="18:00"
-                  end="20:00"
-                  description="2. kyu - DAN"
-                  color="blue"
-                />
+                {map(wednesdayEvents, event => (
+                  <Event
+                    start={event.node.timeStart}
+                    end={event.node.timeEnd}
+                    description={event.node.description}
+                    color={event.node.color.hex}
+                  />
+                ))}
               </Day>
               <Day>
                 <h4>Štvrtok</h4>
-                <Event
-                  start="18:00"
-                  end="20:00"
-                  description="2. kyu - DAN"
-                  color="blue"
-                />
+                {map(thursdayEvents, event => (
+                  <Event
+                    start={event.node.timeStart}
+                    end={event.node.timeEnd}
+                    description={event.node.description}
+                    color={event.node.color.hex}
+                  />
+                ))}
               </Day>
               <Day>
                 <h4>Piatok</h4>
-                <Event
-                  start={treningPiatokStart}
-                  end={treningPiatokEnd}
-                  description="9. - 3. kyu"
-                  color="red"
-                />
-                <Event
-                  start="18:00"
-                  end="20:00"
-                  description="Mix dospelí"
-                  color="green"
-                />
+                {map(fridayEvents, event => (
+                  <Event
+                    start={event.node.timeStart}
+                    end={event.node.timeEnd}
+                    description={event.node.description}
+                    color={event.node.color.hex}
+                  />
+                ))}
               </Day>
             </Calendar>
           </MainPanel>
