@@ -462,6 +462,7 @@ const IndexPage = () => {
         }
       }
       posts: allDatoCmsBlogPost(
+        filter: { locale: { eq: "sk" } }
         sort: { fields: [meta___createdAt], order: DESC }
         limit: 5
       ) {

@@ -167,7 +167,7 @@ const ClenoviaPage = () => {
             <MemberCategory>Čestný prezident KK Duvikan</MemberCategory>
             <MemberGrid>
               {map(members1, member => (
-                <MemberCard>
+                <MemberCard key={member.name}>
                   <div className="innerBox">
                     <h3>{member.name}</h3>
                     <p>{member.description}</p>
@@ -182,7 +182,7 @@ const ClenoviaPage = () => {
             <MemberCategory>Vedenie klubu</MemberCategory>
             <MemberGrid>
               {map(members2, member => (
-                <MemberCard>
+                <MemberCard key={member.name}>
                   <div className="innerBox">
                     <h3>{member.name}</h3>
                     <p>{member.description}</p>
@@ -197,7 +197,7 @@ const ClenoviaPage = () => {
             <MemberCategory>Trénerská rada klubu</MemberCategory>
             <MemberGrid>
               {map(members2, member => (
-                <MemberCard>
+                <MemberCard key={member.name}>
                   <div className="innerBox">
                     <h3>{member.name}</h3>
                     <p>{member.description}</p>

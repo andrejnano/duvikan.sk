@@ -271,6 +271,7 @@ const TreningyPage = () => {
                 <h4>Pondelok</h4>
                 {map(mondayEvents, event => (
                   <Event
+                    key={`${event.node.day} - ${event.node.description}`}
                     start={event.node.timeStart}
                     end={event.node.timeEnd}
                     description={event.node.description}
@@ -282,6 +283,7 @@ const TreningyPage = () => {
                 <h4>Utorok</h4>
                 {map(tuesdayEvents, event => (
                   <Event
+                    key={`${event.node.day} - ${event.node.description}`}
                     start={event.node.timeStart}
                     end={event.node.timeEnd}
                     description={event.node.description}
@@ -293,6 +295,7 @@ const TreningyPage = () => {
                 <h4>Streda</h4>
                 {map(wednesdayEvents, event => (
                   <Event
+                    key={`${event.node.day} - ${event.node.description}`}
                     start={event.node.timeStart}
                     end={event.node.timeEnd}
                     description={event.node.description}
@@ -304,6 +307,7 @@ const TreningyPage = () => {
                 <h4>Štvrtok</h4>
                 {map(thursdayEvents, event => (
                   <Event
+                    key={`${event.node.day} - ${event.node.description}`}
                     start={event.node.timeStart}
                     end={event.node.timeEnd}
                     description={event.node.description}
@@ -315,6 +319,7 @@ const TreningyPage = () => {
                 <h4>Piatok</h4>
                 {map(fridayEvents, event => (
                   <Event
+                    key={`${event.node.day} - ${event.node.description}`}
                     start={event.node.timeStart}
                     end={event.node.timeEnd}
                     description={event.node.description}

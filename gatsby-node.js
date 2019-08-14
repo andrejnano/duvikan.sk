@@ -10,6 +10,7 @@ exports.createPages = async ({ graphql, actions }) => {
       graphql(`
         {
           allDatoCmsBlogPost(
+            filter: { locale: { eq: "sk" } }
             sort: { fields: [meta___createdAt], order: DESC }
           ) {
             nodes {
