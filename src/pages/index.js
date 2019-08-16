@@ -31,17 +31,12 @@ const HomePage = styled.article`
 `;
 
 const LangSwitch = styled.div`
-  position: absolute;
-  right: 0%;
-  top: 50%;
-  transform: translateY(-100%);
-  padding: 0 5%;
+  grid-column: 6/7;
   opacity: 0.5;
-  display: none;
 
   > a {
     display: block;
-    font-size: 2rem;
+    font-size: 1rem;
     font-weight: bold;
     &:hover {
       opacity: 0.5;
@@ -72,7 +67,7 @@ const JapaneseSideText = styled.div`
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  right: 5%;
+  right: 10%;
   line-height: 1;
   width: auto;
   overflow: hidden;
@@ -80,7 +75,7 @@ const JapaneseSideText = styled.div`
   pointer-events: none;
   font-size: 175px;
   font-weight: 1000;
-  /* opacity: 0.075; */
+  opacity: 0.3;
   color: rgb(238, 40, 53);
   writing-mode: vertical-lr;
 `;
@@ -124,6 +119,9 @@ const HeroSectionContent = styled.div`
   grid-column: 2/4;
   background: transparent;
   position: relative;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
   &::before {
     content: ' ';
     width: 250px;
@@ -133,12 +131,21 @@ const HeroSectionContent = styled.div`
     top: -1rem;
     left: 0;
   }
+
+  h1 {
+    font-size: 5rem;
+    font-weight: 800;
+    line-height: 1.2;
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.16);
+  }
   p {
-    font-size: 3.2rem;
-    line-height: 1.4;
-    font-weight: 600;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    font-size: 2.5rem;
+    line-height: 1.618;
+    font-weight: 400;
+    max-width: 30em;
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.16);
   }
   .cta {
     letter-spacing: 0.2em;
@@ -570,22 +577,12 @@ const IndexPage = () => {
         Tag="section"
         fluid={backgroundFluidImageStack}
       >
-        <LangSwitch>
-          <a href="#1">SK</a>
-          <a href="#2">EN</a>
-        </LangSwitch>
         <JapaneseSideText>空手道場</JapaneseSideText>
         <JapaneseBgText>空手道場</JapaneseBgText>
-        <LogoBg>
-          <Image
-            className="logoWhite"
-            fluid={data.logoWhite.childImageSharp.fluid}
-          />
-        </LogoBg>
         <HeroSection>
           <GridLayout>
             <HeroSectionContent>
-              <p>{description}</p>
+              <div dangerouslySetInnerHTML={{ __html: description }} />
               <Link className="cta" to="/about">
                 Viac info{' '}
                 <FontAwesomeIcon icon={['far', 'long-arrow-alt-right']} />
