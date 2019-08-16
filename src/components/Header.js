@@ -5,19 +5,22 @@ import Img from 'gatsby-image';
 import { graphql, Link, StaticQuery } from 'gatsby';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import Container from '../containers/Container';
+import { GridLayout } from '../components/common/LayoutParts';
 import { colors, colors2 } from '../consts/style';
 
 const HeaderWrapper = styled.header`
-  position: fixed;
-  z-index: 999;
+  position: relative;
   top: 0;
   left: 0;
   width: 100%;
+  margin: auto;
+  padding: 20px 0;
   background: ${colors.white};
   color: ${colors.black};
+  border-bottom: 3px solid #707070;
+  margin-top: -3px;
+  z-index: 999;
   transition: background 0.4s linear, color 0.4s linear;
-  padding-top: calc(54px + 2rem);
   box-shadow: rgba(46, 41, 51, 0.08) 0px 1px 2px,
     rgba(71, 63, 79, 0.08) 0px 2px 4px;
 
@@ -31,8 +34,7 @@ const HeaderWrapper = styled.header`
 
   @media (min-width: 950px) {
     position: relative;
-    padding-top: calc(54px + 4rem);
-    box-shadow: none;
+    /* box-shadow: none; */
     background: transparent;
     &.isHome {
       background: transparent;
@@ -46,7 +48,7 @@ const HeaderWrapper = styled.header`
       }
     }
 
-    &.isScrolling {
+    /* disabled temp. &.isScrolling {
       transition: background 0.2s linear;
       position: sticky;
       background: ${colors.black};
@@ -60,74 +62,20 @@ const HeaderWrapper = styled.header`
       hr {
         display: none;
       }
-    }
+    } */
   }
 `;
 
-const HeaderHr = styled.hr`
-  position: relative;
-  width: 100%;
-  max-width: 1470px;
-  height: 2px;
-  opacity: 0.5;
-  border: 0;
-  margin: 0;
-  margin-top: 2rem;
-  background-color: ${colors.black};
-  box-shadow: 0 2px 4px rgba(3, 27, 78, 0.06);
-  transition: background 0.4s linear, width 0.4s linear;
-  height: 2px;
-  display: none;
-  &.whiteHr {
-    background-color: ${colors.white};
-    transition: background 0.4s linear, width 0.8s linear;
-  }
-
-  @media (min-width: 950px) {
-    display: block;
-  }
-`;
-
-const Navigation = styled.nav`
-  position: absolute;
-  top: 1rem;
-  width: 100%;
-  @media (min-width: 950px) {
-    top: 2rem;
-  }
-`;
-
-const InsideWrapper = styled.div`
-  width: 100%;
+const PageMeta = styled.div`
+  grid-column: 2/4;
   display: flex;
   flex-direction: row;
   align-items: center;
-`;
-
-const LeftWrapper = styled.div`
-  width: auto;
-
-  @media (min-width: 950px) {
-    width: 200px;
-  }
-`;
-
-const RightWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
 `;
 
 const Logo = styled.div`
   background: transparent;
-  width: auto;
-  margin-right: 1rem;
-  @media (min-width: 950px) {
-    width: 200px;
-    margin: 0;
-  }
+  margin-right: 2rem;
 `;
 
 const PageTitle = styled.div`
@@ -151,15 +99,19 @@ const PageTitle = styled.div`
   }
 `;
 
-const NavList = styled.ul`
+const NavList = styled.div`
+  grid-column: 4/6;
   display: none;
   @media (min-width: 1200px) {
-    display: block;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
   }
-  margin-top: 1rem;
   a {
     letter-spacing: 0.2em;
-    font-weight: bold;
+    font-weight: 800;
+    color: rgba(255, 255, 255, 0.8);
     text-transform: uppercase;
     font-size: 1.2rem;
     &:not(:last-of-type) {
@@ -167,6 +119,7 @@ const NavList = styled.ul`
     }
     &:hover {
       opacity: 0.5;
+      color: rgb(238, 40, 53);
     }
   }
   a.activePage {
@@ -218,6 +171,7 @@ const Image = styled(Img)`
 `;
 
 const ToggleButton = styled.div`
+  grid-column: 5 / 6;
   display: block;
   padding: 1rem;
   cursor: pointer;
@@ -228,6 +182,30 @@ const ToggleButton = styled.div`
 
   @media (min-width: 1200px) {
     display: none;
+  }
+`;
+
+const HeaderHr = styled.hr`
+  position: relative;
+  width: 100%;
+  max-width: 1470px;
+  height: 2px;
+  opacity: 0.5;
+  border: 0;
+  margin: 0;
+  margin-top: 2rem;
+  background-color: ${colors.black};
+  box-shadow: 0 2px 4px rgba(3, 27, 78, 0.06);
+  transition: background 0.4s linear, width 0.4s linear;
+  height: 2px;
+  display: none;
+  &.whiteHr {
+    background-color: ${colors.white};
+    transition: background 0.4s linear, width 0.8s linear;
+  }
+
+  @media (min-width: 950px) {
+    display: block;
   }
 `;
 
@@ -292,67 +270,61 @@ class Header extends Component {
 
     return (
       <HeaderWrapper className={headerClasses}>
-        <Navigation>
-          <Container>
-            <InsideWrapper>
-              <LeftWrapper>
-                <Logo>
-                  <Link to="/">
-                    <Image
-                      className="logoWhite"
-                      fluid={data.logoWhite.childImageSharp.fluid}
-                    />
-                    <Image
-                      className="logoBlack"
-                      fluid={data.logoBlack.childImageSharp.fluid}
-                    />
-                  </Link>
-                </Logo>
-              </LeftWrapper>
-              <RightWrapper>
-                <PageTitle>
-                  <Link to="/">
-                    <span className="headerTitle">
-                      {data.globalSite.headerTitle}
-                    </span>
-                    <span className="headerSubtitle">
-                      {data.globalSite.headerSubtitle}
-                    </span>
-                  </Link>
-                </PageTitle>
-                <NavList>
-                  <Link to="/blog" activeClassName="activePage">
-                    Novinky
-                  </Link>
-                  <Link to="/treningy" activeClassName="activePage">
-                    Tréningy
-                  </Link>
-                  <Link to="/about" activeClassName="activePage">
-                    O nás
-                  </Link>
-                  <Link to="/clenovia" activeClassName="activePage">
-                    Členovia
-                  </Link>
-                  <Link to="/historia" activeClassName="activePage">
-                    História
-                  </Link>
-                  <Link to="/contact" activeClassName="activePage">
-                    Kontakt
-                  </Link>
-                </NavList>
-                <ToggleButton onClick={() => this.toggleMobileNav()}>
-                  {!this.state.mobileNavOpen && (
-                    <FontAwesomeIcon icon={['far', 'bars']} />
-                  )}
-                  {this.state.mobileNavOpen && (
-                    <FontAwesomeIcon icon={['far', 'times']} />
-                  )}
-                </ToggleButton>
-              </RightWrapper>
-            </InsideWrapper>
-            <HeaderHr className={this.props.isHome ? 'whiteHr' : ''} />
-          </Container>
-        </Navigation>
+        <GridLayout>
+          <PageMeta>
+            <Logo>
+              <Link to="/">
+                <Image
+                  className="logoWhite"
+                  fluid={data.logoWhite.childImageSharp.fluid}
+                />
+                <Image
+                  className="logoBlack"
+                  fluid={data.logoBlack.childImageSharp.fluid}
+                />
+              </Link>
+            </Logo>
+            <PageTitle>
+              <Link to="/">
+                <span className="headerTitle">
+                  {data.globalSite.headerTitle}
+                </span>
+                <span className="headerSubtitle">
+                  {data.globalSite.headerSubtitle}
+                </span>
+              </Link>
+            </PageTitle>
+          </PageMeta>
+          <NavList>
+            <Link to="/blog" activeClassName="activePage">
+              Novinky
+            </Link>
+            <Link to="/treningy" activeClassName="activePage">
+              Tréningy
+            </Link>
+            <Link to="/about" activeClassName="activePage">
+              O nás
+            </Link>
+            <Link to="/clenovia" activeClassName="activePage">
+              Členovia
+            </Link>
+            <Link to="/historia" activeClassName="activePage">
+              História
+            </Link>
+            <Link to="/contact" activeClassName="activePage">
+              Kontakt
+            </Link>
+          </NavList>
+          <ToggleButton onClick={() => this.toggleMobileNav()}>
+            {!this.state.mobileNavOpen && (
+              <FontAwesomeIcon icon={['far', 'bars']} />
+            )}
+            {this.state.mobileNavOpen && (
+              <FontAwesomeIcon icon={['far', 'times']} />
+            )}
+          </ToggleButton>
+        </GridLayout>
+        {/* <HeaderHr className={this.props.isHome ? 'whiteHr' : ''} /> */}
         <MobileNavOverlay className={this.state.mobileNavOpen && 'visible'}>
           <MobileNavList onClick={() => this.toggleMobileNav()}>
             <Link to="/blog" activeClassName="activePage">

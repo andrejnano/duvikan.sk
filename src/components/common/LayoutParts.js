@@ -1,6 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 
+export const GridLayout = styled.div`
+  display: grid;
+  grid-template-columns: 5% 1fr 1fr 1fr 1fr 5%;
+`;
+
 export const SectionWrapper = styled.section`
   display: flex;
   flex-direction: column;

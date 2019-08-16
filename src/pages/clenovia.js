@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { graphql, useStaticQuery } from 'gatsby';
-import Img from 'gatsby-image';
 import SEO from '../components/SEO';
 import { map } from 'lodash';
 import { ScaleUp } from '../style/motion';
@@ -10,7 +9,6 @@ import { colors } from '../consts/style';
 
 import {
   SectionWrapper,
-  Cover,
   SidePanel,
   MainPanel,
 } from '../components/common/LayoutParts';

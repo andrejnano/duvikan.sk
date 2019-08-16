@@ -3,7 +3,6 @@ import React from 'react';
 import styled from 'styled-components';
 import Moment from 'react-moment';
 import { graphql, useStaticQuery, Link } from 'gatsby';
-import { map } from 'lodash';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Img from 'gatsby-image';
 import SEO from '../components/SEO';
@@ -13,7 +12,6 @@ import Container from '../containers/Container';
 
 import {
   SectionWrapper,
-  Cover,
   SidePanel,
   MainPanel,
 } from '../components/common/LayoutParts';

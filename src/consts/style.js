@@ -56,6 +56,14 @@ export const colors = {
   fg: '#ffffff',
 };
 
+export const grays = {
+  dark: '#121212',
+  semidark: '#181818',
+  medium: '#282828',
+  semilight: '#3d3d3d',
+  light: '#b3b3b3',
+};
+
 export const colors2 = {
   white: '#FBF8FF',
   black: '#1E1927',

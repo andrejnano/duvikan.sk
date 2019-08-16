@@ -3,8 +3,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { chunk, sum } from 'lodash';
 import Img from 'gatsby-image';
-import { Box } from 'rebass';
-import { colors } from '../consts/style';
 
 const GalleryGrid = styled.div`
   a:hover {
