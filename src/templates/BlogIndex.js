@@ -17,8 +17,8 @@ import {
 } from '../components/common/LayoutParts';
 
 const Title = styled.h1`
-  margin: 2rem;
-  grid-column: 2/3;
+  margin: 4rem 0rem;
+  grid-column: 2/-2;
   font-size: 3rem;
   font-weight: bold;
   .pages {
@@ -33,11 +33,15 @@ const BlogPostList = styled.ul`
   grid-column: 2/-2;
   width: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   padding: 0;
   margin: 0;
   position: relative;
   list-style-type: none;
+
+  @media (min-width: 950px) {
+    grid-template-columns: 1fr 1fr;
+  }
 
   li {
     position: relative;
@@ -73,7 +77,6 @@ const BlogPostList = styled.ul`
         align-items: center;
         font-weight: 400;
         padding: 1rem 0rem 2rem;
-        opacity: 0.75;
         color: ${colorScheme.accent};
 
         .authorName {
@@ -115,9 +118,9 @@ const BlogPostList = styled.ul`
 
       .excerpt {
         flex: 66.66666%;
-        font-size: 2rem;
-        line-height: 1.7;
-        color: ${colors.gray3};
+        font-size: 1.6rem;
+        line-height: 1.4;
+        color: ${colorScheme.main};
         padding-left: 1rem;
       }
 

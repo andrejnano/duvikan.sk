@@ -19,13 +19,14 @@ import {
 } from '../components/common/LayoutParts';
 
 const Title = styled.h1`
-  grid-column: 2/3;
+  grid-column: 2/-2;
   font-size: 3rem;
+  margin-bottom: 3rem;
   font-weight: bold;
 `;
 
 const IntroHeadline = styled.section`
-  grid-column: 2/3;
+  grid-column: 2/-2;
   font-size: 3rem;
   font-weight: 800;
   margin-bottom: 3rem;
@@ -33,7 +34,7 @@ const IntroHeadline = styled.section`
 `;
 
 const IntroContent = styled.section`
-  grid-column: 3/-2;
+  grid-column: 2/-2;
   color: ${colors.black};
   background: ${colors.white};
   border-radius: 3px;
@@ -44,6 +45,7 @@ const IntroContent = styled.section`
 
 const GalleryWrap = styled.div`
   grid-column: 2/-2;
+  margin-bottom: 3rem;
 `;
 
 const AboutPage = () => {
@@ -83,10 +85,6 @@ const AboutPage = () => {
       <Cover>
         <Img fluid={cover.fluid} />
       </Cover>
-      <GridLayout>
-        <Title>O nás</Title>
-      </GridLayout>
-      <SectionSeparator />
       <GridLayout>
         <IntroHeadline>{title}</IntroHeadline>
         <IntroContent

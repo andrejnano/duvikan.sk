@@ -9,7 +9,7 @@ import { GridLayout } from '../components/common/LayoutParts';
 import { boxShadow, colorScheme, colors, colors2 } from '../consts/style';
 
 const HeaderWrapper = styled.header`
-  position: relative;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -35,7 +35,7 @@ const HeaderWrapper = styled.header`
     position: relative;
     &.isHome {
       background: transparent;
-      color: ${colorScheme.neutral};
+      color: #fff;
       transition: background 0.4s linear, color 0.4s linear;
       .logoWhite {
         display: block;
@@ -91,7 +91,7 @@ const NavList = styled.div`
   }
   a {
     letter-spacing: 0.2em;
-    font-weight: 800;
+    font-weight: 600;
     color: inherit;
     text-transform: uppercase;
     font-size: 1.2rem;
@@ -124,22 +124,34 @@ const MobileNavList = styled.ul`
   }
 
   a.activePage {
-    color: ${colors2.red};
+    color: ${colorScheme.secondary};
   }
 `;
 
 const MobileNavOverlay = styled.div`
   position: fixed;
-  top: calc(54px + 2rem);
+  top: calc(54px + 3rem);
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: ${colors.black};
+  background: #000;
   color: ${colors.white};
   padding: 2rem;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.4s linear;
+  transition: opacity 250ms ease;
+
+  &::before {
+    content: ' ';
+    position: absolute;
+    top: -20px;
+    right: calc(5% + 1rem);
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 20px 20px 20px;
+    border-color: transparent transparent #000000 transparent;
+  }
 
   &.visible {
     opacity: 1;
@@ -152,41 +164,18 @@ const Image = styled(Img)`
 `;
 
 const ToggleButton = styled.div`
-  grid-column: 5 / 6;
-  display: block;
+  grid-column: 5 / -2;
+  display: inline-block;
+  text-align: right;
   padding: 1rem;
   cursor: pointer;
   svg {
-    font-size: 2.4rem;
+    font-size: 3rem;
     color: inherit;
   }
 
   @media (min-width: 1200px) {
     display: none;
-  }
-`;
-
-const HeaderHr = styled.hr`
-  position: relative;
-  width: 100%;
-  max-width: 1470px;
-  height: 2px;
-  opacity: 0.5;
-  border: 0;
-  margin: 0;
-  margin-top: 2rem;
-  background-color: ${colors.black};
-  box-shadow: 0 2px 4px rgba(3, 27, 78, 0.06);
-  transition: background 0.4s linear, width 0.4s linear;
-  height: 2px;
-  display: none;
-  &.whiteHr {
-    background-color: ${colors.white};
-    transition: background 0.4s linear, width 0.8s linear;
-  }
-
-  @media (min-width: 950px) {
-    display: block;
   }
 `;
 
@@ -298,10 +287,10 @@ class Header extends Component {
           </NavList>
           <ToggleButton onClick={() => this.toggleMobileNav()}>
             {!this.state.mobileNavOpen && (
-              <FontAwesomeIcon icon={['far', 'bars']} />
+              <FontAwesomeIcon icon={['fad', 'bars']} />
             )}
             {this.state.mobileNavOpen && (
-              <FontAwesomeIcon icon={['far', 'times']} />
+              <FontAwesomeIcon icon={['fad', 'times']} />
             )}
           </ToggleButton>
         </GridLayout>

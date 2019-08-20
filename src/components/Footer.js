@@ -13,7 +13,7 @@ import { GridLayout } from '../components/common/LayoutParts';
 
 const FooterOutsideWrapper = styled.footer`
   width: 100%;
-  background: ${colors.lightWash};
+  background: ${colors.mediumWash};
 `;
 
 const FooterWrapper = styled.div`
@@ -34,7 +34,12 @@ const SectionSeparator = styled.hr`
 `;
 
 const NavList = styled.nav`
-  grid-column: 3/5;
+  grid-column: 2/-2;
+  margin-top: 2rem;
+  @media (min-width: 950px) {
+    margin-top: 0rem;
+    grid-column: 3/5;
+  }
   a {
     letter-spacing: 0.2em;
     font-weight: bold;
@@ -51,7 +56,10 @@ const NavList = styled.nav`
 `;
 
 const Copyright = styled.div`
-  grid-column: 2/3;
+  grid-column: 2/-2;
+  @media (min-width: 950px) {
+    grid-column: 2/3;
+  }
   font-size: 1.6rem;
   font-weight: bold;
   a {
@@ -63,10 +71,17 @@ const Copyright = styled.div`
 `;
 
 const SocialIcons = styled.div`
-  grid-column: 5/6;
+  grid-column: 2/-2;
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: flex-start;
+  margin-top: 2rem;
+
+  @media (min-width: 950px) {
+    margin-top: 0rem;
+    grid-column: 5/6;
+    justify-content: flex-end;
+  }
   a {
     margin-right: 1rem;
     &:hover {

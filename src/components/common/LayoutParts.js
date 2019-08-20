@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { boxShadow, colorScheme } from '../../consts/style';
 
 export const GridLayout = styled.div`
   display: grid;
@@ -32,11 +33,10 @@ export const Cover = styled.div`
   width: 100%;
   display: flex;
   max-height: 40vh;
+  margin-bottom: 3rem;
   > div {
     flex: 100%;
-    border-radius: 3px;
-    border: 1px solid #e5e8ed;
-    box-shadow: 0 2px 4px rgba(3, 27, 78, 0.06);
+    box-shadow: ${boxShadow};
   }
 `;
 
@@ -47,29 +47,6 @@ export const SidePanel = styled.div`
   @media (min-width: 950px) {
     padding: 0;
     width: 200px;
-  }
-
-  .btn {
-    appearance: none;
-    overflow: visible;
-    vertical-align: middle;
-    cursor: pointer;
-    height: 4rem;
-    line-height: 4rem;
-    text-align: center;
-    white-space: nowrap;
-    text-decoration: none;
-    transition: all easeInOutCubic 0.25s;
-    border-radius: 3px;
-    color: #333;
-    background: #ececec;
-    padding: 1rem 3rem;
-    font-weight: 600;
-    border: 0;
-
-    &:hover {
-      background: #dfdfdf;
-    }
   }
 `;
 

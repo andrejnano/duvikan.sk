@@ -8,22 +8,23 @@ import Footer from '../components/Footer';
 import Reboot from '../style/reboot';
 import Global from '../style/global';
 
-import { colors, gradients } from '../consts/style';
+import { colors, gradients, colorScheme } from '../consts/style';
 
 // FontAwesome Icons
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 import {
-  faBars,
+  // faBars,
   faLongArrowAltRight,
   faLongArrowAltLeft,
   faClock,
   faCalendarAlt,
-  faTimes,
   faEnvelope,
   faEnvelopeSquare,
   faPhone,
 } from '@fortawesome/pro-regular-svg-icons';
+
+import { faBars, faTimes } from '@fortawesome/pro-duotone-svg-icons';
 
 library.add(
   fab,
@@ -42,7 +43,7 @@ const SiteWrapper = styled.div`
   display: flex;
   min-height: 100%;
   flex-direction: column;
-  background-color: #fff;
+  background-color: ${colors.lightWash};
 `;
 
 const ContentWrapper = styled.main`

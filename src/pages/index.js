@@ -45,10 +45,16 @@ const LangSwitch = styled.div`
 `;
 
 const SocialIcons = styled.div`
-  grid-column: 5/6;
+  grid-column: 2/-2;
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: flex-start;
+
+  @media (min-width: 950px) {
+    grid-column: 5/6;
+    justify-content: flex-end;
+  }
+
   align-items: center;
   padding: 0 2.5%;
   opacity: 0.8;
@@ -78,6 +84,11 @@ const JapaneseSideText = styled.div`
   opacity: 0.3;
   color: ${colorScheme.secondary};
   writing-mode: vertical-lr;
+
+  display: none;
+  @media (min-width: 950px) {
+    display: block;
+  }
 `;
 
 const JapaneseBgText = styled.div`
@@ -104,7 +115,10 @@ const HeroSection = styled.section`
 `;
 
 const HeroSectionContent = styled.div`
-  grid-column: 2/4;
+  grid-column: 2/-2;
+  @media (min-width: 950px) {
+    grid-column: 2/4;
+  }
   background: transparent;
   position: relative;
   -webkit-font-smoothing: antialiased;
@@ -209,31 +223,37 @@ const PropositionSection = styled.div`
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 10vh;
+  height: auto;
+
+  @media (min-width: 950px) {
+    height: 10vh;
+  }
 
   > .grid {
     height: 100%;
 
     .featuredLink {
-      /* this is just test  */
-      padding: 1rem;
-      margin-right: 1rem;
-      border: 0.5px solid transparent;
-      /* box-shadow: ${boxShadow}; */
-      border-radius: 3px;
-      transition: border 250ms ease;
-
-      /* end of test */
       align-self: center;
       padding-right: 1rem;
-      &:first-child {
-        grid-column: 2/3;
+      grid-column: 2/-2;
+
+      @media (min-width: 950px) {
+        grid-column: initial;
+        &:first-child {
+          grid-column: 2/3;
+        }
+      }
+
+      h3 {
+        font-size: 1.6rem;
+      }
+
+      p {
+        font-size: 1.4rem;
       }
 
       &:hover {
-        /* opacity: 0.5; */
-        box-shadow: ${boxShadow};
-        border-color: ${colorScheme.secondary};
+        opacity: 0.75;
         h3 {
           color: ${colorScheme.secondary};
         }
@@ -283,10 +303,11 @@ const JapaneseTitle = styled.div`
 `;
 
 const CenteredTextBlock = styled.div`
-  grid-column: 2/4;
+  grid-column: 2/-2;
   font-size: 3rem;
   display: flex;
   flex-direction: column;
+  align-items: center;
   margin-top: 4rem;
 
   svg {
@@ -303,6 +324,7 @@ const CenteredTextBlock = styled.div`
   }
   .japaneseTitle {
     font-weight: 400;
+    color: ${colorScheme.secondary};
   }
 
   .subtitle {
@@ -310,6 +332,7 @@ const CenteredTextBlock = styled.div`
   }
 
   .bodyContent {
+    text-align: center;
     font-size: 2rem;
     display: relative;
     margin-top: 3rem;
@@ -334,6 +357,7 @@ const NewsfeedTitle = styled.h2`
 `;
 
 const FbFeed = styled.div`
+  display: none;
   grid-column: 4/6;
 
   > iframe {
@@ -341,10 +365,6 @@ const FbFeed = styled.div`
     height: 100%;
     overflow: hidden;
   }
-`;
-
-const SideGallery = styled.div`
-  grid-column: 4/6;
 `;
 
 const BlogPostGrid = styled.div`
@@ -666,7 +686,6 @@ const IndexPage = () => {
               }}
             />
           </CenteredTextBlock>
-          <JapaneseTitle>空手道場ドゥヴィ館ブラチスラバ</JapaneseTitle>
         </GridLayout>
       </Main>
     </HomePage>

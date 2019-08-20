@@ -7,27 +7,46 @@ import Img from 'gatsby-image';
 
 import SEO from '../components/SEO';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { font, colors } from '../consts/style';
+import { colors, colorScheme, boxShadow } from '../consts/style';
 import { ScaleUp } from '../style/motion';
-import Container from '../containers/Container';
+import { GridLayout, Cover } from '../components/common/LayoutParts';
 
-import {
-  SectionWrapper,
-  Cover,
-  SidePanel,
-  MainPanel,
-} from '../components/common/LayoutParts';
+const GoBack = styled.div`
+  margin: 1rem 0;
+  grid-column: 2/-2;
+  @media (min-width: 950px) {
+    grid-column: 2/3;
+  }
 
-const Content = styled.article`
-  color: ${colors.black};
-  background: ${colors.white};
-  border-radius: 3px;
-  border: 1px solid #e5e8ed;
-  box-shadow: 0 2px 4px rgba(3, 27, 78, 0.06);
-  padding: 2rem;
+  .btn {
+    appearance: none;
+    overflow: visible;
+    vertical-align: middle;
+    cursor: pointer;
+    height: 4rem;
+    line-height: 4rem;
+    text-align: center;
+    white-space: nowrap;
+    text-decoration: none;
+    transition: all easeInOutCubic 0.25s;
+    border-radius: 3px;
+    color: #333;
+    background: #ececec;
+    padding: 1rem 3rem;
+    font-weight: 600;
+    border: 0;
+
+    &:hover {
+      background: #dfdfdf;
+    }
+  }
 `;
 
 const Title = styled.h1`
+  grid-column: 2/-2;
+  @media (min-width: 950px) {
+    grid-column: 3/-2;
+  }
   font-size: 4rem;
   margin: 0;
   padding: 0;
@@ -35,7 +54,10 @@ const Title = styled.h1`
 `;
 
 const PostInfo = styled.header`
-  width: 100%;
+  grid-column: 2/-2;
+  @media (min-width: 950px) {
+    grid-column: 3/-2;
+  }
   color: ${colors.light};
   display: flex;
   flex-direction: row;
@@ -71,43 +93,49 @@ const TimeToRead = styled.time`
   }
 `;
 
+const Content = styled.article`
+  grid-column: 2/-2;
+  color: ${colorScheme.main};
+  background: ${colors.white};
+  border-radius: 3px;
+  border: 1px solid #e5e8ed;
+  box-shadow: ${boxShadow};
+  padding: 3rem;
+`;
+
 const BlogPost = ({ data }) => {
   const { title, seoMetaTags, meta, author, cover, contentNode } = data.project;
   return (
     <ScaleUp>
       <SEO meta={seoMetaTags} />
-      <Container>
-        <Cover>
-          <Img fluid={cover.fluid} />
-        </Cover>
-        <SectionWrapper>
-          <SidePanel>
-            <Link to="/blog" className="btn">
-              <FontAwesomeIcon icon={['far', 'long-arrow-alt-left']} /> Späť
-            </Link>
-          </SidePanel>
-          <MainPanel>
-            <Title>{title}</Title>
-            <PostInfo>
-              <Img className="authorPhoto" fluid={author.photo.fluid} />
-              <div className="authorName">{author.name}</div>
-              <LastUpdate>
-                <FontAwesomeIcon icon={['far', 'calendar-alt']} />{' '}
-                <Moment format="DD.MM.YYYY">{meta.updatedAt}</Moment>
-              </LastUpdate>
-              <TimeToRead>
-                <FontAwesomeIcon icon={['far', 'clock']} />{' '}
-                {contentNode.childMarkdownRemark.timeToRead} min.
-              </TimeToRead>
-            </PostInfo>
-            <Content
-              dangerouslySetInnerHTML={{
-                __html: contentNode.childMarkdownRemark.html,
-              }}
-            />
-          </MainPanel>
-        </SectionWrapper>
-      </Container>
+      <Cover>
+        <Img fluid={cover.fluid} />
+      </Cover>
+      <GridLayout>
+        <GoBack>
+          <Link to="/blog" className="btn">
+            <FontAwesomeIcon icon={['far', 'long-arrow-alt-left']} /> Späť
+          </Link>
+        </GoBack>
+        <Title>{title}</Title>
+        <PostInfo>
+          <Img className="authorPhoto" fluid={author.photo.fluid} />
+          <div className="authorName">{author.name}</div>
+          <LastUpdate>
+            <FontAwesomeIcon icon={['far', 'calendar-alt']} />{' '}
+            <Moment format="DD.MM.YYYY">{meta.updatedAt}</Moment>
+          </LastUpdate>
+          <TimeToRead>
+            <FontAwesomeIcon icon={['far', 'clock']} />{' '}
+            {contentNode.childMarkdownRemark.timeToRead} min.
+          </TimeToRead>
+        </PostInfo>
+        <Content
+          dangerouslySetInnerHTML={{
+            __html: contentNode.childMarkdownRemark.html,
+          }}
+        />
+      </GridLayout>
     </ScaleUp>
   );
 };

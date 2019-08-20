@@ -7,7 +7,7 @@ import SEO from '../components/SEO';
 import { map } from 'lodash';
 import { ScaleUp } from '../style/motion';
 import Container from '../containers/Container';
-import { colors, colors2 } from '../consts/style';
+import { colors, colors2, colorScheme, boxShadow } from '../consts/style';
 import Gallery from '../components/Gallery';
 
 import {
@@ -20,11 +20,11 @@ import {
 
 const IntroText = styled.div`
   grid-column: 2/-2;
-  background: ${colors.white};
+  background: #fff;
   border-radius: 3px;
   border: 1px solid #e5e8ed;
-  box-shadow: 0 2px 4px rgba(3, 27, 78, 0.06);
-  padding: 2rem;
+  box-shadow: ${boxShadow};
+  padding: 3rem;
 
   p {
     font-size: 2rem;
@@ -42,11 +42,10 @@ const IntroText = styled.div`
 `;
 
 const Title = styled.h1`
-  grid-column: 2/3;
+  grid-column: 2/-2;
   font-size: 3rem;
   font-weight: bold;
-  margin: 0;
-  margin-bottom: 2rem;
+  margin: 4rem 0rem;
   padding: 0;
 `;
 
@@ -56,7 +55,8 @@ const SectionSeparator = styled.hr`
   background-color: ${colors.black};
   opacity: 0.075;
   border: 0;
-  margin: 3rem 0;
+  margin: 0;
+  margin-bottom: 3rem;
   overflow: visible;
 `;
 
@@ -94,9 +94,10 @@ const Day = styled.div`
 
 const EventCard = styled.div`
   padding: 2rem;
-  border: 1px solid #e5e8ed;
-  box-shadow: 0 2px 4px rgba(3, 27, 78, 0.06);
+  border: 1px solid #e6ecf1;
+  box-shadow: ${boxShadow};
   background-color: ${colors.white};
+  transition: border 250ms ease;
   border-radius: 3px;
   margin-bottom: 2rem;
   margin-left: 2rem;
@@ -125,6 +126,11 @@ const EventCard = styled.div`
   div {
     font-weight: 500;
   }
+`;
+
+const GalleryWrap = styled.div`
+  grid-column: 2/-2;
+  margin-bottom: 3rem;
 `;
 
 const Event = props => {
@@ -260,6 +266,7 @@ const TreningyPage = () => {
           }}
         />
       </GridLayout>
+
       <SectionSeparator />
 
       <GridLayout>
@@ -332,7 +339,9 @@ const TreningyPage = () => {
 
       <GridLayout>
         <Title>Pohľad na tréningy</Title>
-        <Gallery itemsPerRow={3} images={imageGallery} />
+        <GalleryWrap>
+          <Gallery itemsPerRow={3} images={imageGallery} />
+        </GalleryWrap>
       </GridLayout>
     </ScaleUp>
   );
