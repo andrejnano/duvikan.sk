@@ -1,6 +1,6 @@
 import 'typeface-inter';
 import { createGlobalStyle } from 'styled-components';
-import { colors, colors2, gradients } from '../consts/style';
+import { colors, colors2, colorScheme, boxShadow, gradients } from '../consts/style';
 
 const Global = createGlobalStyle`
 
@@ -18,9 +18,8 @@ html {
 body {
   overflow-x: hidden;
   word-wrap: break-word;
-  color: ${colors.black};
-  background-color: ${colors.white};
-  background: ${colors.lightWash};
+  color: #000;
+  background: #fff;
 }
 
 // links reset
@@ -37,18 +36,18 @@ a {
 {
   box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-	background-color: #191919;
+	background-color: ${colorScheme.main};
 }
 
 ::-webkit-scrollbar
 {
 	width: 5px;
-	background-color: #191919;
+	background-color: ${colorScheme.main};
 }
 
 ::-webkit-scrollbar-thumb
 {
-	background-color: #ccc;
+	background-color: ${colorScheme.secondary};
 	${
     '' /* background-image: -webkit-linear-gradient(90deg, rgba(255, 255, 255, .2) 25%,
                     transparent 25%,

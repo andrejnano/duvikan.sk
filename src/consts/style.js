@@ -26,6 +26,15 @@ export const gradients = {
     'background-image: linear-gradient(to right, #868f96 0%, #596164 100%);',
 };
 
+export const boxShadow = '0 3px 8px 0 rgba(116, 129, 141, 0.1)';
+
+export const colorScheme = {
+  main: '#242A31',
+  secondary: 'rgb(238, 40, 53)',
+  accent: '#9DAAB6',
+  neutral: '#d4dadf',
+};
+
 export const colors = {
   white: '#ffffff',
   black: '#050526',

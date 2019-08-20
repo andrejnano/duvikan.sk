@@ -15,9 +15,11 @@ import {
   Cover,
   SidePanel,
   MainPanel,
+  GridLayout,
 } from '../components/common/LayoutParts';
 
 const IntroText = styled.div`
+  grid-column: 2/-2;
   background: ${colors.white};
   border-radius: 3px;
   border: 1px solid #e5e8ed;
@@ -40,9 +42,11 @@ const IntroText = styled.div`
 `;
 
 const Title = styled.h1`
-  font-size: 2rem;
-  font-weight: 600;
+  grid-column: 2/3;
+  font-size: 3rem;
+  font-weight: bold;
   margin: 0;
+  margin-bottom: 2rem;
   padding: 0;
 `;
 
@@ -52,12 +56,12 @@ const SectionSeparator = styled.hr`
   background-color: ${colors.black};
   opacity: 0.075;
   border: 0;
-  margin: 0;
-  margin-bottom: 3rem;
+  margin: 3rem 0;
   overflow: visible;
 `;
 
 const Calendar = styled.div`
+  grid-column: 2/-2;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -67,7 +71,9 @@ const Calendar = styled.div`
 const Day = styled.div`
   height: 100%;
   flex: 100%;
-  padding: 2rem;
+  &:not(:last-child) {
+    padding-right: 2rem;
+  }
 
   @media (min-width: 1470px) {
     flex: 20%;
@@ -93,6 +99,7 @@ const EventCard = styled.div`
   background-color: ${colors.white};
   border-radius: 3px;
   margin-bottom: 2rem;
+  margin-left: 2rem;
   color: ${colors.black};
 
   time::before {
@@ -245,103 +252,88 @@ const TreningyPage = () => {
   return (
     <ScaleUp>
       <SEO meta={seoMetaTags} />
-      <Container>
-        <SectionWrapper>
-          <SidePanel>
-            <Title>{title} </Title>
-          </SidePanel>
-          <MainPanel>
-            <IntroText
-              dangerouslySetInnerHTML={{
-                __html: introText,
-              }}
-            />
-          </MainPanel>
-        </SectionWrapper>
+      <GridLayout>
+        <Title>{title} </Title>
+        <IntroText
+          dangerouslySetInnerHTML={{
+            __html: introText,
+          }}
+        />
+      </GridLayout>
+      <SectionSeparator />
 
-        <SectionSeparator />
+      <GridLayout>
+        <Title>Rozpis tréningov</Title>
+        <Calendar>
+          <Day>
+            <h4>Pondelok</h4>
+            {map(mondayEvents, event => (
+              <Event
+                key={`${event.node.day} - ${event.node.description}`}
+                start={event.node.timeStart}
+                end={event.node.timeEnd}
+                description={event.node.description}
+                color={event.node.color.hex}
+              />
+            ))}
+          </Day>
+          <Day>
+            <h4>Utorok</h4>
+            {map(tuesdayEvents, event => (
+              <Event
+                key={`${event.node.day} - ${event.node.description}`}
+                start={event.node.timeStart}
+                end={event.node.timeEnd}
+                description={event.node.description}
+                color={event.node.color.hex}
+              />
+            ))}
+          </Day>
+          <Day>
+            <h4>Streda</h4>
+            {map(wednesdayEvents, event => (
+              <Event
+                key={`${event.node.day} - ${event.node.description}`}
+                start={event.node.timeStart}
+                end={event.node.timeEnd}
+                description={event.node.description}
+                color={event.node.color.hex}
+              />
+            ))}
+          </Day>
+          <Day>
+            <h4>Štvrtok</h4>
+            {map(thursdayEvents, event => (
+              <Event
+                key={`${event.node.day} - ${event.node.description}`}
+                start={event.node.timeStart}
+                end={event.node.timeEnd}
+                description={event.node.description}
+                color={event.node.color.hex}
+              />
+            ))}
+          </Day>
+          <Day>
+            <h4>Piatok</h4>
+            {map(fridayEvents, event => (
+              <Event
+                key={`${event.node.day} - ${event.node.description}`}
+                start={event.node.timeStart}
+                end={event.node.timeEnd}
+                description={event.node.description}
+                color={event.node.color.hex}
+              />
+            ))}
+          </Day>
+        </Calendar>
+      </GridLayout>
 
-        <SectionWrapper>
-          <SidePanel>
-            <Title>Rozpis tréningov</Title>
-          </SidePanel>
-          <MainPanel>
-            <Calendar>
-              <Day>
-                <h4>Pondelok</h4>
-                {map(mondayEvents, event => (
-                  <Event
-                    key={`${event.node.day} - ${event.node.description}`}
-                    start={event.node.timeStart}
-                    end={event.node.timeEnd}
-                    description={event.node.description}
-                    color={event.node.color.hex}
-                  />
-                ))}
-              </Day>
-              <Day>
-                <h4>Utorok</h4>
-                {map(tuesdayEvents, event => (
-                  <Event
-                    key={`${event.node.day} - ${event.node.description}`}
-                    start={event.node.timeStart}
-                    end={event.node.timeEnd}
-                    description={event.node.description}
-                    color={event.node.color.hex}
-                  />
-                ))}
-              </Day>
-              <Day>
-                <h4>Streda</h4>
-                {map(wednesdayEvents, event => (
-                  <Event
-                    key={`${event.node.day} - ${event.node.description}`}
-                    start={event.node.timeStart}
-                    end={event.node.timeEnd}
-                    description={event.node.description}
-                    color={event.node.color.hex}
-                  />
-                ))}
-              </Day>
-              <Day>
-                <h4>Štvrtok</h4>
-                {map(thursdayEvents, event => (
-                  <Event
-                    key={`${event.node.day} - ${event.node.description}`}
-                    start={event.node.timeStart}
-                    end={event.node.timeEnd}
-                    description={event.node.description}
-                    color={event.node.color.hex}
-                  />
-                ))}
-              </Day>
-              <Day>
-                <h4>Piatok</h4>
-                {map(fridayEvents, event => (
-                  <Event
-                    key={`${event.node.day} - ${event.node.description}`}
-                    start={event.node.timeStart}
-                    end={event.node.timeEnd}
-                    description={event.node.description}
-                    color={event.node.color.hex}
-                  />
-                ))}
-              </Day>
-            </Calendar>
-          </MainPanel>
-        </SectionWrapper>
+      <SectionSeparator />
 
-        <SectionSeparator />
-
-        <SectionWrapper>
-          <SidePanel>
-            <Title>Pohľad na tréningy</Title>
-          </SidePanel>
-          <MainPanel>
-            <Gallery itemsPerRow={3} images={imageGallery} />
-          </MainPanel>
-        </SectionWrapper>
-      </Container>
+      <GridLayout>
+        <Title>Pohľad na tréningy</Title>
+        <Gallery itemsPerRow={3} images={imageGallery} />
+      </GridLayout>
     </ScaleUp>
   );
 };

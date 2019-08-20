@@ -6,7 +6,7 @@ import { graphql, Link, StaticQuery } from 'gatsby';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { GridLayout } from '../components/common/LayoutParts';
-import { colors, colors2 } from '../consts/style';
+import { boxShadow, colorScheme, colors, colors2 } from '../consts/style';
 
 const HeaderWrapper = styled.header`
   position: relative;
@@ -17,12 +17,11 @@ const HeaderWrapper = styled.header`
   padding: 20px 0;
   background: ${colors.white};
   color: ${colors.black};
-  border-bottom: 3px solid #707070;
-  margin-top: -3px;
+  border-bottom: 1px solid ${colorScheme.neutral};
+  margin-top: -1px;
   z-index: 999;
-  transition: background 0.4s linear, color 0.4s linear;
-  box-shadow: rgba(46, 41, 51, 0.08) 0px 1px 2px,
-    rgba(71, 63, 79, 0.08) 0px 2px 4px;
+  transition: background 0.4s ease, color 0.4s ease;
+  box-shadow: ${boxShadow};
 
   .logoBlack {
     display: block;
@@ -34,11 +33,9 @@ const HeaderWrapper = styled.header`
 
   @media (min-width: 950px) {
     position: relative;
-    /* box-shadow: none; */
-    background: transparent;
     &.isHome {
       background: transparent;
-      color: ${colors.white};
+      color: ${colorScheme.neutral};
       transition: background 0.4s linear, color 0.4s linear;
       .logoWhite {
         display: block;
@@ -47,22 +44,6 @@ const HeaderWrapper = styled.header`
         display: none;
       }
     }
-
-    /* disabled temp. &.isScrolling {
-      transition: background 0.2s linear;
-      position: sticky;
-      background: ${colors.black};
-      color: ${colors.white};
-      .logoWhite {
-        display: block;
-      }
-      .logoBlack {
-        display: none;
-      }
-      hr {
-        display: none;
-      }
-    } */
   }
 `;
 
@@ -111,19 +92,19 @@ const NavList = styled.div`
   a {
     letter-spacing: 0.2em;
     font-weight: 800;
-    color: rgba(255, 255, 255, 0.8);
+    color: inherit;
     text-transform: uppercase;
     font-size: 1.2rem;
     &:not(:last-of-type) {
       margin-right: 2em;
     }
     &:hover {
-      opacity: 0.5;
-      color: rgb(238, 40, 53);
+      opacity: 0.75;
+      color: ${colorScheme.secondary};
     }
   }
   a.activePage {
-    border-bottom: 3px solid ${colors.darkWash};
+    color: ${colorScheme.secondary};
   }
 `;
 

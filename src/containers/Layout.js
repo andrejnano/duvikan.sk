@@ -42,7 +42,7 @@ const SiteWrapper = styled.div`
   display: flex;
   min-height: 100%;
   flex-direction: column;
-  background-color: ${colors.mediumWash};
+  background-color: #fff;
 `;
 
 const ContentWrapper = styled.main`

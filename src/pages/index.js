@@ -9,9 +9,9 @@ import SEO from '../components/SEO';
 import { map } from 'lodash';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { colors, colors2 } from '../consts/style';
+import { colors, colorScheme, boxShadow } from '../consts/style';
 import Container from '../containers/Container';
-import Logo from '../images/logo-black.svg';
+import Logo from '../images/logo.svg';
 import {
   GridLayout,
   SidePanel,
@@ -58,7 +58,7 @@ const SocialIcons = styled.div`
 
     &:hover {
       opacity: 0.8;
-      color: rgb(238, 40, 53);
+      color: ${colorScheme.secondary};
     }
   }
 `;
@@ -76,7 +76,7 @@ const JapaneseSideText = styled.div`
   font-size: 175px;
   font-weight: 1000;
   opacity: 0.3;
-  color: rgb(238, 40, 53);
+  color: ${colorScheme.secondary};
   writing-mode: vertical-lr;
 `;
 
@@ -93,18 +93,6 @@ const JapaneseBgText = styled.div`
   font-weight: 1000;
   opacity: 0.075;
   display: none;
-`;
-
-const LogoBg = styled.div`
-  position: absolute;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  left: 50%;
-  width: auto;
-  overflow: hidden;
-  white-space: nowrap;
-  pointer-events: none;
-  opacity: 0.075;
 `;
 
 const HeroSection = styled.section`
@@ -152,20 +140,28 @@ const HeroSectionContent = styled.div`
     font-weight: 700;
     text-transform: uppercase;
     font-size: 1.4rem;
-    color: rgb(238, 40, 53);
+    color: ${colorScheme.secondary};
     position: relative;
     transition: padding 0.1s linear;
+    padding: 1rem;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    transition: border 250ms ease;
 
     &:hover {
-      opacity: 0.6;
-      padding-left: 0.4rem;
-      transition: padding 0.1s linear;
+      /* opacity: 0.6; */
+      /* padding-left: 0.4rem; */
+      /* transition: padding 0.1s linear; */
+      border-color: ${colorScheme.secondary};
+      color: ${colorScheme.secondary};
+      box-shadow: ${boxShadow};
     }
 
     svg {
-      font-size: 1.6rem;
+      font-size: 2rem;
       vertical-align: middle;
       margin-top: -0.2rem;
+      margin-left: 0.2rem;
     }
   }
 `;
@@ -193,7 +189,7 @@ const NewsfeedSection = styled.div`
       h3 {
         font-size: 3rem;
         font-weight: 400;
-        color: rgb(238, 40, 53);
+        color: ${colorScheme.secondary};
       }
       p {
         color: #fff;
@@ -207,7 +203,8 @@ const NewsfeedSection = styled.div`
 
 const PropositionSection = styled.div`
   background: rgba(26, 26, 26, 0.7);
-  border-top: 3px solid #707070;
+  border-top: 1px solid #707070;
+  /* background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 75%); */
   position: absolute;
   bottom: 0;
   left: 0;
@@ -218,42 +215,34 @@ const PropositionSection = styled.div`
     height: 100%;
 
     .featuredLink {
+      /* this is just test  */
+      padding: 1rem;
+      margin-right: 1rem;
+      border: 0.5px solid transparent;
+      /* box-shadow: ${boxShadow}; */
+      border-radius: 3px;
+      transition: border 250ms ease;
+
+      /* end of test */
       align-self: center;
+      padding-right: 1rem;
       &:first-child {
         grid-column: 2/3;
       }
 
       &:hover {
-        opacity: 0.5;
+        /* opacity: 0.5; */
+        box-shadow: ${boxShadow};
+        border-color: ${colorScheme.secondary};
+        h3 {
+          color: ${colorScheme.secondary};
+        }
+        p {
+          opacity: 0.75;
+        }
       }
     }
   }
-`;
-
-const Image = styled(Img)`
-  width: 0px;
-`;
-
-const MainPanelRow = styled.main`
-  flex: 1;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  position: relative;
-`;
-
-const Title = styled.h1`
-  font-size: 1.6rem;
-  font-weight: 400;
-`;
-
-const SectionSeparator = styled.hr`
-  width: 100%;
-  height: 1px;
-  opacity: 0.5;
-  border: 0;
-  margin: 0;
-  background-color: #fff;
 `;
 
 const DarkSeparator = styled.hr`
@@ -266,33 +255,26 @@ const DarkSeparator = styled.hr`
   overflow: visible;
 `;
 
-const SectionWrapper = styled.section`
-  display: flex;
-  flex-direction: column;
-  padding: 3rem 0;
-
-  @media (min-width: 950px) {
-    flex-direction: row;
-  }
-`;
-
 const Main = styled.section`
-  background: ${colors.lightWash};
-  color: ${colors.black};
+  background: #000;
+  color: #fff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   box-shadow: 0 2px 4px rgba(3, 27, 78, 0.06);
   border-bottom: 1px solid #e5e8ed;
-
-  @media (min-width: 950px) {
-    padding-top: 50px;
-  }
+  margin: 0;
+  padding: 6rem 0;
 `;
 
 const JapaneseTitle = styled.div`
-  grid-column: 2/3;
-  position: relative;
-  writing-mode: vertical-lr;
-  height: 100%;
-  font-size: 4rem;
+  grid-column: 4/6;
+  align-self: center;
+  justify-self: center;
+  line-height: 1;
+  /* writing-mode: vertical-lr; */
+  text-align: center;
+  font-size: 5rem;
+  color: ${colorScheme.secondary};
   display: none;
 
   @media (min-width: 950px) {
@@ -301,16 +283,17 @@ const JapaneseTitle = styled.div`
 `;
 
 const CenteredTextBlock = styled.div`
-  flex: 60%;
+  grid-column: 2/4;
   font-size: 3rem;
-  margin-left: auto;
-  margin-right: auto;
   display: flex;
   flex-direction: column;
+  margin-top: 4rem;
 
   svg {
     color: #000;
     fill: currentColor;
+    width: 200px;
+    height: 300px;
   }
   .title {
     font-size: 6rem;
@@ -327,87 +310,101 @@ const CenteredTextBlock = styled.div`
   }
 
   .bodyContent {
-    font-size: 1.6rem;
-    font-weight: 400;
+    font-size: 2rem;
     display: relative;
     margin-top: 3rem;
-    text-align: justify;
-    max-width: 575px;
-    padding-right: 1rem;
-    color: ${colors.black};
+    line-height: 1.618;
+    font-weight: 400;
+    max-width: 30em;
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.16);
+  }
+`;
+
+const Newsfeed = styled.section`
+  color: #000;
+  background: rgba(255, 255, 255, 0.9);
+`;
+
+const NewsfeedTitle = styled.h2`
+  grid-column: 2/3;
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 4rem 0 2rem;
+`;
+
+const FbFeed = styled.div`
+  grid-column: 4/6;
+
+  > iframe {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
   }
 `;
 
 const SideGallery = styled.div`
-  flex: 40%;
-  align-self: center;
-  padding: 2rem 0;
-`;
-
-const Newsfeed = styled.section`
-  color: ${colors.white};
-  background: ${colors.black};
-  padding: 4rem 0;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-`;
-
-const NewsfeedTitle = styled.h2`
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 2rem;
+  grid-column: 4/6;
 `;
 
 const BlogPostGrid = styled.div`
-  width: 100%;
+  grid-column: 2/4;
   display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: flex-start;
-  padding: 2rem 0;
   margin: 0;
+  margin-bottom: 4rem;
   position: relative;
   list-style-type: none;
-  /* border: 1px solid #e5e8ed;
-  background-color: ${colors.white};
-  border-radius: 3px;
-  box-shadow: 0 2px 4px rgba(3, 27, 78, 0.06); */
+  /* background: ${colors.mediumWash}; */
+
+  .viewMoreLink {
+    padding: 1rem 0;
+    font-weight: bold;
+
+    svg {
+      margin-left: 2px;
+      font-size: 1.2em;
+      vertical-align: middle;
+      position: relative;
+      top: -1px;
+      color: inherit;
+    }
+
+    &:hover {
+      opacity: 0.5;
+    }
+  }
 `;
 
 const BlogPostItem = styled.li`
   position: relative;
   width: 100%;
-  margin-bottom: 1rem;
   > a {
     position: relative;
-    padding: 1rem;
-    color: ${colors.white};
+    padding: 1rem 0;
+    color: inherit;
     overflow: hidden;
-    height: 100%;
     display: flex;
     flex-direction: row;
     align-items: center;
 
     .timePosted {
-      font-size: 1.4rem;
+      font-size: 1.6rem;
       width: auto;
-      margin-right: 2rem;
-
-      @media (min-width: 950px) {
-        width: 200px;
-        margin: 0;
-      }
+      margin: 0;
     }
 
     .title {
-      font-size: 1.6rem;
-      font-weight: 400;
+      font-size: 2rem;
+      font-weight: 600;
+      margin: 0;
+      margin-left: 2rem;
     }
 
     .linkText {
       margin-left: auto;
-      color: ${colors.white};
+      color: inherit;
       font-weight: 400;
       font-size: 1.4rem;
       display: none;
@@ -417,21 +414,7 @@ const BlogPostItem = styled.li`
         vertical-align: middle;
         position: relative;
         top: -1px;
-        color: ${colors.white};
-      }
-      &:after {
-        content: ' ';
-        position: absolute;
-        left: 0;
-        bottom: -2px;
-        width: 100%;
-        height: 1px;
-        background: ${colors.white};
-        transition: opacity 0.25s linear;
-      }
-
-      @media (min-width: 950px) {
-        display: block;
+        color: inherit;
       }
     }
 
@@ -584,20 +567,12 @@ const IndexPage = () => {
             <HeroSectionContent>
               <div dangerouslySetInnerHTML={{ __html: description }} />
               <Link className="cta" to="/about">
-                Viac info{' '}
+                Viac o našom klube{' '}
                 <FontAwesomeIcon icon={['far', 'long-arrow-alt-right']} />
               </Link>
             </HeroSectionContent>
           </GridLayout>
         </HeroSection>
-        <NewsfeedSection>
-          <GridLayout>
-            <div>
-              <h3>Novy prispevok</h3>
-              <p>História nášho klubu a ciest na Okinawu.</p>
-            </div>
-          </GridLayout>
-        </NewsfeedSection>
         <PropositionSection>
           <GridLayout className="grid">
             <Link className="featuredLink" to="/about">
@@ -629,54 +604,14 @@ const IndexPage = () => {
           </GridLayout>
         </PropositionSection>
       </BackgroundImage>
-      <Main>
-        <Container>
-          <SectionWrapper>
-            <MainPanel>
-              <Gallery itemsPerRow={3} images={firstImageGallery} />
-            </MainPanel>
-          </SectionWrapper>
-          <DarkSeparator />
-          <SectionWrapper>
-            <SidePanel>
-              <JapaneseTitle>空手道場ドゥヴィ館ブラチスラバ</JapaneseTitle>
-            </SidePanel>
-            <MainPanelRow>
-              <CenteredTextBlock>
-                <Logo />
-                <h4 className="japaneseTitle">
-                  空手道場ドゥヴィ館ブラチスラバ
-                </h4>
-                <h3 className="title">Duvi-kan</h3>
-                <div className="subtitle">
-                  <strong>DUVI</strong> - okinawské meno šéftrénera MUDr.
-                  Divinca
-                </div>
-                <div className="subtitle">
-                  <strong>KAN</strong> - po japonsky škola
-                </div>
-                <div
-                  className="bodyContent"
-                  dangerouslySetInnerHTML={{
-                    __html: body,
-                  }}
-                />
-              </CenteredTextBlock>
-              <SideGallery>
-                <Gallery itemsPerRow={1} images={secondImageGallery} />
-              </SideGallery>
-            </MainPanelRow>
-          </SectionWrapper>
-          <SectionSeparator />
-        </Container>
-      </Main>
       <Newsfeed>
-        <Container>
+        <GridLayout>
           <NewsfeedTitle>Najnovšie príspevky</NewsfeedTitle>
+        </GridLayout>
+        <GridLayout>
           <BlogPostGrid>
             {map(edges, post => (
               <BlogPostItem key={post.node.slug}>
-                <SectionSeparator />
                 <Link to={`/blog/${post.node.slug}/`}>
                   <div className="timePosted">
                     <FontAwesomeIcon icon={['far', 'calendar-alt']} />{' '}
@@ -692,9 +627,48 @@ const IndexPage = () => {
                 </Link>
               </BlogPostItem>
             ))}
+            <Link className="viewMoreLink" to="/blog">
+              Zobraziť všetky príspevky{' '}
+              <FontAwesomeIcon icon={['far', 'long-arrow-alt-right']} />{' '}
+            </Link>
           </BlogPostGrid>
-        </Container>
+          <FbFeed>
+            <iframe
+              title="fbfeedembed"
+              src="http://www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2FduvikanBratislava/&width=600&colorscheme=light&show_faces=true&border_color&stream=true&header=true&height=300"
+              scrolling="yes"
+              allowTransparency="true"
+              frameBorder="0"
+            ></iframe>
+          </FbFeed>
+          {/* <SideGallery>
+            <Gallery itemsPerRow={2} images={secondImageGallery} />
+          </SideGallery> */}
+        </GridLayout>
       </Newsfeed>
+      <Main>
+        <DarkSeparator></DarkSeparator>
+        <GridLayout>
+          <CenteredTextBlock>
+            <Logo />
+            <h4 className="japaneseTitle">空手道場ドゥヴィ館ブラチスラバ</h4>
+            <h3 className="title">Duvi-kan</h3>
+            <div className="subtitle">
+              <strong>DUVI</strong> - okinawské meno šéftrénera MUDr. Divinca
+            </div>
+            <div className="subtitle">
+              <strong>KAN</strong> - po japonsky škola
+            </div>
+            <div
+              className="bodyContent"
+              dangerouslySetInnerHTML={{
+                __html: body,
+              }}
+            />
+          </CenteredTextBlock>
+          <JapaneseTitle>空手道場ドゥヴィ館ブラチスラバ</JapaneseTitle>
+        </GridLayout>
+      </Main>
     </HomePage>
   );
 };

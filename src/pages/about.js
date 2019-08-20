@@ -11,17 +11,21 @@ import { colors } from '../consts/style';
 
 import {
   SectionWrapper,
+  SectionSeparator,
   Cover,
   SidePanel,
   MainPanel,
+  GridLayout,
 } from '../components/common/LayoutParts';
 
 const Title = styled.h1`
-  font-size: 2rem;
-  font-weight: 600;
+  grid-column: 2/3;
+  font-size: 3rem;
+  font-weight: bold;
 `;
 
 const IntroHeadline = styled.section`
+  grid-column: 2/3;
   font-size: 3rem;
   font-weight: 800;
   margin-bottom: 3rem;
@@ -29,12 +33,17 @@ const IntroHeadline = styled.section`
 `;
 
 const IntroContent = styled.section`
+  grid-column: 3/-2;
   color: ${colors.black};
   background: ${colors.white};
   border-radius: 3px;
   border: 1px solid #e5e8ed;
   box-shadow: 0 2px 4px rgba(3, 27, 78, 0.06);
   padding: 2rem;
+`;
+
+const GalleryWrap = styled.div`
+  grid-column: 2/-2;
 `;
 
 const AboutPage = () => {
@@ -71,32 +80,28 @@ const AboutPage = () => {
   return (
     <ScaleUp>
       <SEO meta={seoMetaTags} />
-      <Container>
-        <Cover>
-          <Img fluid={cover.fluid} />
-        </Cover>
-        <SectionWrapper>
-          <SidePanel>
-            <Title>O nás</Title>
-          </SidePanel>
-          <MainPanel>
-            <IntroHeadline>{title}</IntroHeadline>
-            <IntroContent
-              dangerouslySetInnerHTML={{
-                __html: intro,
-              }}
-            />
-          </MainPanel>
-        </SectionWrapper>
-        <SectionWrapper>
-          <SidePanel>
-            <Title>Galéria</Title>
-          </SidePanel>
-          <MainPanel>
-            <Gallery itemsPerRow={3} images={imageGallery} />
-          </MainPanel>
-        </SectionWrapper>
-      </Container>
+      <Cover>
+        <Img fluid={cover.fluid} />
+      </Cover>
+      <GridLayout>
+        <Title>O nás</Title>
+      </GridLayout>
+      <SectionSeparator />
+      <GridLayout>
+        <IntroHeadline>{title}</IntroHeadline>
+        <IntroContent
+          dangerouslySetInnerHTML={{
+            __html: intro,
+          }}
+        />
+      </GridLayout>
+      <SectionSeparator />
+      <GridLayout>
+        <Title>Galéria</Title>
+        <GalleryWrap>
+          <Gallery itemsPerRow={3} images={imageGallery} />
+        </GalleryWrap>
+      </GridLayout>
     </ScaleUp>
   );
 };

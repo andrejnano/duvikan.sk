@@ -17,8 +17,18 @@ export const SectionWrapper = styled.section`
   }
 `;
 
+export const SectionSeparator = styled.hr`
+  width: 100%;
+  height: 1px;
+  background-color: #000;
+  opacity: 0.075;
+  border: 0;
+  margin: 3rem 0;
+  overflow: visible;
+`;
+
 export const Cover = styled.div`
-  margin-top: 3rem;
+  position: relative;
   width: 100%;
   display: flex;
   max-height: 40vh;

@@ -9,7 +9,7 @@ import Container from '../containers/Container';
 // webpack import image path
 import logoImage from '../images/logo.svg';
 
-import { SidePanel, MainPanel } from '../components/common/LayoutParts';
+import { GridLayout } from '../components/common/LayoutParts';
 
 const FooterOutsideWrapper = styled.footer`
   width: 100%;
@@ -17,14 +17,9 @@ const FooterOutsideWrapper = styled.footer`
 `;
 
 const FooterWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
+  width: 100%;
   margin: 3rem 0;
   padding: 3rem 0;
-
-  @media (min-width: 950px) {
-    flex-direction: row;
-  }
 `;
 
 const SectionSeparator = styled.hr`
@@ -39,6 +34,7 @@ const SectionSeparator = styled.hr`
 `;
 
 const NavList = styled.nav`
+  grid-column: 3/5;
   a {
     letter-spacing: 0.2em;
     font-weight: bold;
@@ -55,8 +51,9 @@ const NavList = styled.nav`
 `;
 
 const Copyright = styled.div`
-  font-size: 1.4rem;
-  margin-top: 1rem;
+  grid-column: 2/3;
+  font-size: 1.6rem;
+  font-weight: bold;
   a {
     margin-left: 0.7rem;
     text-decoration: none;
@@ -66,6 +63,10 @@ const Copyright = styled.div`
 `;
 
 const SocialIcons = styled.div`
+  grid-column: 5/6;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
   a {
     margin-right: 1rem;
     &:hover {
@@ -85,49 +86,45 @@ const Footer = () => {
 
   return (
     <FooterOutsideWrapper>
-      <Container>
-        <SectionSeparator />
-        <FooterWrapper>
-          <SidePanel>
-            <SocialIcons>
-              <a href="https://facebook.com/duvikanBratislava">
-                <FontAwesomeIcon icon={['fab', 'facebook-square']} />
-              </a>
-              <a href="https://facebook.com/duvikanBratislava">
-                <FontAwesomeIcon icon={['fab', 'instagram']} />
-              </a>
-              <a href="mailto:duvikan@gmail.com">
-                <FontAwesomeIcon icon={['far', 'envelope']} />
-              </a>
-            </SocialIcons>
-          </SidePanel>
-          <MainPanel>
-            <NavList>
-              <Link to="/" activeClassName="activePage">
-                Domov
-              </Link>
-              <Link to="/blog" activeClassName="activePage">
-                Novinky
-              </Link>
-              <Link to="/treningy" activeClassName="activePage">
-                Tréningy
-              </Link>
-              <Link to="/about" activeClassName="activePage">
-                O nás
-              </Link>
-              <Link to="/historia" activeClassName="activePage">
-                História
-              </Link>
-              <Link to="/contact" activeClassName="activePage">
-                Kontakt
-              </Link>
-            </NavList>
-            <Copyright>
-              Duvikan {year} <a href="https://anano.dev">@andrejnano</a>
-            </Copyright>
-          </MainPanel>
-        </FooterWrapper>
-      </Container>
+      <SectionSeparator />
+      <FooterWrapper>
+        <GridLayout>
+          <Copyright>
+            Duvikan {year} {/*<a href="https://anano.dev">@andrejnano</a>*/}
+          </Copyright>
+          <NavList>
+            <Link to="/" activeClassName="activePage">
+              Domov
+            </Link>
+            <Link to="/blog" activeClassName="activePage">
+              Novinky
+            </Link>
+            <Link to="/treningy" activeClassName="activePage">
+              Tréningy
+            </Link>
+            <Link to="/about" activeClassName="activePage">
+              O nás
+            </Link>
+            <Link to="/historia" activeClassName="activePage">
+              História
+            </Link>
+            <Link to="/contact" activeClassName="activePage">
+              Kontakt
+            </Link>
+          </NavList>
+          <SocialIcons>
+            <a href="https://facebook.com/duvikanBratislava">
+              <FontAwesomeIcon icon={['fab', 'facebook-square']} />
+            </a>
+            <a href="https://facebook.com/duvikanBratislava">
+              <FontAwesomeIcon icon={['fab', 'instagram']} />
+            </a>
+            <a href="mailto:duvikan@gmail.com">
+              <FontAwesomeIcon icon={['far', 'envelope']} />
+            </a>
+          </SocialIcons>
+        </GridLayout>
+      </FooterWrapper>
     </FooterOutsideWrapper>
   );
 };
