@@ -14,7 +14,10 @@ const HeaderWrapper = styled.header`
   left: 0;
   width: 100%;
   margin: auto;
-  padding: 20px 0;
+  padding: 10px 0;
+  @media (min-width: 950px) {
+    padding: 20px 0;
+  }
   background: ${colors.white};
   color: ${colors.black};
   border-bottom: 1px solid ${colorScheme.neutral};
@@ -48,7 +51,10 @@ const HeaderWrapper = styled.header`
 `;
 
 const PageMeta = styled.div`
-  grid-column: 2/4;
+  grid-column: 2/5;
+  @media (min-width: 950px) {
+    grid-column: 2/4;
+  }
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -68,7 +74,10 @@ const PageTitle = styled.div`
   }
   .headerTitle {
     font-weight: bold;
-    font-size: 2rem;
+    font-size: 1.2rem;
+    @media (min-width: 950px) {
+      font-size: 2rem;
+    }
   }
   .headerSubtitle {
     font-weight: 200;
@@ -130,7 +139,7 @@ const MobileNavList = styled.ul`
 
 const MobileNavOverlay = styled.div`
   position: fixed;
-  top: calc(54px + 3rem);
+  top: calc(50px + 20px);
   left: 0;
   width: 100vw;
   height: 100vh;
@@ -145,11 +154,11 @@ const MobileNavOverlay = styled.div`
     content: ' ';
     position: absolute;
     top: -20px;
-    right: calc(5% + 1rem);
+    right: calc(2.2rem);
     width: 0;
     height: 0;
     border-style: solid;
-    border-width: 0 20px 20px 20px;
+    border-width: 0 15px 20px 15px;
     border-color: transparent transparent #000000 transparent;
   }
 
@@ -166,11 +175,12 @@ const Image = styled(Img)`
 const ToggleButton = styled.div`
   grid-column: 5 / -2;
   display: inline-block;
+  align-self: center;
   text-align: right;
   padding: 1rem;
   cursor: pointer;
   svg {
-    font-size: 3rem;
+    font-size: 2.4rem;
     color: inherit;
   }
 

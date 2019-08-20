@@ -4,32 +4,23 @@ import { graphql, useStaticQuery } from 'gatsby';
 import Img from 'gatsby-image';
 import SEO from '../components/SEO';
 
-import {
-  SectionWrapper,
-  Cover,
-  SidePanel,
-  MainPanel,
-} from '../components/common/LayoutParts';
+import { GridLayout } from '../components/common/LayoutParts';
 
-import Container from '../containers/Container';
-import { colors } from '../consts/style';
+import { colors, colorScheme, boxShadow } from '../consts/style';
 
 const IntroHeadline = styled.div`
+  grid-column: 2/-2;
   font-size: 3rem;
-  font-weight: 800;
-  margin-bottom: 3rem;
-`;
-
-const Row = styled.div`
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  align-items: center;
+  font-weight: bold;
+  margin: 4rem 0rem;
+  padding: 0;
 `;
 
 const FirstParagraph = styled.div`
-  flex: 70%;
+  grid-column: 2/-2;
+  @media (min-width: 950px) {
+    grid-column: 2/4;
+  }
   > div {
     padding-right: 2rem;
     p {
@@ -45,11 +36,20 @@ const FirstParagraph = styled.div`
 `;
 
 const FirstImage = styled.section`
-  flex: 30%;
+  grid-column: 2/-2;
+  @media (min-width: 950px) {
+    grid-column: 5/-3;
+  }
 `;
 
 const MainContent = styled.section`
-  flex: 100%;
+  grid-column: 2/-2;
+  background: #fff;
+  border-radius: 3px;
+  border: 1px solid #e5e8ed;
+  box-shadow: ${boxShadow};
+  margin: 2rem 0 4rem;
+  padding: 2rem;
 
   ul {
     li {
@@ -86,11 +86,6 @@ const MainContent = styled.section`
   }
 `;
 
-const Title = styled.h1`
-  font-size: 2rem;
-  font-weight: 600;
-`;
-
 const HistoriaPage = () => {
   const data = useStaticQuery(graphql`
     query HistoriaQuery {
@@ -122,35 +117,26 @@ const HistoriaPage = () => {
   return (
     <>
       <SEO meta={seoMetaTags} />
-      <Container>
-        <SectionWrapper>
-          <SidePanel>
-            <Title>{title}</Title>
-          </SidePanel>
-          <MainPanel>
-            <IntroHeadline>{introHeadline}</IntroHeadline>
-            <Row>
-              <FirstParagraph>
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html: firstParagraph,
-                  }}
-                />
-              </FirstParagraph>
-              <FirstImage>
-                <Img fluid={firstImage.fluid} />
-              </FirstImage>
-            </Row>
-            <MainContent>
-              <div
-                dangerouslySetInnerHTML={{
-                  __html: content,
-                }}
-              />
-            </MainContent>
-          </MainPanel>
-        </SectionWrapper>
-      </Container>
+      <GridLayout>
+        <IntroHeadline>{introHeadline}</IntroHeadline>
+        <FirstParagraph>
+          <div
+            dangerouslySetInnerHTML={{
+              __html: firstParagraph,
+            }}
+          />
+        </FirstParagraph>
+        <FirstImage>
+          <Img fluid={firstImage.fluid} />
+        </FirstImage>
+        <MainContent>
+          <div
+            dangerouslySetInnerHTML={{
+              __html: content,
+            }}
+          />
+        </MainContent>
+      </GridLayout>
     </>
   );
 };

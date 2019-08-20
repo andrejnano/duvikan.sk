@@ -32,7 +32,7 @@ export const Cover = styled.div`
   position: relative;
   width: 100%;
   display: flex;
-  max-height: 40vh;
+  height: 40vh;
   margin-bottom: 3rem;
   > div {
     flex: 100%;

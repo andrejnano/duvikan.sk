@@ -5,6 +5,17 @@ import Moment from 'react-moment';
 import { graphql, Link } from 'gatsby';
 import Img from 'gatsby-image';
 
+import {
+  FacebookIcon,
+  TwitterIcon,
+  LinkedinIcon,
+  WhatsappIcon,
+  LinkedinShareButton,
+  TwitterShareButton,
+  FacebookShareButton,
+  WhatsappShareButton,
+} from 'react-share';
+
 import SEO from '../components/SEO';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { colors, colorScheme, boxShadow } from '../consts/style';
@@ -28,16 +39,24 @@ const GoBack = styled.div`
     text-align: center;
     white-space: nowrap;
     text-decoration: none;
-    transition: all easeInOutCubic 0.25s;
+    color: ${colors.black};
+    background-color: ${colors.white};
+    border: 1px solid #e6ecf1;
     border-radius: 3px;
-    color: #333;
-    background: #ececec;
+    box-shadow: ${boxShadow};
+    transition: border 250ms ease;
     padding: 1rem 3rem;
     font-weight: 600;
-    border: 0;
+
+    svg {
+      font-size: 1.6rem;
+      vertical-align: middle;
+      margin-top: -0.2rem;
+    }
 
     &:hover {
-      background: #dfdfdf;
+      border-color: ${colorScheme.secondary};
+      color: ${colorScheme.secondary};
     }
   }
 `;
@@ -103,8 +122,38 @@ const Content = styled.article`
   padding: 3rem;
 `;
 
+const SocialButtons = styled.div`
+  grid-column: -3/-2;
+  margin: 2rem 0 4rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+
+  > div[role='button'] {
+    display: inline-block;
+    cursor: pointer;
+    margin-left: 0.5rem;
+    transition: opacity 250ms ease;
+
+    &:hover {
+      opacity: 0.75;
+      transition: opacity 250ms ease;
+    }
+  }
+`;
+
 const BlogPost = ({ data }) => {
-  const { title, seoMetaTags, meta, author, cover, contentNode } = data.project;
+  const {
+    title,
+    slug,
+    seoMetaTags,
+    meta,
+    author,
+    cover,
+    contentNode,
+  } = data.project;
+
+  const postUrl = `https://duvikan.club/blog/${slug}/`;
   return (
     <ScaleUp>
       <SEO meta={seoMetaTags} />
@@ -135,6 +184,20 @@ const BlogPost = ({ data }) => {
             __html: contentNode.childMarkdownRemark.html,
           }}
         />
+        <SocialButtons>
+          <FacebookShareButton url={postUrl}>
+            <FacebookIcon size={32} round={true} />
+          </FacebookShareButton>
+          <TwitterShareButton url={postUrl}>
+            <TwitterIcon size={32} round={true} />
+          </TwitterShareButton>
+          <LinkedinShareButton url={postUrl}>
+            <LinkedinIcon size={32} round={true} />
+          </LinkedinShareButton>
+          <WhatsappShareButton url={postUrl}>
+            <WhatsappIcon size={32} round={true} />
+          </WhatsappShareButton>
+        </SocialButtons>
       </GridLayout>
     </ScaleUp>
   );
@@ -144,6 +207,7 @@ export const projectQuery = graphql`
   query($slug: String!) {
     project: datoCmsBlogPost(slug: { eq: $slug }) {
       title
+      slug
       seoMetaTags {
         ...GatsbyDatoCmsSeoMetaTags
       }

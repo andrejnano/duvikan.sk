@@ -25,7 +25,6 @@ const Title = styled.h1`
   padding: 0;
 `;
 
-
 const ContactCategory = styled.h2`
   grid-column: 2/-2;
   font-size: 2rem;
@@ -214,6 +213,18 @@ const ContactPage = () => {
             <div className="innerBox">
               <h3>IBAN</h3>
               <p>SK1211000000002635766523</p>
+              <h3>Trénujúci do 17 rokov</h3>
+              <p>30€/mesačne</p>
+              <h3>Trénujúci nad 18 rokov</h3>
+              <p>35€/mesačne</p>
+              <h3>Špecifikácia platby</h3>
+              <ul>
+                <li>Platbu je potrebné uskutočniť vždy mesiac vopred</li>
+                <li>
+                  Do poznámky sa píše <strong>meno cvičiaceho</strong> a <strong>mesiac</strong>, za ktorý sa
+                  uhrádza.
+                </li>
+              </ul>
             </div>
           </ContactCard>
         </ContactGrid>

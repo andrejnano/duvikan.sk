@@ -26,7 +26,11 @@ const HomePage = styled.article`
   margin-top: -94px;
 
   .fullScreenBackground {
-    height: 100vh;
+    height: auto;
+    min-height: 100vh;
+    @media (min-width: 950px) {
+      height: 100vh;
+    }
   }
 `;
 
@@ -135,14 +139,20 @@ const HeroSectionContent = styled.div`
   }
 
   h1 {
-    font-size: 5rem;
+    font-size: 2.4rem;
+    @media (min-width: 950px) {
+      font-size: 5rem;
+    }
     font-weight: 800;
     line-height: 1.2;
     color: rgba(255, 255, 255, 0.9);
     text-shadow: 0 2px 20px rgba(0, 0, 0, 0.16);
   }
   p {
-    font-size: 2.5rem;
+    font-size: 2rem;
+    @media (min-width: 950px) {
+      font-size: 2.5rem;
+    }
     line-height: 1.618;
     font-weight: 400;
     max-width: 30em;
@@ -153,7 +163,10 @@ const HeroSectionContent = styled.div`
     letter-spacing: 0.2em;
     font-weight: 700;
     text-transform: uppercase;
-    font-size: 1.4rem;
+    font-size: 1rem;
+    @media (min-width: 950px) {
+      font-size: 1.4rem;
+    }
     color: ${colorScheme.secondary};
     position: relative;
     transition: padding 0.1s linear;
@@ -345,12 +358,16 @@ const CenteredTextBlock = styled.div`
 `;
 
 const Newsfeed = styled.section`
+  position: relative;
   color: #000;
   background: rgba(255, 255, 255, 0.9);
 `;
 
 const NewsfeedTitle = styled.h2`
-  grid-column: 2/3;
+  grid-column: 2/-2;
+  @media (min-width: 950px) {
+    grid-column: 2/4;
+  }
   font-size: 2rem;
   font-weight: bold;
   margin: 4rem 0 2rem;
@@ -368,7 +385,10 @@ const FbFeed = styled.div`
 `;
 
 const BlogPostGrid = styled.div`
-  grid-column: 2/4;
+  grid-column: 2/-2;
+  @media (min-width: 950px) {
+    grid-column: 2/4;
+  }
   display: flex;
   flex-direction: column;
   justify-content: flex-start;

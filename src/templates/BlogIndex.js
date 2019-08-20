@@ -21,12 +21,6 @@ const Title = styled.h1`
   grid-column: 2/-2;
   font-size: 3rem;
   font-weight: bold;
-  .pages {
-    display: inline;
-    font-size: 2rem;
-    color: ${colors.gray1};
-    font-weight: 400;
-  }
 `;
 
 const BlogPostList = styled.ul`
@@ -40,12 +34,23 @@ const BlogPostList = styled.ul`
   list-style-type: none;
 
   @media (min-width: 950px) {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 4rem 1fr;
   }
 
   li {
+    margin-bottom: 2rem;
     position: relative;
     min-width: 250px;
+
+    @media (min-width: 950px) {
+      :nth-child(odd) {
+        grid-column: 1/2;
+      }
+      :nth-child(even) {
+        grid-column: 3/4;
+      }
+      margin-bottom: 4rem;
+    }
 
     a.card {
       position: relative;
@@ -56,7 +61,6 @@ const BlogPostList = styled.ul`
       box-shadow: ${boxShadow};
       background-color: ${colors.white};
       border-radius: 3px;
-      margin: 2rem;
       transition: border 250ms ease;
       display: flex;
       flex-direction: row;
@@ -78,6 +82,10 @@ const BlogPostList = styled.ul`
         font-weight: 400;
         padding: 1rem 0rem 2rem;
         color: ${colorScheme.accent};
+        font-size: 1rem;
+        @media (min-width: 950px) {
+          font-size: inherit;
+        }
 
         .authorName {
           margin-right: 2rem;
@@ -118,7 +126,10 @@ const BlogPostList = styled.ul`
 
       .excerpt {
         flex: 66.66666%;
-        font-size: 1.6rem;
+        font-size: 1.2rem;
+        @media (min-width: 950px) {
+          font-size: 1.6rem;
+        }
         line-height: 1.4;
         color: ${colorScheme.main};
         padding-left: 1rem;
@@ -218,7 +229,9 @@ const Pagination = styled.div`
   margin-bottom: 2rem;
 
   .pageNumber {
-    color: ${colors.dark};
+    color: ${colorScheme.main};
+    font-size: 2rem;
+    font-weight: 600;
     margin-left: auto;
   }
 
@@ -232,13 +245,21 @@ const Pagination = styled.div`
     text-align: center;
     white-space: nowrap;
     text-decoration: none;
-    transition: all easeInOutCubic 0.25s;
+    color: ${colors.black};
+    background-color: ${colors.white};
+    border: 1px solid #e6ecf1;
     border-radius: 3px;
-    color: #333;
-    background: #ececec;
+    box-shadow: ${boxShadow};
+    transition: border 250ms ease;
     padding: 0 2rem;
     font-weight: 600;
-    border: 0;
+
+    span {
+      display: none;
+      @media (min-width: 950px) {
+        display: inline;
+      }
+    }
 
     svg {
       font-size: 1.6rem;
@@ -247,7 +268,8 @@ const Pagination = styled.div`
     }
 
     &:hover {
-      background: #dfdfdf;
+      border-color: ${colorScheme.secondary};
+      color: ${colorScheme.secondary};
     }
 
     &.next {
@@ -267,12 +289,19 @@ const Pagination = styled.div`
     text-decoration: none;
     transition: all easeInOutCubic 0.25s;
     border-radius: 3px;
+    border: 1px solid #e6ecf1;
     color: #333;
     background: #ececec;
     padding: 0 2rem;
     font-weight: 600;
-    border: 0;
     opacity: 0.5;
+
+    span {
+      display: none;
+      @media (min-width: 950px) {
+        display: inline;
+      }
+    }
 
     &.next {
       margin-left: auto;
@@ -285,14 +314,14 @@ const PaginationLink = props => {
     if (props.class === 'next') {
       return (
         <Link className={props.class} to={'/blog/' + props.url}>
-          {props.text}{' '}
+          <span>{props.text}</span>{' '}
           <FontAwesomeIcon icon={['far', 'long-arrow-alt-right']} />
         </Link>
       );
     } else if (props.class === 'previous') {
       return (
         <Link className={props.class} to={'/blog/' + props.url}>
-          <FontAwesomeIcon icon={['far', 'long-arrow-alt-left']} /> {props.text}
+          <FontAwesomeIcon icon={['far', 'long-arrow-alt-left']} /> <span>{props.text}</span>
         </Link>
       );
     }
@@ -300,14 +329,14 @@ const PaginationLink = props => {
     if (props.class === 'next') {
       return (
         <div className={`${props.class} disabled`}>
-          {props.text}{' '}
+          <span>{props.text}</span>{' '}
           <FontAwesomeIcon icon={['far', 'long-arrow-alt-right']} />
         </div>
       );
     } else if (props.class === 'previous') {
       return (
         <div className={`${props.class} disabled`}>
-          <FontAwesomeIcon icon={['far', 'long-arrow-alt-left']} /> {props.text}
+          <FontAwesomeIcon icon={['far', 'long-arrow-alt-left']} /> <span>{props.text}</span>
         </div>
       );
     }
@@ -337,12 +366,7 @@ const BlogIndex = ({ pageContext }) => {
     <>
       <SEO meta={seoMetaTags} />
       <GridLayout>
-        <Title>
-          {title}{' '}
-          <div className="pages">
-            &mdash; {index}/{pageCount}
-          </div>
-        </Title>
+        <Title>{title}</Title>
         <Pagination role="navigation">
           <PaginationLink
             test={first}

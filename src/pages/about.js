@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { graphql, useStaticQuery } from 'gatsby';
-
+import BackgroundImage from 'gatsby-background-image';
 import SEO from '../components/SEO';
 import Gallery from '../components/Gallery';
 import Img from 'gatsby-image';
@@ -79,11 +79,16 @@ const AboutPage = () => {
     imageGallery,
   } = data.datoCmsAboutPage;
 
+  const coverFluidImageStack = [
+    cover.fluid,
+    'radial-gradient(circle, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0.75) 90%)',
+  ].reverse();
+
   return (
     <ScaleUp>
       <SEO meta={seoMetaTags} />
       <Cover>
-        <Img fluid={cover.fluid} />
+        <BackgroundImage fluid={coverFluidImageStack} />
       </Cover>
       <GridLayout>
         <IntroHeadline>{title}</IntroHeadline>

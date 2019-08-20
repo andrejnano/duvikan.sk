@@ -6,15 +6,10 @@ import Img from 'gatsby-image';
 import SEO from '../components/SEO';
 import { map } from 'lodash';
 import { ScaleUp } from '../style/motion';
-import Container from '../containers/Container';
-import { colors, colors2, colorScheme, boxShadow } from '../consts/style';
+import { colors, colorScheme, boxShadow } from '../consts/style';
 import Gallery from '../components/Gallery';
 
 import {
-  SectionWrapper,
-  Cover,
-  SidePanel,
-  MainPanel,
   GridLayout,
 } from '../components/common/LayoutParts';
 
