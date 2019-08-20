@@ -48,7 +48,7 @@ const BlogPostList = styled.ul`
       color: ${colors.black};
       overflow: hidden;
       height: 100%;
-      border: 1px solid #E6ECF1;
+      border: 1px solid #e6ecf1;
       box-shadow: ${boxShadow};
       background-color: ${colors.white};
       border-radius: 3px;
@@ -109,7 +109,7 @@ const BlogPostList = styled.ul`
         flex: 33.33333%;
         height: 150px;
         width: 150px;
-        border: 1px solid #E6ECF1;
+        border: 1px solid #e6ecf1;
         box-shadow: ${boxShadow};
       }
 
