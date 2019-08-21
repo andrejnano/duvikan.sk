@@ -28,9 +28,16 @@ export const gradients = {
 
 export const boxShadow = '0 3px 8px 0 rgba(116, 129, 141, 0.1)';
 
+// export const colorScheme = {
+//   main: '#242A31',
+//   secondary: 'rgb(238, 40, 53)',
+//   accent: '#9DAAB6',
+//   neutral: '#d4dadf',
+// };
+
 export const colorScheme = {
   main: '#242A31',
-  secondary: 'rgb(238, 40, 53)',
+  secondary: '#ef4146',
   accent: '#9DAAB6',
   neutral: '#d4dadf',
 };

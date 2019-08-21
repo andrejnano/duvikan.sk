@@ -6,15 +6,11 @@ import SEO from '../components/SEO';
 import Gallery from '../components/Gallery';
 import Img from 'gatsby-image';
 import { ScaleUp } from '../style/motion';
-import Container from '../containers/Container';
-import { colors } from '../consts/style';
+import { colors, boxShadow, colorScheme } from '../consts/style';
 
 import {
-  SectionWrapper,
   SectionSeparator,
   Cover,
-  SidePanel,
-  MainPanel,
   GridLayout,
 } from '../components/common/LayoutParts';
 
@@ -35,12 +31,27 @@ const IntroHeadline = styled.section`
 
 const IntroContent = styled.section`
   grid-column: 2/-2;
-  color: ${colors.black};
-  background: ${colors.white};
+  color: rgba(0, 0, 0, 0.84);
+  background: #fff;
   border-radius: 3px;
   border: 1px solid #e5e8ed;
-  box-shadow: 0 2px 4px rgba(3, 27, 78, 0.06);
-  padding: 2rem;
+  box-shadow: ${boxShadow};
+  padding: 3rem;
+
+  p {
+    font-size: 16px;
+    letter-spacing: -0.011em;
+    line-height: 22px;
+    margin-bottom: 35.596px;
+  }
+
+  ul {
+    margin-bottom: 35.596px;
+
+    li {
+      margin-bottom: 17.798px;
+    }
+  }
 `;
 
 const GalleryWrap = styled.div`

@@ -23,14 +23,11 @@ const HomePage = styled.article`
   color: ${colors.white};
   position: relative;
   /* margin-top: calc(-1 * (54px + 4rem)); */
+  /* TODO: fix this margin, should be dependent on the header height */
   margin-top: -94px;
 
   .fullScreenBackground {
-    height: auto;
-    min-height: 100vh;
-    @media (min-width: 950px) {
-      height: 100vh;
-    }
+    height: 100vh;
   }
 `;
 
@@ -83,7 +80,8 @@ const JapaneseSideText = styled.div`
   overflow: hidden;
   white-space: nowrap;
   pointer-events: none;
-  font-size: 175px;
+  /* fking magic  */
+  font-size: calc((90vh - 80px) / 4 / 1.618);
   font-weight: 1000;
   opacity: 0.3;
   color: ${colorScheme.secondary};
@@ -120,9 +118,6 @@ const HeroSection = styled.section`
 
 const HeroSectionContent = styled.div`
   grid-column: 2/-2;
-  @media (min-width: 950px) {
-    grid-column: 2/4;
-  }
   background: transparent;
   position: relative;
   -webkit-font-smoothing: antialiased;
@@ -142,16 +137,20 @@ const HeroSectionContent = styled.div`
     font-size: 2.4rem;
     @media (min-width: 950px) {
       font-size: 5rem;
+      font-size: 40px;
+      letter-spacing: -0.022em;
+      line-height: 56px;
     }
     font-weight: 800;
-    line-height: 1.2;
     color: rgba(255, 255, 255, 0.9);
     text-shadow: 0 2px 20px rgba(0, 0, 0, 0.16);
   }
   p {
     font-size: 2rem;
     @media (min-width: 950px) {
-      font-size: 2.5rem;
+      font-size: 24px;
+      letter-spacing: -0.019em;
+      line-height: 34px;
     }
     line-height: 1.618;
     font-weight: 400;
@@ -161,27 +160,20 @@ const HeroSectionContent = styled.div`
   }
   .cta {
     letter-spacing: 0.2em;
-    font-weight: 700;
+    font-weight: 800;
     text-transform: uppercase;
     font-size: 1rem;
     @media (min-width: 950px) {
-      font-size: 1.4rem;
+      font-size: 1.2rem;
     }
     color: ${colorScheme.secondary};
     position: relative;
-    transition: padding 0.1s linear;
-    padding: 1rem;
-    border: 1px solid transparent;
-    border-radius: 3px;
+    padding: 1rem 0;
+    border-bottom: 1px solid transparent;
     transition: border 250ms ease;
 
     &:hover {
-      /* opacity: 0.6; */
-      /* padding-left: 0.4rem; */
-      /* transition: padding 0.1s linear; */
       border-color: ${colorScheme.secondary};
-      color: ${colorScheme.secondary};
-      box-shadow: ${boxShadow};
     }
 
     svg {
@@ -193,53 +185,22 @@ const HeroSectionContent = styled.div`
   }
 `;
 
-const NewsfeedSection = styled.div`
-  position: absolute;
-  bottom: 15vh;
-  left: 5%;
-  > div {
-    display: flex;
-    flex-direction: row;
-    div {
-      position: relative;
-      margin-right: 4rem;
-      opacity: 0.8;
-      &::before {
-        content: ' ';
-        width: 100px;
-        height: 3px;
-        background: rgba(255, 255, 255, 0.5);
-        position: absolute;
-        top: -1rem;
-        left: 0;
-      }
-      h3 {
-        font-size: 3rem;
-        font-weight: 400;
-        color: ${colorScheme.secondary};
-      }
-      p {
-        color: #fff;
-      }
-      &:first-child {
-        grid-column: 2/3;
-      }
-    }
-  }
-`;
 
 const PropositionSection = styled.div`
-  background: rgba(26, 26, 26, 0.7);
   border-top: 1px solid #707070;
-  /* background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 75%); */
-  position: absolute;
-  bottom: 0;
+  background: #000;
+  position: relative;
+  top: 0;
   left: 0;
   width: 100%;
   height: auto;
+  padding: 4rem 0;
 
   @media (min-width: 950px) {
+    padding: 1rem 0;
     height: 10vh;
+    transform: translateY(-100%);
+    background: rgba(26, 26, 26, 0.7);
   }
 
   > .grid {
@@ -430,13 +391,19 @@ const BlogPostItem = styled.li`
     align-items: center;
 
     .timePosted {
-      font-size: 1.6rem;
+      font-size: 1rem;
+      @media (min-width: 950px) {
+        font-size: 1.6rem;
+      }
       width: auto;
       margin: 0;
     }
 
     .title {
-      font-size: 2rem;
+      font-size: 1.2rem;
+      @media (min-width: 950px) {
+        font-size: 2rem;
+      }
       font-weight: 600;
       margin: 0;
       margin-left: 2rem;
@@ -613,37 +580,37 @@ const IndexPage = () => {
             </HeroSectionContent>
           </GridLayout>
         </HeroSection>
-        <PropositionSection>
-          <GridLayout className="grid">
-            <Link className="featuredLink" to="/about">
-              <h3>Náš príbeh</h3>
-              <p>História nášho klubu a ciest na Okinawu.</p>
-            </Link>
-
-            <Link className="featuredLink" to="/treningy">
-              <h3>Rozpisy tréningov</h3>
-              <p>Časový rozpis tréningov pre rok 2019.</p>
-            </Link>
-
-            <Link className="featuredLink" to="/historia">
-              <h3>História okinawského karate</h3>
-              <p>Tradičné okinawské karate a jeho vývoj.</p>
-            </Link>
-
-            <SocialIcons>
-              <a href="https://facebook.com/duvikanBratislava">
-                <FontAwesomeIcon icon={['fab', 'facebook-square']} />
-              </a>
-              <a href="https://facebook.com/duvikanBratislava">
-                <FontAwesomeIcon icon={['fab', 'instagram']} />
-              </a>
-              <a href="mailto:duvikan@gmail.com">
-                <FontAwesomeIcon icon={['far', 'envelope']} />
-              </a>
-            </SocialIcons>
-          </GridLayout>
-        </PropositionSection>
       </BackgroundImage>
+      <PropositionSection>
+        <GridLayout className="grid">
+          <Link className="featuredLink" to="/about">
+            <h3>Náš príbeh</h3>
+            <p>História nášho klubu a ciest na Okinawu.</p>
+          </Link>
+
+          <Link className="featuredLink" to="/treningy">
+            <h3>Rozpisy tréningov</h3>
+            <p>Časový rozpis tréningov pre rok 2019.</p>
+          </Link>
+
+          <Link className="featuredLink" to="/historia">
+            <h3>História okinawského karate</h3>
+            <p>Tradičné okinawské karate a jeho vývoj.</p>
+          </Link>
+
+          <SocialIcons>
+            <a href="https://facebook.com/duvikanBratislava">
+              <FontAwesomeIcon icon={['fab', 'facebook-square']} />
+            </a>
+            <a href="https://facebook.com/duvikanBratislava">
+              <FontAwesomeIcon icon={['fab', 'instagram']} />
+            </a>
+            <a href="mailto:duvikan@gmail.com">
+              <FontAwesomeIcon icon={['far', 'envelope']} />
+            </a>
+          </SocialIcons>
+        </GridLayout>
+      </PropositionSection>
       <Newsfeed>
         <GridLayout>
           <NewsfeedTitle>Najnovšie príspevky</NewsfeedTitle>

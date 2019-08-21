@@ -63,10 +63,10 @@ const Layout = ({ children, location }) => {
       <Reboot />
       <Global />
       <Header isHome={isHome} />
-      {/* <Transition location={location}>
+      <Transition location={location}>
         <ContentWrapper>{children}</ContentWrapper>
-      </Transition> */}
-      <ContentWrapper>{children}</ContentWrapper>
+      </Transition>
+      {/* <ContentWrapper>{children}</ContentWrapper> */}
       <Footer />
     </SiteWrapper>
   );

@@ -152,7 +152,14 @@ const ClenoviaPage = () => {
     }
   `);
 
-  const { seoMetaTags, description, members1, members2, members3, members4} = data.page;
+  const {
+    seoMetaTags,
+    description,
+    members1,
+    members2,
+    members3,
+    members4,
+  } = data.page;
   return (
     <ScaleUp>
       <SEO meta={seoMetaTags} />

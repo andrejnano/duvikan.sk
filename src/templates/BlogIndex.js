@@ -16,8 +16,14 @@ import {
   GridLayout,
 } from '../components/common/LayoutParts';
 
+const BlogIndexWrap = styled.div`
+  .top {
+    /* background: ${colors.mediumWash}; */
+  }
+`;
+
 const Title = styled.h1`
-  margin: 4rem 0rem;
+  margin: 2rem 0rem 1rem;
   grid-column: 2/-2;
   font-size: 3rem;
   font-weight: bold;
@@ -69,7 +75,9 @@ const BlogPostList = styled.ul`
 
       .title {
         flex: 100%;
-        font-size: 2.4rem;
+        font-size: 24px;
+        letter-spacing: -0.019em;
+        line-height: 34px;
         font-weight: 600;
         margin: 0;
       }
@@ -84,7 +92,9 @@ const BlogPostList = styled.ul`
         color: ${colorScheme.accent};
         font-size: 1rem;
         @media (min-width: 950px) {
-          font-size: inherit;
+          font-size: 16px;
+          letter-spacing: -0.011em;
+          line-height: 22px;
         }
 
         .authorName {
@@ -119,19 +129,22 @@ const BlogPostList = styled.ul`
       .cover {
         flex: 33.33333%;
         height: 150px;
-        width: 150px;
+        max-height: 150px;
         border: 1px solid #e6ecf1;
         box-shadow: ${boxShadow};
       }
 
       .excerpt {
         flex: 66.66666%;
-        font-size: 1.2rem;
+        color: rgba(0, 0, 0, 0.84);
+        font-size: 16px;
+        letter-spacing: -0.011em;
+        line-height: 22px;
         @media (min-width: 950px) {
-          font-size: 1.6rem;
+          font-size: 16px;
+          letter-spacing: -0.011em;
+          line-height: 22px;
         }
-        line-height: 1.4;
-        color: ${colorScheme.main};
         padding-left: 1rem;
       }
 
@@ -321,7 +334,8 @@ const PaginationLink = props => {
     } else if (props.class === 'previous') {
       return (
         <Link className={props.class} to={'/blog/' + props.url}>
-          <FontAwesomeIcon icon={['far', 'long-arrow-alt-left']} /> <span>{props.text}</span>
+          <FontAwesomeIcon icon={['far', 'long-arrow-alt-left']} />{' '}
+          <span>{props.text}</span>
         </Link>
       );
     }
@@ -336,7 +350,8 @@ const PaginationLink = props => {
     } else if (props.class === 'previous') {
       return (
         <div className={`${props.class} disabled`}>
-          <FontAwesomeIcon icon={['far', 'long-arrow-alt-left']} /> <span>{props.text}</span>
+          <FontAwesomeIcon icon={['far', 'long-arrow-alt-left']} />{' '}
+          <span>{props.text}</span>
         </div>
       );
     }
@@ -363,9 +378,9 @@ const BlogIndex = ({ pageContext }) => {
 
   const { title, seoMetaTags } = data.page;
   return (
-    <>
+    <BlogIndexWrap>
       <SEO meta={seoMetaTags} />
-      <GridLayout>
+      <GridLayout className="top">
         <Title>{title}</Title>
         <Pagination role="navigation">
           <PaginationLink
@@ -393,8 +408,7 @@ const BlogIndex = ({ pageContext }) => {
           ))}
         </BlogPostList>
       </GridLayout>
-      <SectionSeparator />
-      <GridLayout>
+      <GridLayout className="bottom">
         <Pagination role="navigation">
           <PaginationLink
             test={first}
@@ -413,7 +427,7 @@ const BlogIndex = ({ pageContext }) => {
           />
         </Pagination>
       </GridLayout>
-    </>
+    </BlogIndexWrap>
   );
 };
 

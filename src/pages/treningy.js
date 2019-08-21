@@ -9,9 +9,7 @@ import { ScaleUp } from '../style/motion';
 import { colors, colorScheme, boxShadow } from '../consts/style';
 import Gallery from '../components/Gallery';
 
-import {
-  GridLayout,
-} from '../components/common/LayoutParts';
+import { GridLayout } from '../components/common/LayoutParts';
 
 const IntroText = styled.div`
   grid-column: 2/-2;
@@ -22,7 +20,9 @@ const IntroText = styled.div`
   padding: 3rem;
 
   p {
-    font-size: 2rem;
+    font-size: 20px;
+    letter-spacing: -0.017em;
+    line-height: 28px;
     font-weight: 400;
   }
 
@@ -70,7 +70,7 @@ const Day = styled.div`
     padding-right: 2rem;
   }
 
-  @media (min-width: 1470px) {
+  @media (min-width: 1200px) {
     flex: 20%;
     &:not(:last-child) {
       border-right: 1px solid #e5e8ed;

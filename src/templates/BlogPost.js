@@ -77,16 +77,15 @@ const PostInfo = styled.header`
   @media (min-width: 950px) {
     grid-column: 3/-2;
   }
-  color: ${colors.light};
   display: flex;
   flex-direction: row;
   margin-bottom: 2rem;
 
   .authorName {
-    color: ${colors.mediumBlue};
+    color: ${colorScheme.main};
     font-weight: 500;
-    margin-right: 1rem;
-    border-bottom: 1px solid ${colors.mediumBlue};
+    margin-right: 2rem;
+    border-bottom: 1px solid ${colorScheme.secondary};
   }
 
   .authorPhoto {
@@ -100,26 +99,36 @@ const PostInfo = styled.header`
 `;
 
 const LastUpdate = styled.time`
-  font-weight: bold;
-  padding: 0 1rem;
+  font-weight: 400;
+  margin-right: 2rem;
+  color: ${colorScheme.main};
 `;
 
-const TimeToRead = styled.time`
+const TimeToRead = styled.span`
   font-weight: 400;
-  padding: 0 1rem;
-  &::before {
-    content: '\00B7';
-  }
+  color: ${colorScheme.main};
 `;
 
 const Content = styled.article`
   grid-column: 2/-2;
+  @media (min-width: 950px) {
+    grid-column: 3/-2;
+  }
   color: ${colorScheme.main};
   background: ${colors.white};
   border-radius: 3px;
   border: 1px solid #e5e8ed;
   box-shadow: ${boxShadow};
   padding: 3rem;
+
+  p {
+    line-height: 22px;
+    color: rgba(0, 0, 0, 0.84);
+    letter-spacing: -0.011em;
+    font-size: 16px;
+    margin-bottom: 35.596px;
+    max-width: 35em;
+  }
 `;
 
 const SocialButtons = styled.div`
@@ -163,18 +172,18 @@ const BlogPost = ({ data }) => {
       <GridLayout>
         <GoBack>
           <Link to="/blog" className="btn">
-            <FontAwesomeIcon icon={['far', 'long-arrow-alt-left']} /> Späť
+            <FontAwesomeIcon icon={['far', 'long-arrow-alt-left']} /> Všetky príspevky
           </Link>
         </GoBack>
         <Title>{title}</Title>
         <PostInfo>
           <Img className="authorPhoto" fluid={author.photo.fluid} />
-          <div className="authorName">{author.name}</div>
-          <LastUpdate>
+          <div title="Autor článku" className="authorName">{author.name}</div>
+          <LastUpdate title="Dátum publikácie">
             <FontAwesomeIcon icon={['far', 'calendar-alt']} />{' '}
             <Moment format="DD.MM.YYYY">{meta.updatedAt}</Moment>
           </LastUpdate>
-          <TimeToRead>
+          <TimeToRead title="Čas na prečítanie textu">
             <FontAwesomeIcon icon={['far', 'clock']} />{' '}
             {contentNode.childMarkdownRemark.timeToRead} min.
           </TimeToRead>

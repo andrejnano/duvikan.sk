@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { graphql, useStaticQuery } from 'gatsby';
+import { graphql, useStaticQuery, Link } from 'gatsby';
 import GoogleMapReact from 'google-map-react';
 import SEO from '../components/SEO';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -15,6 +15,7 @@ const MapFrame = styled.iframe`
   box-shadow: 0 2px 4px rgba(3, 27, 78, 0.06);
   background-color: ${colors.white};
   border-radius: 3px;
+  max-height: 40vh;
 `;
 
 const Title = styled.h1`
@@ -75,7 +76,6 @@ const ContactCard = styled.li`
     box-shadow: ${boxShadow};
     background-color: ${colors.white};
     transition: border 250ms ease;
-    cursor: pointer;
 
     h3 {
       font-size: 1.6rem;
@@ -89,23 +89,17 @@ const ContactCard = styled.li`
     p {
       color: ${colors.gray3};
       font-size: 1.4rem;
-      padding-bottom: 3rem;
+      padding-bottom: 1rem;
+      cursor: text;
     }
 
-    .linkText {
-      position: absolute;
-      display: inline-block;
-      bottom: 2rem;
-      left: 2rem;
+    .link {
+      position: relative;
       color: ${colorScheme.main};
       font-weight: bold;
       font-size: 1.4rem;
-    }
 
-    &:hover {
-      border-color: ${colorScheme.secondary};
-      color: ${colorScheme.secondary};
-      .linkText {
+      &:hover {
         color: ${colorScheme.secondary};
       }
     }
@@ -166,7 +160,9 @@ const ContactPage = () => {
             <div className="innerBox">
               <h3>Adresa</h3>
               <p>Struková 13, 821 05 Bratislava</p>
-              <span className="linkText">Nájsť na mape</span>
+              <Link to="/contact" className="link">
+                Nájsť na mape
+              </Link>
             </div>
           </ContactCard>
 
@@ -180,7 +176,12 @@ const ContactPage = () => {
                 Facebook
               </h3>
               <p>facebook.com/duvikanBratislava</p>
-              <span className="linkText">Otvoriť stránku</span>
+              <a
+                href="https://www.facebook.com/duvikanBratislava"
+                className="link"
+              >
+                Otvoriť stránku
+              </a>
             </div>
           </ContactCard>
 
@@ -191,7 +192,9 @@ const ContactPage = () => {
                 E-mail
               </h3>
               <p>{email}</p>
-              <span className="linkText">Napísať správu</span>
+              <a href={`mailto:${email}`} className="link">
+                Napísať správu
+              </a>
             </div>
           </ContactCard>
         </ContactGrid>
@@ -201,8 +204,7 @@ const ContactPage = () => {
           <ContactCard>
             <div className="innerBox">
               <h3>Daniel Baran</h3>
-              <p>prezident klubu</p>
-              <span className="linkText">0903 919 943</span>
+              <p>0903 919 943</p>
             </div>
           </ContactCard>
         </ContactGrid>
@@ -221,8 +223,8 @@ const ContactPage = () => {
               <ul>
                 <li>Platbu je potrebné uskutočniť vždy mesiac vopred</li>
                 <li>
-                  Do poznámky sa píše <strong>meno cvičiaceho</strong> a <strong>mesiac</strong>, za ktorý sa
-                  uhrádza.
+                  Do poznámky sa píše <strong>meno cvičiaceho</strong> a{' '}
+                  <strong>mesiac</strong>, za ktorý sa uhrádza.
                 </li>
               </ul>
             </div>
