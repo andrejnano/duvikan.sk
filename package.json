@@ -40,6 +40,7 @@
     "path": "^0.12.7",
     "prop-types": "^15.7.2",
     "react": "16.8.0",
+    "react-big-calendar": "^0.22.0",
     "react-dom": "16.8.0",
     "react-helmet": "^5.2.1",
     "react-images": "^1.0.0",

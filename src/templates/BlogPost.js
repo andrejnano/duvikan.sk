@@ -127,7 +127,6 @@ const Content = styled.article`
     letter-spacing: -0.011em;
     font-size: 16px;
     margin-bottom: 35.596px;
-    max-width: 35em;
   }
 `;
 
@@ -162,7 +161,10 @@ const BlogPost = ({ data }) => {
     contentNode,
   } = data.project;
 
-  const postUrl = `https://duvikan.club/blog/${slug}/`;
+  const { siteMetadata } = data.meta;
+
+  const postUrl = `${siteMetadata.siteUrl}/blog/${slug}/`;
+
   return (
     <ScaleUp>
       <SEO meta={seoMetaTags} />
@@ -172,13 +174,16 @@ const BlogPost = ({ data }) => {
       <GridLayout>
         <GoBack>
           <Link to="/blog" className="btn">
-            <FontAwesomeIcon icon={['far', 'long-arrow-alt-left']} /> Všetky príspevky
+            <FontAwesomeIcon icon={['far', 'long-arrow-alt-left']} /> Všetky
+            príspevky
           </Link>
         </GoBack>
         <Title>{title}</Title>
         <PostInfo>
           <Img className="authorPhoto" fluid={author.photo.fluid} />
-          <div title="Autor článku" className="authorName">{author.name}</div>
+          <div title="Autor článku" className="authorName">
+            {author.name}
+          </div>
           <LastUpdate title="Dátum publikácie">
             <FontAwesomeIcon icon={['far', 'calendar-alt']} />{' '}
             <Moment format="DD.MM.YYYY">{meta.updatedAt}</Moment>
@@ -194,16 +199,16 @@ const BlogPost = ({ data }) => {
           }}
         />
         <SocialButtons>
-          <FacebookShareButton url={postUrl}>
+          <FacebookShareButton url={postUrl} title="Zdielať na Facebook">
             <FacebookIcon size={32} round={true} />
           </FacebookShareButton>
-          <TwitterShareButton url={postUrl}>
+          <TwitterShareButton url={postUrl} title="Zdielať na Twitter">
             <TwitterIcon size={32} round={true} />
           </TwitterShareButton>
-          <LinkedinShareButton url={postUrl}>
+          <LinkedinShareButton url={postUrl} title="Zdielať na LinkedIn">
             <LinkedinIcon size={32} round={true} />
           </LinkedinShareButton>
-          <WhatsappShareButton url={postUrl}>
+          <WhatsappShareButton url={postUrl} title="Zdielať cez Whatsapp">
             <WhatsappIcon size={32} round={true} />
           </WhatsappShareButton>
         </SocialButtons>
@@ -214,6 +219,11 @@ const BlogPost = ({ data }) => {
 
 export const projectQuery = graphql`
   query($slug: String!) {
+    meta: site {
+      siteMetadata {
+        siteUrl
+      }
+    }
     project: datoCmsBlogPost(slug: { eq: $slug }) {
       title
       slug

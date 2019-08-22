@@ -32,11 +32,17 @@ export const Cover = styled.div`
   position: relative;
   width: 100%;
   display: flex;
-  height: 40vh;
+  height: auto;
+  min-height: 50vh;
   margin-bottom: 3rem;
+
+  background-position: top;
+  background-size: cover;
   > div {
     flex: 100%;
     box-shadow: ${boxShadow};
+    background-position: top;
+    background-size: cover;
   }
 `;
 

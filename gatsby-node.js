@@ -17,7 +17,6 @@ exports.createPages = async ({ graphql, actions }) => {
               id
               title
               slug
-              featured
               meta {
                 createdAt
               }

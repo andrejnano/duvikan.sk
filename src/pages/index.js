@@ -10,14 +10,8 @@ import { map } from 'lodash';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { colors, colorScheme, boxShadow } from '../consts/style';
-import Container from '../containers/Container';
 import Logo from '../images/logo.svg';
-import {
-  GridLayout,
-  SidePanel,
-  MainPanel,
-} from '../components/common/LayoutParts';
-import Gallery from '../components/Gallery';
+import { GridLayout } from '../components/common/LayoutParts';
 
 const HomePage = styled.article`
   color: ${colors.white};
@@ -185,7 +179,6 @@ const HeroSectionContent = styled.div`
   }
 `;
 
-
 const PropositionSection = styled.div`
   border-top: 1px solid #707070;
   background: #000;
@@ -322,6 +315,10 @@ const Newsfeed = styled.section`
   position: relative;
   color: #000;
   background: rgba(255, 255, 255, 0.9);
+
+  @media (min-width: 950px) {
+    margin-top: -10vh;
+  }
 `;
 
 const NewsfeedTitle = styled.h2`
@@ -496,7 +493,6 @@ const IndexPage = () => {
           node {
             id
             title
-            featured
             slug
             cover {
               fluid(maxWidth: 720) {

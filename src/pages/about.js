@@ -99,7 +99,15 @@ const AboutPage = () => {
     <ScaleUp>
       <SEO meta={seoMetaTags} />
       <Cover>
-        <BackgroundImage fluid={coverFluidImageStack} />
+        <BackgroundImage
+          fluid={coverFluidImageStack}
+          style={{
+            // Defaults are overwrite-able by setting one or each of the following:
+            backgroundSize: 'cover',
+            backgroundPosition: '50% 20%',
+            backgroundRepeat: 'no-repeat',
+          }}
+        />
       </Cover>
       <GridLayout>
         <IntroHeadline>{title}</IntroHeadline>

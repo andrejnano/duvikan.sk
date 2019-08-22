@@ -1,13 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import { graphql, useStaticQuery, Link } from 'gatsby';
-import GoogleMapReact from 'google-map-react';
 import SEO from '../components/SEO';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
-import Container from '../containers/Container';
 import { Cover, GridLayout } from '../components/common/LayoutParts';
-
 import { colors, colorScheme, boxShadow } from '../consts/style';
 
 const MapFrame = styled.iframe`
@@ -153,7 +149,7 @@ const ContactPage = () => {
         ></MapFrame>
       </Cover>
       <GridLayout>
-        <Title>Kontakt</Title>
+        <Title>{title}</Title>
         <ContactCategory>Klub</ContactCategory>
         <ContactGrid>
           <ContactCard>

@@ -57,13 +57,14 @@ const MemberGrid = styled.ul`
   list-style: none;
   margin: 0;
   padding: 0;
-  margin-bottom: 3rem;
+  margin-bottom: 4rem;
 `;
 
 const MemberCard = styled.li`
   position: relative;
   min-width: 250px;
   width: 100%;
+  margin-bottom: 2rem;
 
   @media (min-width: 720px) {
     max-width: 720px;
@@ -79,9 +80,10 @@ const MemberCard = styled.li`
   }
 
   .innerBox {
+    height: 100%;
     display: block;
     position: relative;
-    margin: 0 1rem 1rem;
+    margin: 0rem 1rem 1rem;
     padding: 2rem;
     border: 1px solid #e6ecf1;
     box-shadow: ${boxShadow};
@@ -92,6 +94,8 @@ const MemberCard = styled.li`
 
     .photo {
       margin-bottom: 1rem;
+      border: 1px solid #e6ecf1;
+      box-shadow: ${boxShadow};
     }
 
     h3 {
@@ -137,6 +141,11 @@ const ClenoviaPage = () => {
           name
           description
           bio
+          profilePhoto {
+            fluid(maxWidth: 200) {
+              ...GatsbyDatoCmsFluid
+            }
+          }
         }
         members3 {
           name
@@ -145,7 +154,10 @@ const ClenoviaPage = () => {
         }
         members4 {
           name
-          description
+          bio
+        }
+        members5 {
+          name
           bio
         }
       }
@@ -159,6 +171,7 @@ const ClenoviaPage = () => {
     members2,
     members3,
     members4,
+    members5,
   } = data.page;
   return (
     <ScaleUp>
@@ -190,6 +203,7 @@ const ClenoviaPage = () => {
           {map(members2, member => (
             <MemberCard key={member.name}>
               <div className="innerBox">
+                <Img className="photo" fluid={member.profilePhoto.fluid} />
                 <h3>{member.name}</h3>
                 <p className="description">{member.description}</p>
                 <div
@@ -224,6 +238,24 @@ const ClenoviaPage = () => {
         <MemberCategory>Ostatní členovia klubu</MemberCategory>
         <MemberGrid>
           {map(members4, member => (
+            <MemberCard key={member.name}>
+              <div className="innerBox">
+                <h3>{member.name}</h3>
+                <p className="description">{member.description}</p>
+                <div
+                  className="bio"
+                  dangerouslySetInnerHTML={{
+                    __html: member.bio,
+                  }}
+                />
+              </div>
+            </MemberCard>
+          ))}
+        </MemberGrid>
+
+        <MemberCategory>Čestní členovia klubu</MemberCategory>
+        <MemberGrid>
+          {map(members5, member => (
             <MemberCard key={member.name}>
               <div className="innerBox">
                 <h3>{member.name}</h3>
