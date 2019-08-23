@@ -200,7 +200,7 @@ const ContactPage = () => {
           <ContactCard>
             <div className="innerBox">
               <h3>Daniel Baran</h3>
-              <p>0903 919 943</p>
+              <p>{phoneNumber}</p>
             </div>
           </ContactCard>
         </ContactGrid>
