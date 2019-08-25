@@ -27,11 +27,11 @@ const IntroText = styled.div`
   }
 
   a {
-    color: ${colors.mediumBlue};
-    text-decoration: underline;
-
+    color: ${colorScheme.secondary};
+    font-weight: 400;
     &:hover {
-      text-decoration: underline;
+      /* text-decoration: underline; */
+      opacity: 0.75;
     }
   }
 `;

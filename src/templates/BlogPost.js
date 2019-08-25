@@ -127,6 +127,19 @@ const Content = styled.article`
     letter-spacing: -0.011em;
     font-size: 16px;
     margin-bottom: 35.596px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  a {
+    color: ${colorScheme.secondary};
+    font-weight: 400;
+    &:hover {
+      /* text-decoration: underline; */
+      opacity: 0.75;
+    }
   }
 `;
 
