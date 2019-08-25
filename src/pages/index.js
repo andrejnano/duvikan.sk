@@ -636,13 +636,13 @@ const IndexPage = () => {
             </Link>
           </BlogPostGrid>
           <FbFeed>
-            <iframe
+            {/* <iframe
               title="fbfeedembed"
               src="http://www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2FduvikanBratislava/&width=600&colorscheme=light&show_faces=true&border_color&stream=true&header=true&height=300"
               scrolling="yes"
               allowTransparency="true"
               frameBorder="0"
-            ></iframe>
+            ></iframe> */}
           </FbFeed>
           {/* <SideGallery>
             <Gallery itemsPerRow={2} images={secondImageGallery} />
