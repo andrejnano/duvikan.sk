@@ -60,10 +60,10 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
-        name: 'gatsby-datocms-starter',
-        short_name: 'starter',
+        name: 'Duvikan Karate Klub Bratislava',
+        short_name: 'Duvikan',
         start_url: '/',
-        background_color: '#222',
+        background_color: '#1a1a1a',
         theme_color: '#fff',
         display: 'minimal-ui',
         icon: 'src/images/icon.png',

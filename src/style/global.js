@@ -10,6 +10,8 @@ import {
 
 const Global = createGlobalStyle`
 
+@import 'node_modules/@fortawesome/fontawesome-svg-core/styles';
+
 html { 
   font-family: 'Inter', sans-serif; 
   font-feature-settings: 'dlig', 'zero', 'ss01', 'cv05', 'cv10';
@@ -64,7 +66,6 @@ a {
                     transparent) */
   }
 }
-
 `;
 
 export default Global;
