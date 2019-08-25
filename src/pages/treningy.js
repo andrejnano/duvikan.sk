@@ -60,7 +60,12 @@ const Calendar = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  padding: 1rem;
+  /* height: 100%; */
+  /* padding: 1rem; */
+
+  @media (min-width: 1200px) {
+    height: 100%;
+  }
 `;
 
 const Day = styled.div`
@@ -97,6 +102,9 @@ const EventCard = styled.div`
   margin-bottom: 2rem;
   margin-left: 2rem;
   color: ${colors.black};
+  border: 1px solid ${props => props.color || 'gray'};
+  /* box-shadow: 0 3px 8px 0 ${props => props.color + '20' || 'gray'}; */
+  background: ${props => props.color + '0A'};
 
   time::before {
     background: ${props => props.color || 'gray'};
@@ -107,6 +115,8 @@ const EventCard = styled.div`
     position: relative;
 
     &:before {
+      /* tmp display none */
+      display: none;
       content: ' ';
       height: 1.6em;
       width: 3px;
@@ -262,8 +272,6 @@ const TreningyPage = () => {
         />
       </GridLayout>
 
-      <SectionSeparator />
-
       <GridLayout>
         <Title>Rozpis tréningov</Title>
         <Calendar>
@@ -330,7 +338,7 @@ const TreningyPage = () => {
         </Calendar>
       </GridLayout>
 
-      <SectionSeparator />
+      {/* <SectionSeparator /> */}
 
       <GridLayout>
         <Title>Pohľad na tréningy</Title>
