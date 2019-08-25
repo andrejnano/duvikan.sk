@@ -13,6 +13,8 @@ import { colors, gradients, colorScheme } from '../consts/style';
 import { library, config } from '@fortawesome/fontawesome-svg-core';
 config.autoAddCss = false;
 
+import '@fortawesome/fontawesome-svg-core/styles.css';
+
 import {
   faInstagram,
   faFacebookSquare,
