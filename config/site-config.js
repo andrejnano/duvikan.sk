@@ -1,5 +1,5 @@
 module.exports = {
-  siteUrl: 'https://duvikan.club',
+  siteUrl: 'https://duvikan.sk',
   sitemapPath: '/sitemap.xml',
   title: 'Duvikan',
   description: 'Karate klub Duvikan Bratislava',

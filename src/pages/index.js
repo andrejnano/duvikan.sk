@@ -549,9 +549,7 @@ const IndexPage = () => {
   const backgroundFluidImageStack = [
     backgroundImage.fluid,
     // good one 'radial-gradient(circle, rgba(26,26,26, 0.7) 0%, rgba(26, 26, 26, 1) 90%)',
-    // 'linear-gradient( 111.6deg,  rgba(73,235,221,0.2) -0%, rgba(83,222,219,0.2) 7.1%, rgba(105,191,217,0.2) 13.4%, rgba(127,157,214,0.2) 18%, rgba(155,113,208,0.2) 23.9%, rgba(178,73,201,0.2) 28.8%, rgba(200,45,192,0.2) 33.3%, rgba(213,42,180,0.2) 38%, rgba(232,44,145,0.2) 44.2%, rgba(239,45,128,0.2) 52.4%, rgba(249,66,107,0.2) 59.7%, rgba(252,105,98,0.2) 67.3%, rgba(252,105,98,0.2) 74.4%, rgba(254,145,92,0.2) 82.2%, rgba(255,189,86,0.2) 88.2%, rgba(254,227,80,0.2) 92.8%, rgba(254,248,75,0.2) 98.4% )',
     'radial-gradient(circle, rgba(26,26,26, 0.7) 0%, rgba(0, 0, 0, 1) 90%)',
-    // 'radial-gradient( circle farthest-corner at 7.5% 24%,  rgba(237,161,193,0.1) 0%, rgba(250,178,172,0.1) 25.5%, rgba(190,228,210,0.1) 62.3%, rgba(215,248,247,0.1) 93.8% )',
   ].reverse();
   const { edges } = data.posts;
 
@@ -644,9 +642,6 @@ const IndexPage = () => {
               frameBorder="0"
             ></iframe> */}
           </FbFeed>
-          {/* <SideGallery>
-            <Gallery itemsPerRow={2} images={secondImageGallery} />
-          </SideGallery> */}
         </GridLayout>
       </Newsfeed>
       <Main>

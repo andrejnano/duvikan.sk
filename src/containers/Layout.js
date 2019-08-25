@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { graphql, StaticQuery } from 'gatsby';
 import Transition from '../components/Transition';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -12,7 +11,12 @@ import { colors, gradients, colorScheme } from '../consts/style';
 
 // FontAwesome Icons
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { fab } from '@fortawesome/free-brands-svg-icons';
+import {
+  faInstagram,
+  faFacebookSquare,
+  faFacebook,
+  faFacebookF,
+} from '@fortawesome/free-brands-svg-icons';
 import {
   // faBars,
   faLongArrowAltRight,
@@ -27,7 +31,10 @@ import {
 import { faBars, faTimes } from '@fortawesome/pro-duotone-svg-icons';
 
 library.add(
-  fab,
+  faInstagram,
+  faFacebookSquare,
+  faFacebook,
+  faFacebookF,
   faBars,
   faLongArrowAltRight,
   faLongArrowAltLeft,
