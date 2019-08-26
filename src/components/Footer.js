@@ -118,7 +118,7 @@ const Footer = () => {
               Tréningy
             </Link>
             <Link to="/about" activeClassName="activePage">
-              O nás
+              O&nbsp;nás
             </Link>
             <Link to="/historia" activeClassName="activePage">
               História
