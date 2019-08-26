@@ -11,15 +11,13 @@ exports.createPages = async ({ graphql, actions }) => {
         {
           allDatoCmsBlogPost(
             filter: { locale: { eq: "sk" } }
-            sort: { fields: [meta___createdAt], order: DESC }
+            sort: { fields: publicationDate, order: DESC }
           ) {
             nodes {
               id
               title
               slug
-              meta {
-                createdAt
-              }
+              publicationDate
               cover {
                 fluid(maxWidth: 720) {
                   src

@@ -9,12 +9,7 @@ import SEO from '../components/SEO';
 
 import { boxShadow, colors, colorScheme } from '../consts/style';
 
-import {
-  SectionWrapper,
-  SidePanel,
-  MainPanel,
-  GridLayout,
-} from '../components/common/LayoutParts';
+import { GridLayout } from '../components/common/LayoutParts';
 
 const BlogIndexWrap = styled.div`
   .top {
@@ -207,7 +202,7 @@ const BlogPostItem = props => {
             icon={['far', 'calendar-alt']}
           />{' '}
           <Moment className="createdAtTime" format="DD.MM.YYYY">
-            {props.node.meta.createdAt}
+            {props.node.publicationDate}
           </Moment>
           <FontAwesomeIcon className="clockIcon" icon={['far', 'clock']} />{' '}
           <span className="timeToRead">

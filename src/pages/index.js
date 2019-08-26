@@ -486,7 +486,7 @@ const IndexPage = () => {
       }
       posts: allDatoCmsBlogPost(
         filter: { locale: { eq: "sk" } }
-        sort: { fields: [meta___createdAt], order: DESC }
+        sort: { fields: [publicationDate], order: DESC }
         limit: 5
       ) {
         edges {
@@ -511,6 +511,7 @@ const IndexPage = () => {
                 }
               }
             }
+            publicationDate
             meta {
               createdAt
             }
@@ -617,7 +618,7 @@ const IndexPage = () => {
                   <div className="timePosted">
                     <FontAwesomeIcon icon={['far', 'calendar-alt']} />{' '}
                     <Moment format="DD.MM.YYYY">
-                      {post.node.meta.createdAt}
+                      {post.node.publicationDate}
                     </Moment>
                   </div>
                   <h3 className="title">{post.node.title}</h3>

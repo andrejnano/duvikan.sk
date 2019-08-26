@@ -168,11 +168,13 @@ const BlogPost = ({ data }) => {
     title,
     slug,
     seoMetaTags,
-    meta,
+    publicationDate,
     author,
     cover,
     contentNode,
   } = data.project;
+
+  console.log(`PUBLIKAC.DATE: ${publicationDate}`);
 
   const { siteMetadata } = data.meta;
 
@@ -199,7 +201,7 @@ const BlogPost = ({ data }) => {
           </div>
           <LastUpdate title="Dátum publikácie">
             <FontAwesomeIcon icon={['far', 'calendar-alt']} />{' '}
-            <Moment format="DD.MM.YYYY">{meta.updatedAt}</Moment>
+            <Moment format="DD.MM.YYYY">{publicationDate}</Moment>
           </LastUpdate>
           <TimeToRead title="Čas na prečítanie textu">
             <FontAwesomeIcon icon={['far', 'clock']} />{' '}
@@ -212,16 +214,16 @@ const BlogPost = ({ data }) => {
           }}
         />
         <SocialButtons>
-          <FacebookShareButton url={postUrl} title="Zdielať na Facebook">
+          <FacebookShareButton url={postUrl} quote="Zdielať na Facebook">
             <FacebookIcon size={32} round={true} />
           </FacebookShareButton>
-          <TwitterShareButton url={postUrl} title="Zdielať na Twitter">
+          <TwitterShareButton url={postUrl} quote="Zdielať na Twitter">
             <TwitterIcon size={32} round={true} />
           </TwitterShareButton>
-          <LinkedinShareButton url={postUrl} title="Zdielať na LinkedIn">
+          <LinkedinShareButton url={postUrl} quote="Zdielať na LinkedIn">
             <LinkedinIcon size={32} round={true} />
           </LinkedinShareButton>
-          <WhatsappShareButton url={postUrl} title="Zdielať cez Whatsapp">
+          <WhatsappShareButton url={postUrl} quote="Zdielať cez Whatsapp">
             <WhatsappIcon size={32} round={true} />
           </WhatsappShareButton>
         </SocialButtons>
@@ -243,6 +245,7 @@ export const projectQuery = graphql`
       seoMetaTags {
         ...GatsbyDatoCmsSeoMetaTags
       }
+      publicationDate
       meta {
         updatedAt
       }
