@@ -117,13 +117,15 @@ const NavList = styled.div`
   }
 `;
 
-const MobileNavList = styled.ul`
+const MobileNavList = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 4rem;
+  margin: 2rem 5%;
+  padding: 0;
+  align-items: flex-end;
 
   a {
-    font-size: 4rem;
+    font-size: 3.4rem;
     font-weight: bold;
     margin-bottom: 1rem;
 

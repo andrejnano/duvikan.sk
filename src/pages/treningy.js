@@ -263,14 +263,6 @@ const TreningyPage = () => {
   return (
     <ScaleUp>
       <SEO meta={seoMetaTags} />
-      <GridLayout>
-        <Title>{title} </Title>
-        <IntroText
-          dangerouslySetInnerHTML={{
-            __html: introText,
-          }}
-        />
-      </GridLayout>
 
       <GridLayout>
         <Title>Rozpis tréningov</Title>
@@ -336,6 +328,15 @@ const TreningyPage = () => {
             ))}
           </Day>
         </Calendar>
+      </GridLayout>
+
+      <GridLayout>
+        <Title>{title}</Title>
+        <IntroText
+          dangerouslySetInnerHTML={{
+            __html: introText,
+          }}
+        />
       </GridLayout>
 
       {/* <SectionSeparator /> */}

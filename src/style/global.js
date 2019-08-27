@@ -10,11 +10,17 @@ import {
 
 const Global = createGlobalStyle`
 
+*, ::before, ::after {
+  box-sizing: inherit;
+}
+
 html { 
   font-family: 'Inter', sans-serif; 
   font-feature-settings: 'dlig', 'zero', 'ss01', 'cv05', 'cv10';
   font-kerning: auto;
   scroll-behavior: smooth;
+  text-rendering: optimizelegibility;
+  box-sizing: border-box;
 }
 
 @supports (font-variation-settings: normal) {
@@ -64,6 +70,12 @@ a {
                     transparent) */
   }
 }
+
+::selection {
+  background: #14171A;
+  color: #F6F4F2;
+}
+
 `;
 
 export default Global;

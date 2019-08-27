@@ -127,6 +127,15 @@ const BlogPostList = styled.ul`
         max-height: 150px;
         border: 1px solid #e6ecf1;
         box-shadow: ${boxShadow};
+        position: relative;
+
+        &::before {
+          content: ' ';
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.84);
+        }
       }
 
       .excerpt {
@@ -136,9 +145,9 @@ const BlogPostList = styled.ul`
         letter-spacing: -0.011em;
         line-height: 22px;
         @media (min-width: 950px) {
-          font-size: 16px;
-          letter-spacing: -0.011em;
-          line-height: 22px;
+          font-size: 18px;
+          letter-spacing: -0.014em;
+          line-height: 25px;
         }
         padding-left: 1rem;
       }

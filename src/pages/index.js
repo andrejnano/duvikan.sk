@@ -68,7 +68,7 @@ const JapaneseSideText = styled.div`
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  right: 10%;
+  right: 5%;
   line-height: 1;
   width: auto;
   overflow: hidden;
@@ -77,7 +77,7 @@ const JapaneseSideText = styled.div`
   /* fking magic  */
   font-size: calc((90vh - 80px) / 4 / 1.618);
   font-weight: 1000;
-  opacity: 0.3;
+  opacity: 0.75;
   color: ${colorScheme.secondary};
   writing-mode: vertical-lr;
 
@@ -99,6 +99,15 @@ const JapaneseBgText = styled.div`
   font-size: 400px;
   font-weight: 1000;
   opacity: 0.075;
+  /* display: none;
+   */
+`;
+
+const BgPattern = styled.div`
+  position: absolute;
+  bottom: 0%;
+  left: 0%;
+  width: 100%;
   display: none;
 `;
 
@@ -190,17 +199,17 @@ const PropositionSection = styled.div`
   padding: 4rem 0;
 
   @media (min-width: 950px) {
-    padding: 1rem 0;
+    padding: 2rem 0;
     height: 10vh;
     transform: translateY(-100%);
-    background: rgba(26, 26, 26, 0.7);
+    background: rgba(26, 26, 26, 0.5);
   }
 
   > .grid {
     height: 100%;
 
     .featuredLink {
-      align-self: center;
+      align-self: baseline;
       padding-right: 1rem;
       grid-column: 2/-2;
 
@@ -549,7 +558,7 @@ const IndexPage = () => {
 
   const backgroundFluidImageStack = [
     backgroundImage.fluid,
-    // good one 'radial-gradient(circle, rgba(26,26,26, 0.7) 0%, rgba(26, 26, 26, 1) 90%)',
+    // 'radial-gradient(circle, rgba(26,26,26, 0.7) 0%, rgba(26, 26, 26, 1) 90%)',
     'radial-gradient(circle, rgba(26,26,26, 0.7) 0%, rgba(0, 0, 0, 1) 90%)',
   ].reverse();
   const { edges } = data.posts;
@@ -563,7 +572,15 @@ const IndexPage = () => {
         fluid={backgroundFluidImageStack}
       >
         <JapaneseSideText>空手道場</JapaneseSideText>
-        <JapaneseBgText>空手道場</JapaneseBgText>
+        <BgPattern>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+            <path
+              fill="#ee2835"
+              fillOpacity="0.2"
+              d="M0,256L80,234.7C160,213,320,171,480,176C640,181,800,235,960,224C1120,213,1280,139,1360,101.3L1440,64L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"
+            ></path>
+          </svg>
+        </BgPattern>
         <HeroSection>
           <GridLayout>
             <HeroSectionContent>

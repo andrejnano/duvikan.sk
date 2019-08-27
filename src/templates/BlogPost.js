@@ -174,8 +174,6 @@ const BlogPost = ({ data }) => {
     contentNode,
   } = data.project;
 
-  console.log(`PUBLIKAC.DATE: ${publicationDate}`);
-
   const { siteMetadata } = data.meta;
 
   const postUrl = `${siteMetadata.siteUrl}/blog/${slug}/`;
@@ -184,7 +182,15 @@ const BlogPost = ({ data }) => {
     <ScaleUp>
       <SEO meta={seoMetaTags} />
       <Cover>
-        <Img fluid={cover.fluid} />
+        <Img
+          fluid={cover.fluid}
+          style={{
+            // Defaults are overwrite-able by setting one or each of the following:
+            backgroundSize: 'cover',
+            backgroundPosition: '50% 20%',
+            backgroundRepeat: 'no-repeat',
+          }}
+        />
       </Cover>
       <GridLayout>
         <GoBack>
