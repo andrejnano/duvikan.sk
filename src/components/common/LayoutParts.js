@@ -32,8 +32,7 @@ export const Cover = styled.div`
   position: relative;
   width: 100%;
   display: flex;
-  height: auto;
-  min-height: 50vh;
+  max-height: 40vh;
   margin-bottom: 3rem;
 
   background-position: top;
