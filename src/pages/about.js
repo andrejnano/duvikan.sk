@@ -92,7 +92,6 @@ const AboutPage = () => {
 
   const coverFluidImageStack = [
     cover.fluid,
-    'radial-gradient(circle, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0.75) 90%)',
   ].reverse();
 
   return (
@@ -104,7 +103,7 @@ const AboutPage = () => {
           style={{
             // Defaults are overwrite-able by setting one or each of the following:
             backgroundSize: 'cover',
-            backgroundPosition: '50% 20%',
+            backgroundPosition: '50% 40%',
             backgroundRepeat: 'no-repeat',
           }}
         />

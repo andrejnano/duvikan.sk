@@ -71,19 +71,31 @@ const JapaneseSideText = styled.div`
   right: 5%;
   line-height: 1;
   width: auto;
-  overflow: hidden;
+  overflow: visible;
   white-space: nowrap;
   pointer-events: none;
   /* fking magic  */
-  font-size: calc((90vh - 80px) / 4 / 1.618);
-  font-weight: 1000;
+  font-size: calc((90vh - 80px) / 7 / 1.618);
+  font-weight: 600;
   opacity: 0.75;
   color: ${colorScheme.secondary};
   writing-mode: vertical-lr;
-
   display: none;
   @media (min-width: 950px) {
     display: block;
+  }
+
+  .part {
+    margin: 1rem 0;
+    position: relative;
+    .label {
+      position: absolute;
+      right: -1rem;
+      top: 1rem;
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 400;
+    }
   }
 `;
 
@@ -571,7 +583,16 @@ const IndexPage = () => {
         Tag="section"
         fluid={backgroundFluidImageStack}
       >
-        <JapaneseSideText>空手道場</JapaneseSideText>
+        <JapaneseSideText>
+          <span className="part">
+            <span className="label">shodokan</span>
+            尚道館
+          </span>
+          <span className="part">
+            <span className="label">gojyuryu</span>
+            剛柔流
+          </span>
+        </JapaneseSideText>
         <BgPattern>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
             <path
