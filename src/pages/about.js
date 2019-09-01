@@ -90,9 +90,7 @@ const AboutPage = () => {
     imageGallery,
   } = data.datoCmsAboutPage;
 
-  const coverFluidImageStack = [
-    cover.fluid,
-  ].reverse();
+  const coverFluidImageStack = [cover.fluid].reverse();
 
   return (
     <ScaleUp>

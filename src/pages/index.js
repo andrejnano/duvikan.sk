@@ -68,14 +68,14 @@ const JapaneseSideText = styled.div`
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  right: 5%;
+  right: 20%;
   line-height: 1;
   width: auto;
   overflow: visible;
   white-space: nowrap;
   pointer-events: none;
   /* fking magic  */
-  font-size: calc((90vh - 80px) / 7 / 1.618);
+  font-size: calc((90vh - 80px) / 4.5 / 1.618);
   font-weight: 600;
   opacity: 0.75;
   color: ${colorScheme.secondary};
@@ -151,7 +151,6 @@ const HeroSectionContent = styled.div`
   h1 {
     font-size: 2.4rem;
     @media (min-width: 950px) {
-      font-size: 5rem;
       font-size: 40px;
       letter-spacing: -0.022em;
       line-height: 56px;
@@ -161,11 +160,11 @@ const HeroSectionContent = styled.div`
     text-shadow: 0 2px 20px rgba(0, 0, 0, 0.16);
   }
   p {
-    font-size: 2rem;
+    font-size: 1.2rem;
     @media (min-width: 950px) {
-      font-size: 24px;
-      letter-spacing: -0.019em;
-      line-height: 34px;
+      font-size: 20px;
+      letter-spacing: -0.017em;
+      line-height: 28px;
     }
     line-height: 1.618;
     font-weight: 400;
@@ -179,7 +178,9 @@ const HeroSectionContent = styled.div`
     text-transform: uppercase;
     font-size: 1rem;
     @media (min-width: 950px) {
-      font-size: 1.2rem;
+      font-size: 12px;
+      letter-spacing: 0em;
+      line-height: 17px;
     }
     color: ${colorScheme.secondary};
     position: relative;
@@ -192,7 +193,7 @@ const HeroSectionContent = styled.div`
     }
 
     svg {
-      font-size: 2rem;
+      font-size: 16px;
       vertical-align: middle;
       margin-top: -0.2rem;
       margin-left: 0.2rem;
@@ -233,11 +234,15 @@ const PropositionSection = styled.div`
       }
 
       h3 {
-        font-size: 1.6rem;
+        font-size: 16px;
+        letter-spacing: -0.011em;
+        line-height: 22px;
       }
 
       p {
-        font-size: 1.4rem;
+        font-size: 8px;
+        letter-spacing: 0.024em;
+        line-height: 11px;
       }
 
       &:hover {
@@ -584,14 +589,8 @@ const IndexPage = () => {
         fluid={backgroundFluidImageStack}
       >
         <JapaneseSideText>
-          <span className="part">
-            <span className="label">shodokan</span>
-            尚道館
-          </span>
-          <span className="part">
-            <span className="label">gojyuryu</span>
-            剛柔流
-          </span>
+          <span className="part">尚道館</span>
+          <span className="part">剛柔流</span>
         </JapaneseSideText>
         <BgPattern>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
@@ -626,9 +625,9 @@ const IndexPage = () => {
             <p>Časový rozpis tréningov pre rok 2019.</p>
           </Link>
 
-          <Link className="featuredLink" to="/historia">
-            <h3>História okinawského karate</h3>
-            <p>Tradičné okinawské karate a jeho vývoj.</p>
+          <Link className="featuredLink" to="/udalosti">
+            <h3>Udalosti a akcie</h3>
+            <p>Kalendár udalostí - sezóna 2019/2020.</p>
           </Link>
 
           <SocialIcons>

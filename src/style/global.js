@@ -1,12 +1,6 @@
 import 'typeface-inter';
 import { createGlobalStyle } from 'styled-components';
-import {
-  colors,
-  colors2,
-  colorScheme,
-  boxShadow,
-  gradients,
-} from '../consts/style';
+import { colorScheme } from '../consts/style';
 
 const Global = createGlobalStyle`
 

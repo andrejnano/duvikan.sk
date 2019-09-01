@@ -2,38 +2,92 @@
 import React from 'react';
 import styled from 'styled-components';
 import { graphql, useStaticQuery } from 'gatsby';
-import Img from 'gatsby-image';
 import SEO from '../components/SEO';
 import { map } from 'lodash';
-import { ScaleUp } from '../style/motion';
 import { colors, colorScheme, boxShadow } from '../consts/style';
-
+import { GridLayout } from '../components/common/LayoutParts';
+import Moment from 'react-moment';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
+
+import 'moment/locale/sk';
 const localizer = momentLocalizer(moment);
 
 // import 'react-big-calendar/lib/sass/styles';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 
-import { GridLayout } from '../components/common/LayoutParts';
-// const myEventsList = [
-//   {
-//     title: 'Event1',
-//     start: new Date('September 02, 2019 03:24:00'),
-//     end: new Date('September 03, 2019 03:24:00'),
-//     allDay: true,
-//   },
-//   {
-//     title: 'Event2',
-//     start: new Date('August 24, 2019 03:24:00'),
-//     end: new Date('August 28, 2019 03:24:00'),
-//     allDay: true,
-//   },
-// ];
-
 const CalendarWrap = styled.div`
   grid-column: 2/-2;
   height: 60vh;
+
+  .calendar {
+    border: 1px solid #e6ecf1;
+    box-shadow: ${boxShadow};
+    background-color: ${colors.white};
+    transition: border 250ms ease;
+    border-radius: 3px;
+    padding: 2rem;
+    padding-bottom: 6rem;
+    display: block;
+    height: 100%;
+  }
+`;
+
+const Upcoming = styled.ul`
+  grid-column: 2/-2;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  margin-bottom: 4rem;
+`;
+
+const Event = styled.li`
+  position: relative;
+  min-width: 250px;
+  width: 100%;
+  margin-bottom: 2rem;
+
+  @media (min-width: 720px) {
+    max-width: 720px;
+    width: 50%;
+  }
+
+  @media (min-width: 950px) {
+    width: 33.333333%;
+  }
+
+  @media (min-width: 1470px) {
+    width: 25%;
+  }
+
+  .innerBox {
+    height: 100%;
+    display: block;
+    position: relative;
+    margin: 0rem 1rem 1rem;
+    padding: 2rem;
+    border: 1px solid #e6ecf1;
+    box-shadow: ${boxShadow};
+    background-color: ${colors.white};
+    transition: border 250ms ease;
+    border-radius: 3px;
+    display: block;
+
+    .dateInterval {
+      .start {
+      }
+    }
+
+    .title {
+      color: ${colorScheme.main};
+      font-size: 1.6rem;
+      position: relative;
+      margin: 0;
+    }
+  }
 `;
 
 const MyCalendar = props => (
@@ -43,6 +97,10 @@ const MyCalendar = props => (
       events={props.eventList}
       startAccessor="start"
       endAccessor="end"
+      defaultView="month"
+      views={['month', 'week']}
+      culture="sk"
+      className="calendar"
     />
   </CalendarWrap>
 );
@@ -70,15 +128,42 @@ const UdalostiPage = () => {
           allDay
         }
       }
+      upcomingEvents: allDatoCmsEvent(
+        sort: { fields: start, order: ASC }
+        filter: { locale: { eq: "sk" } }
+        limit: 5
+      ) {
+        nodes {
+          title
+          start
+          end
+        }
+      }
     }
   `);
 
   const { title, events, seoMetaTags } = data.page;
+  const upcomingEvents = data.upcomingEvents.nodes;
+
   return (
     <>
       <SEO meta={seoMetaTags} />
       <GridLayout>
         <Title>{title} </Title>
+        <Upcoming>
+          {map(upcomingEvents, event => (
+            <Event key={event.title}>
+              <div className="innerBox">
+                <div className="dateInterval">
+                  <Moment className="start" format="DD.MM.YYYY">
+                    {event.start}
+                  </Moment>
+                </div>
+                <h3 className="title">{event.title}</h3>
+              </div>
+            </Event>
+          ))}
+        </Upcoming>
         <MyCalendar eventList={events} />
       </GridLayout>
     </>

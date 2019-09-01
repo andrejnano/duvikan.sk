@@ -100,10 +100,15 @@ const NavList = styled.div`
   }
   a {
     letter-spacing: 0.2em;
-    font-weight: 600;
+    font-weight: 400;
     color: inherit;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
     font-size: 1.2rem;
+
+    font-size: 14px;
+    letter-spacing: -0.006em;
+    line-height: 20px;
+
     &:not(:last-of-type) {
       margin-right: 2em;
     }
