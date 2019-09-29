@@ -131,7 +131,6 @@ const UdalostiPage = () => {
       upcomingEvents: allDatoCmsEvent(
         sort: { fields: start, order: ASC }
         filter: { locale: { eq: "sk" } }
-        limit: 5
       ) {
         nodes {
           title
