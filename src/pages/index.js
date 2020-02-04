@@ -495,7 +495,6 @@ const FeaturedLinks = styled.div`
     }
 
     &:hover {
-      opacity: 0.7;
       h3 {
         color: ${colorScheme.secondary};
       }
