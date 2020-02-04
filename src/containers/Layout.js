@@ -33,6 +33,7 @@ import {
   faFilePdf,
   faPercent,
   faPercentage,
+  faCalendar,
 } from '@fortawesome/pro-regular-svg-icons';
 
 import { faBars, faTimes } from '@fortawesome/pro-duotone-svg-icons';
@@ -53,7 +54,8 @@ library.add(
   faPhone,
   faFilePdf,
   faPercent,
-  faPercentage
+  faPercentage,
+  faCalendar
 );
 
 const SiteWrapper = styled.div`

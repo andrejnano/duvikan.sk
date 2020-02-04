@@ -130,9 +130,15 @@ const PercentaPage = () => {
             <li>Karate klub Duvikan Bratislava, občianske združenie</li>
             <li>Lietavská 13</li>
             <li>851 06 Bratislava</li>
-            <li><strong>IČO</strong>: 31820719</li>
-            <li><strong>DIČ</strong>: 2022615870</li>
-            <li><strong>Číslo účtu</strong>: SK1211000000002625766523</li>
+            <li>
+              <strong>IČO</strong>: 31820719
+            </li>
+            <li>
+              <strong>DIČ</strong>: 2022615870
+            </li>
+            <li>
+              <strong>Číslo účtu</strong>: SK1211000000002625766523
+            </li>
           </List>
         </Content>
       </GridLayout>

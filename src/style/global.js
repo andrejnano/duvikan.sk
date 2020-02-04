@@ -8,9 +8,10 @@ const Global = createGlobalStyle`
   box-sizing: inherit;
 }
 
-html { 
-  font-family: 'Inter', sans-serif; 
+html {
+  font-family: 'Inter', sans-serif;
   font-feature-settings: 'dlig', 'zero', 'ss01', 'cv05', 'cv10';
+  font-feature-settings: 'zero' 0;
   font-kerning: auto;
   scroll-behavior: smooth;
   text-rendering: optimizelegibility;

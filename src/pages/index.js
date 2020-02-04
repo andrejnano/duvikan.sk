@@ -47,15 +47,18 @@ const SocialIcons = styled.div`
 
   @media (min-width: 950px) {
     grid-column: 5/6;
-    justify-content: flex-end;
+    justify-content: center;
   }
 
-  align-items: center;
+  /* align-items: center; */
   padding: 0 2.5%;
-  opacity: 0.8;
+  /* opacity: 0.8; */
   > a {
     font-size: 3rem;
     padding-right: 1rem;
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 4rem 0 2rem;
 
     &:hover {
       opacity: 0.8;
@@ -68,7 +71,7 @@ const JapaneseSideText = styled.div`
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  right: 20%;
+  right: 10%;
   line-height: 1;
   width: auto;
   overflow: visible;
@@ -76,8 +79,8 @@ const JapaneseSideText = styled.div`
   pointer-events: none;
   /* fking magic  */
   font-size: calc((90vh - 80px) / 4.5 / 1.618);
-  font-weight: 600;
-  opacity: 0.75;
+  font-weight: 500;
+  opacity: 0.5;
   color: ${colorScheme.secondary};
   writing-mode: vertical-lr;
   display: none;
@@ -97,22 +100,6 @@ const JapaneseSideText = styled.div`
       font-weight: 400;
     }
   }
-`;
-
-const JapaneseBgText = styled.div`
-  position: absolute;
-  top: 30%;
-  transform: translateY(-50%);
-  left: 5%;
-  width: auto;
-  overflow: hidden;
-  white-space: nowrap;
-  pointer-events: none;
-  font-size: 400px;
-  font-weight: 1000;
-  opacity: 0.075;
-  /* display: none;
-   */
 `;
 
 const BgPattern = styled.div`
@@ -210,36 +197,18 @@ const HighPriorityArticle = styled.div`
   -moz-osx-font-smoothing: grayscale;
 
   .alertbox {
-    background: rgba(238, 40, 53, 0.75);
+    background: rgba(238, 40, 53, 0.8);
     /* border-radius: 3px; */
     padding: 2rem 2rem;
     display: inline-block;
     color: #fff;
     font-weight: bold;
-    border-bottom: 3px solid #fff;
     box-shadow: ${boxShadow};
     transition: opacity 125ms ease;
 
     &:hover {
       opacity: 0.8;
-      border-bottom: 3px solid #fff;
     }
-  }
-
-  /* .alertbox {
-    background: #fff;
-    border-radius: 3px;
-    padding: 2rem 2rem;
-    display: inline-block;
-    color: rgba(238, 40, 53, 1);
-    font-weight: bold;
-    border-bottom: 3px solid rgba(238, 40, 53);
-    box-shadow: ${boxShadow};
-    transition: opacity 125ms ease;
-
-    &:hover {
-      opacity: 0.8;
-    } */
   }
 `;
 
@@ -254,19 +223,22 @@ const PropositionSection = styled.div`
   padding: 4rem 0;
 
   @media (min-width: 950px) {
-    padding: 2rem 0;
-    height: 10vh;
+    padding: 3rem 0;
+    height: auto;
     transform: translateY(-100%);
     background: rgba(26, 26, 26, 0.5);
+    /* temp */
+    background: #fff;
+    color: #000;
   }
 
   > .grid {
     height: 100%;
 
     .featuredLink {
-      align-self: baseline;
-      padding-right: 1rem;
+      padding-right: 2rem;
       grid-column: 2/-2;
+      transition: color 125ms ease;
 
       @media (min-width: 950px) {
         grid-column: initial;
@@ -282,13 +254,12 @@ const PropositionSection = styled.div`
       }
 
       p {
-        font-size: 8px;
-        letter-spacing: 0.024em;
-        line-height: 11px;
+        font-size: 12px;
+        letter-spacing: 0em;
+        line-height: 17px;
       }
 
       &:hover {
-        opacity: 0.75;
         h3 {
           color: ${colorScheme.secondary};
         }
@@ -319,22 +290,6 @@ const Main = styled.section`
   border-bottom: 1px solid #e5e8ed;
   margin: 0;
   padding: 6rem 0;
-`;
-
-const JapaneseTitle = styled.div`
-  grid-column: 4/6;
-  align-self: center;
-  justify-self: center;
-  line-height: 1;
-  /* writing-mode: vertical-lr; */
-  text-align: center;
-  font-size: 5rem;
-  color: ${colorScheme.secondary};
-  display: none;
-
-  @media (min-width: 950px) {
-    display: block;
-  }
 `;
 
 const CenteredTextBlock = styled.div`
@@ -382,21 +337,25 @@ const CenteredTextBlock = styled.div`
 const Newsfeed = styled.section`
   position: relative;
   color: #000;
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 1);
+  background: #fafafa;
+  /* background: ${colorScheme.secondary}; */
 
   @media (min-width: 950px) {
-    margin-top: -10vh;
+    margin-top: calc(-10vh);
+    /* padding-top: 10vh; */
   }
 `;
 
 const NewsfeedTitle = styled.h2`
-  grid-column: 2/-2;
+  /* grid-column: 2/-2;
   @media (min-width: 950px) {
     grid-column: 2/4;
-  }
+  } */
   font-size: 2rem;
   font-weight: bold;
   margin: 4rem 0 2rem;
+  /* color: #fff; */
 `;
 
 const FbFeed = styled.div`
@@ -413,7 +372,7 @@ const FbFeed = styled.div`
 const BlogPostGrid = styled.div`
   grid-column: 2/-2;
   @media (min-width: 950px) {
-    grid-column: 2/4;
+    grid-column: 2/3;
   }
   display: flex;
   flex-direction: column;
@@ -449,25 +408,35 @@ const BlogPostItem = styled.li`
   > a {
     position: relative;
     padding: 1rem 0;
+    margin-bottom: 0.8rem;
+    background-color: #fff;
+    box-shadow: ${boxShadow};
     color: inherit;
     overflow: hidden;
-    display: flex;
+    display: inline-flex;
+    min-width: 300px;
     flex-direction: row;
     align-items: center;
 
     .timePosted {
       font-size: 1rem;
+      font-weight: 300;
+      opacity: 0.8;
       @media (min-width: 950px) {
-        font-size: 1.6rem;
+        font-size: 1.2rem;
       }
       width: auto;
       margin: 0;
+      margin-left: 1rem;
+      padding-top: 0.25rem;
+      font-feature-settings: 'zero' 0;
+      font-feature-settings: 'tnum' 1;
     }
 
     .title {
-      font-size: 1.2rem;
+      font-size: 1rem;
       @media (min-width: 950px) {
-        font-size: 2rem;
+        font-size: 1.4rem;
       }
       font-weight: 600;
       margin: 0;
@@ -492,6 +461,47 @@ const BlogPostItem = styled.li`
 
     &:hover {
       opacity: 0.5;
+    }
+  }
+`;
+
+const FeaturedLinks = styled.div`
+  grid-column: 2/-2;
+  @media (min-width: 950px) {
+    grid-column: 3/5;
+    margin-left: 4rem;
+  }
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
+  .featuredLink {
+    margin: 0;
+    margin-bottom: 1rem;
+    background-color: #fff;
+    box-shadow: ${boxShadow};
+    padding: 1rem;
+
+    h3 {
+      font-size: 18px;
+      letter-spacing: -0.011em;
+      line-height: 22px;
+    }
+
+    p {
+      font-size: 14px;
+      letter-spacing: 0em;
+      line-height: 17px;
+    }
+
+    &:hover {
+      opacity: 0.7;
+      h3 {
+        color: ${colorScheme.secondary};
+      }
+      p {
+        opacity: 0.75;
+      }
     }
   }
 `;
@@ -665,42 +675,15 @@ const IndexPage = () => {
           </GridLayout>
         </HeroSection>
       </BackgroundImage>
-      <PropositionSection>
+      {/* <PropositionSection>
         <GridLayout className="grid">
-          <Link className="featuredLink" to="/about">
-            <h3>Náš príbeh</h3>
-            <p>História nášho klubu a ciest na Okinawu.</p>
-          </Link>
 
-          <Link className="featuredLink" to="/treningy">
-            <h3>Rozpisy tréningov</h3>
-            <p>Časový rozpis tréningov pre rok 2019.</p>
-          </Link>
-
-          <Link className="featuredLink" to="/udalosti">
-            <h3>Udalosti a akcie</h3>
-            <p>Kalendár udalostí - sezóna 2019/2020.</p>
-          </Link>
-
-          <SocialIcons>
-            <a href="https://facebook.com/duvikanBratislava">
-              <FontAwesomeIcon icon={['fab', 'facebook-square']} />
-            </a>
-            <a href="https://facebook.com/duvikanBratislava">
-              <FontAwesomeIcon icon={['fab', 'instagram']} />
-            </a>
-            <a href="mailto:duvikan@gmail.com">
-              <FontAwesomeIcon icon={['far', 'envelope']} />
-            </a>
-          </SocialIcons>
         </GridLayout>
-      </PropositionSection>
+      </PropositionSection> */}
       <Newsfeed>
         <GridLayout>
-          <NewsfeedTitle>Najnovšie príspevky</NewsfeedTitle>
-        </GridLayout>
-        <GridLayout>
           <BlogPostGrid>
+            <NewsfeedTitle>Najnovšie príspevky</NewsfeedTitle>
             {map(edges, post => (
               <BlogPostItem key={post.node.slug}>
                 <Link to={`/blog/${post.node.slug}/`}>
@@ -723,6 +706,35 @@ const IndexPage = () => {
               <FontAwesomeIcon icon={['far', 'long-arrow-alt-right']} />{' '}
             </Link>
           </BlogPostGrid>
+          <FeaturedLinks>
+            <NewsfeedTitle>Dôležité odkazy</NewsfeedTitle>
+
+            <Link className="featuredLink" to="/about">
+              <h3>Náš príbeh</h3>
+              <p>História nášho klubu a ciest na Okinawu.</p>
+            </Link>
+
+            <Link className="featuredLink" to="/treningy">
+              <h3>Rozpisy tréningov</h3>
+              <p>Časový rozpis tréningov pre rok 2019.</p>
+            </Link>
+
+            <Link className="featuredLink" to="/udalosti">
+              <h3>Udalosti a akcie</h3>
+              <p>Kalendár udalostí - sezóna 2019/2020.</p>
+            </Link>
+          </FeaturedLinks>
+          <SocialIcons>
+            <a href="https://facebook.com/duvikanBratislava">
+              <FontAwesomeIcon icon={['fab', 'facebook-square']} />
+            </a>
+            <a href="https://facebook.com/duvikanBratislava">
+              <FontAwesomeIcon icon={['fab', 'instagram']} />
+            </a>
+            <a href="mailto:duvikan@gmail.com">
+              <FontAwesomeIcon icon={['far', 'envelope']} />
+            </a>
+          </SocialIcons>
           <FbFeed>
             {/* <iframe
               title="fbfeedembed"
