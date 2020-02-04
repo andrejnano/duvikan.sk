@@ -186,7 +186,7 @@ const HeroSectionContent = styled.div`
     position: relative;
     padding: 1rem 0;
     border-bottom: 1px solid transparent;
-    transition: border 250ms ease;
+    transition: border 125ms ease;
 
     &:hover {
       border-color: ${colorScheme.secondary};
@@ -198,6 +198,48 @@ const HeroSectionContent = styled.div`
       margin-top: -0.2rem;
       margin-left: 0.2rem;
     }
+  }
+`;
+
+const HighPriorityArticle = styled.div`
+  grid-column: 2/-2;
+  margin: 4rem 0;
+  background: transparent;
+  position: relative;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  .alertbox {
+    background: rgba(238, 40, 53, 0.75);
+    /* border-radius: 3px; */
+    padding: 2rem 2rem;
+    display: inline-block;
+    color: #fff;
+    font-weight: bold;
+    border-bottom: 3px solid #fff;
+    box-shadow: ${boxShadow};
+    transition: opacity 125ms ease;
+
+    &:hover {
+      opacity: 0.8;
+      border-bottom: 3px solid #fff;
+    }
+  }
+
+  /* .alertbox {
+    background: #fff;
+    border-radius: 3px;
+    padding: 2rem 2rem;
+    display: inline-block;
+    color: rgba(238, 40, 53, 1);
+    font-weight: bold;
+    border-bottom: 3px solid rgba(238, 40, 53);
+    box-shadow: ${boxShadow};
+    transition: opacity 125ms ease;
+
+    &:hover {
+      opacity: 0.8;
+    } */
   }
 `;
 
@@ -509,6 +551,9 @@ const IndexPage = () => {
             ...GatsbyDatoCmsFluid
           }
         }
+        highPriorityArticle {
+          title
+        }
       }
       posts: allDatoCmsBlogPost(
         filter: { locale: { eq: "sk" } }
@@ -571,6 +616,7 @@ const IndexPage = () => {
     firstImageGallery,
     secondImageGallery,
     backgroundImage,
+    highPriorityArticle,
   } = data.page;
 
   const backgroundFluidImageStack = [
@@ -610,6 +656,12 @@ const IndexPage = () => {
                 <FontAwesomeIcon icon={['far', 'long-arrow-alt-right']} />
               </Link>
             </HeroSectionContent>
+            <HighPriorityArticle>
+              <Link to="/2-z-dani" className="alertbox">
+                {highPriorityArticle.title}
+                {/* <FontAwesomeIcon icon={['far', 'long-arrow-alt-right']} /> */}
+              </Link>
+            </HighPriorityArticle>
           </GridLayout>
         </HeroSection>
       </BackgroundImage>

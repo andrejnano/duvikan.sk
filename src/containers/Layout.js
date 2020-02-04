@@ -30,6 +30,9 @@ import {
   faEnvelope,
   faEnvelopeSquare,
   faPhone,
+  faFilePdf,
+  faPercent,
+  faPercentage,
 } from '@fortawesome/pro-regular-svg-icons';
 
 import { faBars, faTimes } from '@fortawesome/pro-duotone-svg-icons';
@@ -47,7 +50,10 @@ library.add(
   faTimes,
   faEnvelope,
   faEnvelopeSquare,
-  faPhone
+  faPhone,
+  faFilePdf,
+  faPercent,
+  faPercentage
 );
 
 const SiteWrapper = styled.div`
