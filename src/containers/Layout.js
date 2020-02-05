@@ -63,6 +63,11 @@ const SiteWrapper = styled.div`
   min-height: 100%;
   flex-direction: column;
   background-color: ${colors.lightWash};
+  /* background: linear-gradient(to right, #ffd89b, #19547b); */
+  /* background: linear-gradient(to right, #f85032, #e73827); */
+  /* background: linear-gradient(to right, #000428, #004e92); */
+  /* background: linear-gradient(to right, #e0eafc, #cfdef3); W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 `;
 
 const ContentWrapper = styled.main`

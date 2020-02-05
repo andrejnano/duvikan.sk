@@ -12,6 +12,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { colors, colorScheme, boxShadow } from '../consts/style';
 import Logo from '../images/logo.svg';
 import { GridLayout } from '../components/common/LayoutParts';
+import { Draggable } from '../style/motion';
 
 const HomePage = styled.article`
   color: ${colors.white};
@@ -480,12 +481,13 @@ const FeaturedLinks = styled.div`
     margin-bottom: 1rem;
     background-color: #fff;
     box-shadow: ${boxShadow};
-    padding: 1rem;
+    padding: 2rem 3rem 1rem;
 
     h3 {
       font-size: 18px;
       letter-spacing: -0.011em;
       line-height: 22px;
+      margin-bottom: 1rem;
     }
 
     p {
@@ -749,7 +751,9 @@ const IndexPage = () => {
         <DarkSeparator></DarkSeparator>
         <GridLayout>
           <CenteredTextBlock>
-            <Logo />
+            <Draggable>
+              <Logo />
+            </Draggable>
             <h4 className="japaneseTitle">空手道場ドゥヴィ館ブラチスラバ</h4>
             <h3 className="title">Duvi-kan</h3>
             <div className="subtitle">

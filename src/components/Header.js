@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { GridLayout } from '../components/common/LayoutParts';
 import { boxShadow, colorScheme, colors, colors2 } from '../consts/style';
+import { Draggable } from '../style/motion';
 
 const HeaderWrapper = styled.header`
   position: fixed;
@@ -100,9 +101,9 @@ const NavList = styled.div`
   }
   a {
     letter-spacing: 0.2em;
-    font-weight: 400;
+    font-weight: 500;
     color: inherit;
-    /* text-transform: uppercase; */
+    text-transform: uppercase;
     font-size: 1.2rem;
 
     font-size: 14px;
@@ -110,10 +111,9 @@ const NavList = styled.div`
     line-height: 20px;
 
     &:not(:last-of-type) {
-      margin-right: 2em;
+      margin-right: 1.5em;
     }
     &:hover {
-      opacity: 0.75;
       color: ${colorScheme.secondary};
     }
   }

@@ -18,7 +18,8 @@ const BlogIndexWrap = styled.div`
 `;
 
 const Title = styled.h1`
-  margin: 2rem 0rem 1rem;
+  margin: 4rem 0rem;
+  padding: 0;
   grid-column: 2/-2;
   font-size: 3rem;
   font-weight: bold;
@@ -35,7 +36,11 @@ const BlogPostList = styled.ul`
   list-style-type: none;
 
   @media (min-width: 950px) {
-    grid-template-columns: 1fr 4rem 1fr;
+    grid-template-columns: 1fr 3rem 1fr;
+  }
+
+  @media (min-width: 1500px) {
+    grid-template-columns: 1fr 3rem 1fr 3rem 1fr;
   }
 
   li {
@@ -43,6 +48,7 @@ const BlogPostList = styled.ul`
     position: relative;
     min-width: 250px;
 
+    /* 2 column grid layout */
     @media (min-width: 950px) {
       :nth-child(odd) {
         grid-column: 1/2;
@@ -50,6 +56,23 @@ const BlogPostList = styled.ul`
       :nth-child(even) {
         grid-column: 3/4;
       }
+
+      margin-bottom: 4rem;
+    }
+
+
+    /* 3 columng grid layout */
+    @media (min-width: 1500px) {
+      :nth-child(3n+1) {
+        grid-column: 1/2;
+      }
+      :nth-child(3n+2) {
+        grid-column: 3/4;
+      }
+      :nth-child(3n+0) {
+        grid-column: 5/6;
+      }
+
       margin-bottom: 4rem;
     }
 
@@ -66,14 +89,14 @@ const BlogPostList = styled.ul`
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
-      padding: 3rem;
+      padding: 2rem 4rem;
 
       .title {
         flex: 100%;
         font-size: 24px;
         letter-spacing: -0.019em;
         line-height: 34px;
-        font-weight: 600;
+        font-weight: 700;
         margin: 0;
       }
 
@@ -82,12 +105,13 @@ const BlogPostList = styled.ul`
         display: flex;
         flex-direction: row;
         align-items: center;
-        font-weight: 400;
+        font-weight: 300;
         padding: 1rem 0rem 2rem;
-        color: ${colorScheme.accent};
+        /* color: ${colorScheme.accent}; */
+        opacity: 0.8;
         font-size: 1rem;
         @media (min-width: 950px) {
-          font-size: 16px;
+          font-size: 14px;
           letter-spacing: -0.011em;
           line-height: 22px;
         }
@@ -122,12 +146,14 @@ const BlogPostList = styled.ul`
       }
 
       .cover {
-        flex: 33.33333%;
-        height: 150px;
-        max-height: 150px;
+        flex: 100%;
+        /* flex: 33.33333%; */
+        height: 350px;
+        max-height: 350px;
         border: 1px solid #e6ecf1;
         box-shadow: ${boxShadow};
         position: relative;
+        margin: -2rem -4rem 3rem -4rem;
 
         &::before {
           content: ' ';
@@ -140,16 +166,18 @@ const BlogPostList = styled.ul`
 
       .excerpt {
         flex: 66.66666%;
-        color: rgba(0, 0, 0, 0.84);
+        color: rgba(0, 0, 0, 0.9);
         font-size: 16px;
+        font-weight: 400;
         letter-spacing: -0.011em;
         line-height: 22px;
-        @media (min-width: 950px) {
+        margin-top: 1rem;
+        /* @media (min-width: 950px) {
           font-size: 18px;
           letter-spacing: -0.014em;
           line-height: 25px;
-        }
-        padding-left: 1rem;
+        } */
+        /* padding-left: 1rem; */
       }
 
       .linkText {
@@ -181,8 +209,11 @@ const BlogPostList = styled.ul`
       }
 
       &:hover {
-        border-color: ${colorScheme.secondary};
-        color: ${colorScheme.secondary};
+        /* border-color: ${colorScheme.secondary}; */
+
+        .title {
+          color: ${colorScheme.secondary};
+        }
 
         .linkText {
           &:after {
@@ -202,7 +233,11 @@ const BlogPostItem = props => {
         to={`/blog/${props.node.slug}/`}
         className={props.node.featured ? 'featured card' : 'card'}
       >
+        <Img className="cover" fluid={props.node.cover.fluid} />
         <h2 className="title">{props.node.title}</h2>
+        <p className="excerpt">
+          {props.node.contentNode.childMarkdownRemark.excerpt}
+        </p>
         <div className="meta">
           <Img className="authorPhoto" fluid={props.node.author.photo.fluid} />
           <div className="authorName">{props.node.author.name}</div>
@@ -213,15 +248,11 @@ const BlogPostItem = props => {
           <Moment className="createdAtTime" format="DD.MM.YYYY">
             {props.node.publicationDate}
           </Moment>
-          <FontAwesomeIcon className="clockIcon" icon={['far', 'clock']} />{' '}
+          {/* <FontAwesomeIcon className="clockIcon" icon={['far', 'clock']} />{' '}
           <span className="timeToRead">
             {props.node.contentNode.childMarkdownRemark.timeToRead} min.
-          </span>
+          </span> */}
         </div>
-        <Img className="cover" fluid={props.node.cover.fluid} />
-        <p className="excerpt">
-          {props.node.contentNode.childMarkdownRemark.excerpt}
-        </p>
       </Link>
     </li>
   );
