@@ -32,10 +32,13 @@ export const Cover = styled.div`
   position: relative;
   width: 100%;
   display: flex;
-  height: 50vh;
-  margin-bottom: 3rem;
+  flex-direction: row;
+  justify-content: center;
+  /* height: 50vh; */
+  margin: 3rem 0 3rem;
   > div {
-    flex: 100%;
+    width: 63rem;
+    max-width: 100vw;
     box-shadow: ${boxShadow};
   }
 `;

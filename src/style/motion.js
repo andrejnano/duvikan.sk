@@ -26,4 +26,4 @@ export const Draggable = ({ children }) => (
   >
     {children}
   </motion.div>
-)
+);

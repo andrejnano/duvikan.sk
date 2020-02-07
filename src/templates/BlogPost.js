@@ -23,10 +23,10 @@ import { ScaleUp } from '../style/motion';
 import { GridLayout, Cover } from '../components/common/LayoutParts';
 
 const GoBack = styled.div`
-  margin: 1rem 0;
+  margin: 3rem 0 3rem;
   grid-column: 2/-2;
   @media (min-width: 950px) {
-    grid-column: 2/3;
+    grid-column: 2/2;
   }
 
   .btn {
@@ -61,25 +61,42 @@ const GoBack = styled.div`
   }
 `;
 
-const Title = styled.h1`
+const TitleWrap = styled.div`
   grid-column: 2/-2;
   @media (min-width: 950px) {
-    grid-column: 3/-2;
-  }
-  font-size: 4rem;
-  margin: 0;
-  padding: 0;
-  margin-bottom: 1rem;
-`;
-
-const PostInfo = styled.header`
-  grid-column: 2/-2;
-  @media (min-width: 950px) {
-    grid-column: 3/-2;
+    grid-column: 2/-2;
   }
   display: flex;
   flex-direction: row;
-  margin-bottom: 2rem;
+  justify-content: center;
+  margin: 3rem 0 1rem;
+`;
+
+const Title = styled.h1`
+  font-size: 40px;
+  letter-spacing: -0.022em;
+  line-height: 56px;
+  padding: 0;
+  margin: 0;
+  width: 63rem;
+  max-width: 90vw;
+`;
+
+const PostInfoWrap = styled.header`
+  grid-column: 2/-2;
+  @media (min-width: 950px) {
+    grid-column: 2/-2;
+  }
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+`;
+
+const PostInfo = styled.div`
+  width: 63rem;
+  max-width: 90vw;
+  display: flex;
+  flex-direction: row;
 
   .authorName {
     color: ${colorScheme.main};
@@ -109,26 +126,55 @@ const TimeToRead = styled.span`
   color: ${colorScheme.main};
 `;
 
-const Content = styled.article`
+const ContentWrap = styled.section`
   grid-column: 2/-2;
   @media (min-width: 950px) {
-    grid-column: 3/-2;
+    grid-column: 2/-2;
   }
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+`;
+
+const Content = styled.article`
+
   color: ${colorScheme.main};
-  background: ${colors.white};
-  border-radius: 3px;
-  border: 1px solid #e5e8ed;
-  box-shadow: ${boxShadow};
-  padding: 3rem;
+  /* background: ${colors.white}; */
+  /* border-radius: 3px; */
+  /* border: 1px solid #e5e8ed; */
+  /* box-shadow: ${boxShadow}; */
+
+  /* to keep character count aroun 2.31*alphabet or  50 - 90 chars per line*/
+  width: 63rem;
+  max-width: 90vw;
+
 
   p {
-    line-height: 22px;
-    color: rgba(0, 0, 0, 0.84);
-    letter-spacing: -0.011em;
-    font-size: 16px;
+    color: rgba(0, 0, 0, 1);
+
+    font-size: 20px;
+    letter-spacing: -0.017em;
+    line-height: 28px;
+
     margin-bottom: 35.596px;
+    white-space: pre-line;
+    text-align: justify;
+    hyphens: auto;
+
+    /* to keep character count aroun 2.31*alphabet or  50 - 90 chars per line*/
+    width: 63rem;
+    max-width: 90vw;
+
+
+    &:first-child {
+      font-weight: 600;
+      font-size: 24px;
+      letter-spacing: -0.019em;
+      line-height: 34px;
+    }
 
     &:last-child {
+      font-weight: bold;
       margin-bottom: 0;
     }
   }
@@ -144,11 +190,11 @@ const Content = styled.article`
 `;
 
 const SocialButtons = styled.div`
-  grid-column: -3/-2;
-  margin: 2rem 0 4rem;
+  grid-column: 2/-2;
+  margin: 6rem 0 6rem;
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: center;
 
   > div[role='button'] {
     display: inline-block;
@@ -181,6 +227,33 @@ const BlogPost = ({ data }) => {
   return (
     <ScaleUp>
       <SEO meta={seoMetaTags} />
+      <GridLayout>
+        <GoBack>
+          <Link to="/blog" className="btn">
+            <FontAwesomeIcon icon={['far', 'long-arrow-alt-left']} /> Všetky
+            príspevky
+          </Link>
+        </GoBack>
+        <TitleWrap>
+          <Title>{title}</Title>
+        </TitleWrap>
+        <PostInfoWrap>
+          <PostInfo>
+            <Img className="authorPhoto" fluid={author.photo.fluid} />
+            <div title="Autor článku" className="authorName">
+              {author.name}
+            </div>
+            <LastUpdate title="Dátum publikácie">
+              <FontAwesomeIcon icon={['far', 'calendar-alt']} />{' '}
+              <Moment format="DD.MM.YYYY">{publicationDate}</Moment>
+            </LastUpdate>
+            {/* <TimeToRead title="Čas na prečítanie textu">
+              <FontAwesomeIcon icon={['far', 'clock']} />{' '}
+              {contentNode.childMarkdownRemark.timeToRead} min.
+            </TimeToRead> */}
+          </PostInfo>
+        </PostInfoWrap>
+      </GridLayout>
       <Cover>
         <Img
           fluid={cover.fluid}
@@ -193,32 +266,17 @@ const BlogPost = ({ data }) => {
         />
       </Cover>
       <GridLayout>
-        <GoBack>
-          <Link to="/blog" className="btn">
-            <FontAwesomeIcon icon={['far', 'long-arrow-alt-left']} /> Všetky
-            príspevky
-          </Link>
-        </GoBack>
-        <Title>{title}</Title>
-        <PostInfo>
-          <Img className="authorPhoto" fluid={author.photo.fluid} />
-          <div title="Autor článku" className="authorName">
-            {author.name}
-          </div>
-          <LastUpdate title="Dátum publikácie">
-            <FontAwesomeIcon icon={['far', 'calendar-alt']} />{' '}
-            <Moment format="DD.MM.YYYY">{publicationDate}</Moment>
-          </LastUpdate>
-          {/* <TimeToRead title="Čas na prečítanie textu">
-            <FontAwesomeIcon icon={['far', 'clock']} />{' '}
-            {contentNode.childMarkdownRemark.timeToRead} min.
-          </TimeToRead> */}
-        </PostInfo>
-        <Content
-          dangerouslySetInnerHTML={{
-            __html: contentNode.childMarkdownRemark.html,
-          }}
-        />
+        {/* Useful line-length debug: <Content>
+          <p>abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefgh</p>
+        </Content> */}
+        <ContentWrap>
+          <Content
+            dangerouslySetInnerHTML={{
+              __html: contentNode.childMarkdownRemark.html,
+            }}
+          />
+        </ContentWrap>
+
         <SocialButtons>
           <FacebookShareButton url={postUrl} quote="Zdielať na Facebook">
             <FacebookIcon size={32} round={true} />

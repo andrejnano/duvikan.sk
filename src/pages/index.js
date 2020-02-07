@@ -123,6 +123,7 @@ const HeroSectionContent = styled.div`
   grid-column: 2/-2;
   background: transparent;
   position: relative;
+  display: block;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
@@ -148,67 +149,125 @@ const HeroSectionContent = styled.div`
     text-shadow: 0 2px 20px rgba(0, 0, 0, 0.16);
   }
   p {
-    font-size: 1.2rem;
     @media (min-width: 950px) {
       font-size: 20px;
       letter-spacing: -0.017em;
       line-height: 28px;
     }
-    line-height: 1.618;
-    font-weight: 400;
+    /* line-height: 1.618; */
+    font-weight: 500;
     max-width: 30em;
     color: rgba(255, 255, 255, 0.9);
     text-shadow: 0 2px 20px rgba(0, 0, 0, 0.16);
   }
+
+`;
+
+const HeroLinks = styled.nav`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin: 3rem 0;
+
   .cta {
-    letter-spacing: 0.2em;
-    font-weight: 800;
-    text-transform: uppercase;
-    font-size: 1rem;
-    @media (min-width: 950px) {
-      font-size: 12px;
-      letter-spacing: 0em;
-      line-height: 17px;
-    }
-    color: ${colorScheme.secondary};
-    position: relative;
-    padding: 1rem 0;
-    border-bottom: 1px solid transparent;
-    transition: border 125ms ease;
+    display: inline-block;
+    margin: 0 2rem 0 0rem;
+
+    font-weight: 700;
+    /* text-transform: uppercase; */
+    font-size: 16px;
+    letter-spacing: -0.011em;
+    line-height: 22px;
+
+    /* font-size: 20px;
+    letter-spacing: -0.017em;
+    line-height: 28px; */
+
+    /* color: ${colorScheme.secondary}; */
+    background: rgba(0, 0, 0, 0);
+    color: #fff;
+    border: 2px solid ${colorScheme.secondary};
+    /* border-radius: 1px; */
+
+    opacity: 0.9;
 
     &:hover {
-      border-color: ${colorScheme.secondary};
+      color: ${colorScheme.secondary};
+      background: rgba(255, 255, 255, 0.95);
+      border-color: #fff;
+      opacity: 1;
     }
 
+    &:nth-of-type(2) {
+      border-color: ${colors.lightBlue};
+      &:hover {
+        color: ${colors.lightBlue};
+        border-color: #fff;
+      }
+    }
+
+    &:nth-of-type(3) {
+      border-color: ${colors.lightGreen};
+      &:hover {
+        color: ${colors.lightGreen};
+        border-color: #fff;
+      }
+    }
+
+    padding: 1rem;
+    /* border-bottom: 2px solid transparent; */
+    transition: border 250ms ease, color 250ms ease, background 250ms ease;
+
     svg {
-      font-size: 16px;
+      display: none;
+      font-size: 20px;
       vertical-align: middle;
-      margin-top: -0.2rem;
-      margin-left: 0.2rem;
+      margin: 0rem 0.4rem;
     }
   }
 `;
 
 const HighPriorityArticle = styled.div`
   grid-column: 2/-2;
-  margin: 4rem 0;
+  transform: translateY(-100%);
   background: transparent;
-  position: relative;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
   .alertbox {
-    background: rgba(238, 40, 53, 0.8);
-    /* border-radius: 3px; */
-    padding: 2rem 2rem;
-    display: inline-block;
+    background: ${colorScheme.secondary};
+    /* border: 4px solid ${colorScheme.secondary}; */
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+    padding: 1.5rem 3rem;
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+
+    font-size: 14px;
+    letter-spacing: -0.011em;
+    line-height: 22px;
+
     color: #fff;
-    font-weight: bold;
-    box-shadow: ${boxShadow};
-    transition: opacity 125ms ease;
+    font-weight: 700;
+    /* box-shadow: ${boxShadow}; */
+    transition: color 250ms ease, background 250ms ease;
+    /* box-shadow: inset 0 -3px 3px -3px #000000; */
+    box-shadow: inset 0 -4px 8px -4px rgba(116, 129, 141, 1);
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.10);
+
+    > svg {
+      font-weight: 800;
+      font-size: 20px;
+      margin-right: 0.75em;
+      position: relative;
+    }
+
 
     &:hover {
-      opacity: 0.8;
+      background: #fff;
+      color: ${colorScheme.secondary};
     }
   }
 `;
@@ -341,6 +400,8 @@ const Newsfeed = styled.section`
   background: rgba(255, 255, 255, 1);
   background: #fafafa;
   /* background: ${colorScheme.secondary}; */
+  box-shadow: 3px 3px 3px #ddd;
+  z-index: 10;
 
   @media (min-width: 950px) {
     margin-top: calc(-10vh);
@@ -355,7 +416,7 @@ const NewsfeedTitle = styled.h2`
   } */
   font-size: 2rem;
   font-weight: bold;
-  margin: 4rem 0 2rem;
+  margin: -2rem 0 2rem;
   /* color: #fff; */
 `;
 
@@ -662,17 +723,21 @@ const IndexPage = () => {
           <GridLayout>
             <HeroSectionContent>
               <div dangerouslySetInnerHTML={{ __html: description }} />
-              <Link className="cta" to="/about">
-                Viac o našom klube{' '}
-                <FontAwesomeIcon icon={['far', 'long-arrow-alt-right']} />
-              </Link>
+              <HeroLinks>
+                <Link className="cta" to="/about">
+                  Viac o našom klube{' '}
+                  <FontAwesomeIcon icon={['far', 'long-arrow-alt-right']} />
+                </Link>
+                <Link className="cta" to="/treningy">
+                  Rozpis tréningov{' '}
+                  <FontAwesomeIcon icon={['far', 'long-arrow-alt-right']} />
+                </Link>
+                <Link className="cta" to="/udalosti">
+                  Kalendár akcií{' '}
+                  <FontAwesomeIcon icon={['far', 'long-arrow-alt-right']} />
+                </Link>
+              </HeroLinks>
             </HeroSectionContent>
-            <HighPriorityArticle>
-              <Link to="/2-z-dani" className="alertbox">
-                {highPriorityArticle.title}
-                {/* <FontAwesomeIcon icon={['far', 'long-arrow-alt-right']} /> */}
-              </Link>
-            </HighPriorityArticle>
           </GridLayout>
         </HeroSection>
       </BackgroundImage>
@@ -683,6 +748,13 @@ const IndexPage = () => {
       </PropositionSection> */}
       <Newsfeed>
         <GridLayout>
+          <HighPriorityArticle>
+            <Link to="/2-z-dani" className="alertbox">
+              <FontAwesomeIcon icon={['far', 'info-circle']} />{' '}
+              {highPriorityArticle.title}
+              {/* <FontAwesomeIcon icon={['far', 'long-arrow-alt-right']} /> */}
+            </Link>
+          </HighPriorityArticle>
           <BlogPostGrid>
             <NewsfeedTitle>Najnovšie príspevky</NewsfeedTitle>
             {map(edges, post => (
