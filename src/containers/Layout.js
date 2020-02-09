@@ -38,7 +38,7 @@ import {
   faInfoCircle,
 } from '@fortawesome/pro-regular-svg-icons';
 
-import { faBars, faTimes } from '@fortawesome/pro-duotone-svg-icons';
+import { faBars, faTimes, faAt } from '@fortawesome/pro-duotone-svg-icons';
 
 library.add(
   faInstagram,
@@ -59,7 +59,8 @@ library.add(
   faPercentage,
   faCalendar,
   faInfo,
-  faInfoCircle
+  faInfoCircle,
+  faAt
 );
 
 const SiteWrapper = styled.div`

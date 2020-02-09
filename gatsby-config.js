@@ -1,6 +1,11 @@
 const siteConfig = require('./config/site-config');
+// require('dotenv').config({
+//   path: `.env.${process.env.NODE_ENV}`,
+// });
+
+// import env variables from .env file (FontAwesome pro, Google analytics,... )
 require('dotenv').config({
-  path: `.env.${process.env.NODE_ENV}`,
+  path: '.env',
 });
 
 module.exports = {

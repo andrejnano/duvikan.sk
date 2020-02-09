@@ -45,6 +45,7 @@ const SocialIcons = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
+  align-items: flex-start;
 
   @media (min-width: 950px) {
     grid-column: 5/6;
@@ -55,9 +56,9 @@ const SocialIcons = styled.div`
   padding: 0 2.5%;
   /* opacity: 0.8; */
   > a {
+    /* display: inline-block; */
     font-size: 3rem;
     padding-right: 1rem;
-    font-size: 2rem;
     font-weight: bold;
     margin: 4rem 0 2rem;
 
@@ -160,7 +161,6 @@ const HeroSectionContent = styled.div`
     color: rgba(255, 255, 255, 0.9);
     text-shadow: 0 2px 20px rgba(0, 0, 0, 0.16);
   }
-
 `;
 
 const HeroLinks = styled.nav`
@@ -446,8 +446,10 @@ const BlogPostGrid = styled.div`
   /* background: ${colors.mediumWash}; */
 
   .viewMoreLink {
-    padding: 1rem 0;
-    font-weight: bold;
+    margin: 1rem;
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: ${colorScheme.main};
 
     svg {
       margin-left: 2px;
@@ -798,14 +800,20 @@ const IndexPage = () => {
             </Link>
           </FeaturedLinks>
           <SocialIcons>
-            <a href="https://facebook.com/duvikanBratislava">
-              <FontAwesomeIcon icon={['fab', 'facebook-square']} />
+            <a
+              title="Otvoriť našu Facebook stránku"
+              href="https://facebook.com/duvikanBratislava"
+            >
+              <FontAwesomeIcon icon={['fab', 'facebook']} />
             </a>
-            <a href="https://facebook.com/duvikanBratislava">
+            <a
+              title="Otvoriť našu Instagram stránku"
+              href="https://facebook.com/duvikanBratislava"
+            >
               <FontAwesomeIcon icon={['fab', 'instagram']} />
             </a>
-            <a href="mailto:duvikan@gmail.com">
-              <FontAwesomeIcon icon={['far', 'envelope']} />
+            <a title="Napíšte nám email" href="mailto:duvikan@gmail.com">
+              <FontAwesomeIcon icon={['fad', 'at']} />
             </a>
           </SocialIcons>
           <FbFeed>

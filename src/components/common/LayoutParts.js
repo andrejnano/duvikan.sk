@@ -35,9 +35,11 @@ export const Cover = styled.div`
   flex-direction: row;
   justify-content: center;
   /* height: 50vh; */
-  margin: 3rem 0 3rem;
+  margin: 0rem 0 3rem;
   > div {
-    width: 63rem;
+    height: auto;
+    width: 100vw;
+    max-height: 70vh;
     max-width: 100vw;
     box-shadow: ${boxShadow};
   }

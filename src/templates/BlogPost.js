@@ -126,6 +126,21 @@ const TimeToRead = styled.span`
   color: ${colorScheme.main};
 `;
 
+const PostCover = styled.div`
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  /* height: 50vh; */
+  margin: 3rem 0 3rem;
+  > div {
+    width: 63rem;
+    max-width: 100vw;
+    box-shadow: ${boxShadow};
+  }
+`;
+
 const ContentWrap = styled.section`
   grid-column: 2/-2;
   @media (min-width: 950px) {
@@ -254,17 +269,16 @@ const BlogPost = ({ data }) => {
           </PostInfo>
         </PostInfoWrap>
       </GridLayout>
-      <Cover>
+      <PostCover>
         <Img
           fluid={cover.fluid}
           style={{
             // Defaults are overwrite-able by setting one or each of the following:
             backgroundSize: 'cover',
-            backgroundPosition: '50% 20%',
             backgroundRepeat: 'no-repeat',
           }}
         />
-      </Cover>
+      </PostCover>
       <GridLayout>
         {/* Useful line-length debug: <Content>
           <p>abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefgh</p>

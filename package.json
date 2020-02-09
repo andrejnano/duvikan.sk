@@ -12,7 +12,7 @@
     "@fortawesome/pro-solid-svg-icons": "^5.10.0",
     "@fortawesome/react-fontawesome": "^0.1.4",
     "babel-plugin-styled-components": "^1.10.6",
-    "dotenv": "^8.0.0",
+    "dotenv": "^8.2.0",
     "framer-motion": "^1.2.6",
     "gatsby": "^2.13.38",
     "gatsby-background-image": "^0.8.3",
