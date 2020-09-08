@@ -326,6 +326,15 @@ const BlogPostItem = styled.li`
     .content {
       height: 100%;
       padding: 1.5rem;
+
+      .excerpt {
+        width: 100%;
+        color: rgb(74,85,104);
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 18px;
+        margin-top: 1rem;
+      }
       
       .timePosted {
         font-size: 1.2rem;
@@ -509,6 +518,7 @@ const IndexPage = () => {
             contentNode {
               childMarkdownRemark {
                 timeToRead
+                excerpt
               }
             }
           }
@@ -591,6 +601,9 @@ const IndexPage = () => {
                     <Img className="cover" fluid={post.node.cover.fluid} />
                     <div className="content">
                       <h3 className="title">{post.node.title}</h3>
+                      <p className="excerpt">
+                        {post.node.contentNode.childMarkdownRemark.excerpt}
+                      </p>
                       <div className="timePosted">
                         <FontAwesomeIcon icon={['far', 'calendar-alt']} />{' '}
                         <Moment format="DD.MM.YYYY">

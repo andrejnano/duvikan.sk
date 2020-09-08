@@ -35,11 +35,11 @@ const BlogPostList = styled.ul`
   position: relative;
   list-style-type: none;
 
-  @media (min-width: 950px) {
+  @media (min-width: 750px) {
     grid-template-columns: 1fr 3rem 1fr;
   }
 
-  @media (min-width: 1500px) {
+  @media (min-width: 950px) {
     grid-template-columns: 1fr 3rem 1fr 3rem 1fr;
   }
 
@@ -49,7 +49,7 @@ const BlogPostList = styled.ul`
     min-width: 250px;
 
     /* 2 column grid layout */
-    @media (min-width: 950px) {
+    @media (min-width: 750px) {
       :nth-child(odd) {
         grid-column: 1/2;
       }
@@ -62,7 +62,7 @@ const BlogPostList = styled.ul`
 
 
     /* 3 columng grid layout */
-    @media (min-width: 1500px) {
+    @media (min-width: 950px) {
       :nth-child(3n+1) {
         grid-column: 1/2;
       }
@@ -81,23 +81,26 @@ const BlogPostList = styled.ul`
       color: ${colors.black};
       overflow: hidden;
       height: 100%;
-      border: 1px solid #e6ecf1;
+      border: 2px solid #e6ecf1;
       box-shadow: ${boxShadow};
       background-color: ${colors.white};
-      border-radius: 3px;
+      border-radius: 5px;
       transition: border 250ms ease;
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
-      padding: 2rem 4rem;
+      padding: 1rem 3rem;
 
       .title {
-        flex: 100%;
-        font-size: 24px;
-        letter-spacing: -0.019em;
-        line-height: 34px;
+        width: 100%;
+        font-size: 18px;
+        line-height: 22px;
         font-weight: 700;
         margin: 0;
+        margin-top: 2rem;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
       }
 
       .meta {
@@ -148,12 +151,12 @@ const BlogPostList = styled.ul`
       .cover {
         flex: 100%;
         /* flex: 33.33333%; */
-        height: 350px;
-        max-height: 350px;
+        height: 250px;
+        max-height: 250px;
         border: 1px solid #e6ecf1;
         box-shadow: ${boxShadow};
         position: relative;
-        margin: -2rem -4rem 3rem -4rem;
+        margin: -2rem -4rem 0 -4rem;
 
         &::before {
           content: ' ';
@@ -165,19 +168,12 @@ const BlogPostList = styled.ul`
       }
 
       .excerpt {
-        flex: 66.66666%;
-        color: rgba(0, 0, 0, 0.9);
-        font-size: 16px;
+        width: 100%;
+        color: rgb(74,85,104);
+        font-size: 14px;
         font-weight: 400;
-        letter-spacing: -0.011em;
-        line-height: 22px;
+        line-height: 18px;
         margin-top: 1rem;
-        /* @media (min-width: 950px) {
-          font-size: 18px;
-          letter-spacing: -0.014em;
-          line-height: 25px;
-        } */
-        /* padding-left: 1rem; */
       }
 
       .linkText {
@@ -258,15 +254,65 @@ const BlogPostItem = props => {
   );
 };
 
-const SectionSeparator = styled.hr`
-  width: 100%;
-  height: 1px;
-  background-color: ${colors.black};
-  opacity: 0.075;
-  border: 0;
-  margin: 0;
-  margin-bottom: 3rem;
-  overflow: visible;
+const TopBar = styled.div`
+  grid-column: 2/-2;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const TopBarPagination = styled.div`
+  padding: 1rem 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  div.disabled {
+    display: none;
+  }
+
+  a {
+    display: block;
+    appearance: none;
+    overflow: visible;
+    cursor: pointer;
+    height: 4rem;
+    line-height: 4rem;
+    text-align: center;
+    white-space: nowrap;
+    text-decoration: none;
+    color: ${colors.black};
+    background-color: ${colors.white};
+    border: 1px solid #e6ecf1;
+    border-radius: 3px;
+    box-shadow: ${boxShadow};
+    transition: border 250ms ease;
+    padding: 0rem 2rem;
+    font-weight: 600;
+
+    span {
+      display: none;
+      @media (min-width: 950px) {
+        display: inline;
+      }
+    }
+
+    svg {
+      font-size: 1.6rem;
+      vertical-align: middle;
+      margin-top: -0.2rem;
+    }
+
+    &:hover {
+      border-color: ${colorScheme.secondary};
+      color: ${colorScheme.secondary};
+    }
+
+    &.next {
+      margin-left: 1rem;
+    }
+  }
 `;
 
 const Pagination = styled.div`
@@ -416,26 +462,26 @@ const BlogIndex = ({ pageContext }) => {
     <BlogIndexWrap>
       <SEO meta={seoMetaTags} />
       <GridLayout className="top">
-        <Title>{title}</Title>
-        <Pagination role="navigation">
-          <PaginationLink
-            test={first}
-            url={previousUrl}
-            text="Novšie príspevky"
-            class="previous"
-          />
-          <div className="pageNumber">
-            {index}/{pageCount}
-          </div>
-          <PaginationLink
-            test={last}
-            url={nextUrl}
-            text="Staršie príspevky"
-            class="next"
-          />
-        </Pagination>
+        <TopBar>
+          <Title>{title} [ {index}/{pageCount} ]</Title>
+
+          <TopBarPagination role="navigation">
+            <PaginationLink
+              test={first}
+              url={previousUrl}
+              text="Novšie príspevky"
+              class="previous"
+            />
+            <PaginationLink
+              test={last}
+              url={nextUrl}
+              text="Staršie príspevky"
+              class="next"
+            />
+          </TopBarPagination>
+        
+        </TopBar>
       </GridLayout>
-      <SectionSeparator />
       <GridLayout>
         <BlogPostList>
           {group.map(node => (
