@@ -80,11 +80,6 @@
     "build": "gatsby build",
     "clean": "rm -rf ./node_modules && rm -rf ./.cache && yarn cache clean && yarn"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "yarn format"
-    }
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/andrejnano/duvikan.sk"

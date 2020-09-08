@@ -117,6 +117,9 @@ const ContactPage = () => {
           latitude
           longitude
         }
+        iban
+        mesacnyPoplatok1
+        mesacnyPoplatok2
       }
     }
   `);
@@ -128,6 +131,9 @@ const ContactPage = () => {
     phoneNumber,
     seoMetaTags,
     location,
+    iban,
+    mesacnyPoplatok1,
+    mesacnyPoplatok2
   } = data.datoCmsContactPage;
 
   const center = {
@@ -210,11 +216,11 @@ const ContactPage = () => {
           <ContactCard>
             <div className="innerBox">
               <h3>IBAN</h3>
-              <p>SK1211000000002625766523</p>
+              <p>{iban}</p>
               <h3>Trénujúci do 17 rokov</h3>
-              <p>30€/mesačne</p>
+              <p>{mesacnyPoplatok1}€/mesačne</p>
               <h3>Trénujúci nad 18 rokov</h3>
-              <p>35€/mesačne</p>
+              <p>{mesacnyPoplatok2}€/mesačne</p>
               <h3>Špecifikácia platby</h3>
               <ul>
                 <li>Platbu je potrebné uskutočniť vždy mesiac vopred</li>
