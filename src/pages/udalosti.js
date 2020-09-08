@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { graphql, useStaticQuery } from 'gatsby';
 import SEO from '../components/SEO';
@@ -9,6 +9,8 @@ import { GridLayout } from '../components/common/LayoutParts';
 import Moment from 'react-moment';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 
 import 'moment/locale/sk';
 const localizer = momentLocalizer(moment);
@@ -33,7 +35,7 @@ const CalendarWrap = styled.div`
   }
 `;
 
-const Upcoming = styled.ul`
+const EventList = styled.ul`
   grid-column: 2/-2;
   display: flex;
   flex-direction: row;
@@ -45,48 +47,29 @@ const Upcoming = styled.ul`
 `;
 
 const Event = styled.li`
-  position: relative;
-  min-width: 250px;
   width: 100%;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
+  margin-left: 1rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  font-size: 1.2rem;
 
-  @media (min-width: 720px) {
-    max-width: 720px;
-    width: 50%;
+  &.hidden {
+    display: none;
   }
 
-  @media (min-width: 950px) {
-    width: 33.333333%;
+  .start {
+    color: ${colorScheme.gray};
+    margin-right: 1rem;
+    width: 100%;
   }
 
-  @media (min-width: 1470px) {
-    width: 25%;
-  }
-
-  .innerBox {
-    height: 100%;
-    display: block;
-    position: relative;
-    margin: 0rem 1rem 1rem;
-    padding: 2rem;
-    border: 1px solid #e6ecf1;
-    box-shadow: ${boxShadow};
-    background-color: ${colors.white};
-    transition: border 250ms ease;
-    border-radius: 3px;
-    display: block;
-
-    .dateInterval {
-      .start {
-      }
-    }
-
-    .title {
-      color: ${colorScheme.main};
-      font-size: 1.6rem;
-      position: relative;
-      margin: 0;
-    }
+  .title {
+    color: ${colorScheme.main};
+    margin: 0;
+    margin-right: 0.5rem;
   }
 `;
 
@@ -114,6 +97,9 @@ const Title = styled.h1`
 `;
 
 const UdalostiPage = () => {
+
+  const [ showOldEvents, setShowOldEvents ] = useState(false);
+
   const data = useStaticQuery(graphql`
     query UdalostiQuery {
       page: datoCmsUdalostiPage {
@@ -121,14 +107,8 @@ const UdalostiPage = () => {
         seoMetaTags {
           ...GatsbyDatoCmsSeoMetaTags
         }
-        events {
-          title
-          start
-          end
-          allDay
-        }
       }
-      upcomingEvents: allDatoCmsEvent(
+      events: allDatoCmsEvent(
         sort: { fields: start, order: ASC }
         filter: { locale: { eq: "sk" } }
       ) {
@@ -136,33 +116,83 @@ const UdalostiPage = () => {
           title
           start
           end
+          allDay
+          location {
+            latitude
+            longitude
+          }
         }
       }
     }
   `);
 
-  const { title, events, seoMetaTags } = data.page;
-  const upcomingEvents = data.upcomingEvents.nodes;
+  const { title, seoMetaTags } = data.page;
+  const events = data.events.nodes;
 
   return (
     <>
       <SEO meta={seoMetaTags} />
       <GridLayout>
         <Title>{title} </Title>
-        <Upcoming>
-          {map(upcomingEvents, event => (
-            <Event key={event.title}>
-              <div className="innerBox">
-                <div className="dateInterval">
+        <EventList>
+        <h2>Najbližšie udalosti</h2>
+          { events
+            .filter((event) => {
+              let eventDate = new Date(event.start).setHours(0,0,0,0);
+              let todayDate = new Date().setHours(0,0,0,0);
+              return eventDate >= todayDate;
+            })
+            .map((event, index) => { return (
+              <Event key={event.title + index}>
+                <Moment className="start" format="DD.MM.YYYY">
+                  {event.start}
+                </Moment>
+                <h3 className="title">
+                  {event.title}
+                </h3>
+                {
+                  event.location &&
+                  <a target="_blank" title="Otvoriť mapu s miestom konania udalosti" href={`https://www.google.com/maps/search/?api=1&query=${event.location.latitude},${event.location.longitude}`}>
+                    <FontAwesomeIcon icon={['far', 'map-marker-alt']} />
+                  </a>
+                }
+              </Event>
+            )})
+          }
+          <button onClick={() => setShowOldEvents(!showOldEvents)}>
+            { showOldEvents ? "Skryť staršie udalosti" : "Zobraziť staršie udalosti" }
+          </button>
+        </EventList>
+        { 
+          showOldEvents &&
+          <EventList>
+            <h2>Staršie udalosti</h2>
+            { events
+              .filter((event) => {
+                let eventDate = new Date(event.start).setHours(0,0,0,0);
+                let todayDate = new Date().setHours(0,0,0,0);
+                return eventDate < todayDate;
+              })
+              .map((event, index) => { return (
+                <Event key={event.title + index}>
                   <Moment className="start" format="DD.MM.YYYY">
                     {event.start}
                   </Moment>
-                </div>
-                <h3 className="title">{event.title}</h3>
-              </div>
-            </Event>
-          ))}
-        </Upcoming>
+                  <h3 className="title">
+                    {event.title}
+                  </h3>
+                  {
+                    event.location &&
+                    <a target="_blank" href={`https://www.google.com/maps/search/?api=1&query=${event.location.latitude},${event.location.longitude}`}>
+                      <FontAwesomeIcon icon={['far', 'map-marker-alt']} />
+                    </a>
+                  }
+                </Event>
+              )})
+            }
+          </EventList>
+        }
+
         <MyCalendar eventList={events} />
       </GridLayout>
     </>
