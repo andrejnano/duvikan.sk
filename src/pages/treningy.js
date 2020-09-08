@@ -261,7 +261,7 @@ const TreningyPage = () => {
   const fridayEvents = data.fridayEvents.edges;
 
   return (
-    <ScaleUp>
+    <>
       <SEO meta={seoMetaTags} />
 
       <GridLayout>
@@ -347,7 +347,7 @@ const TreningyPage = () => {
           <Gallery itemsPerRow={3} images={imageGallery} />
         </GalleryWrap>
       </GridLayout>
-    </ScaleUp>
+    </>
   );
 };
 

@@ -148,7 +148,7 @@ const AboutPage = () => {
   const coverFluidImageStack = [cover.fluid].reverse();
 
   return (
-    <ScaleUp>
+    <>
       <SEO meta={seoMetaTags} />
       <GridLayout>
         <TitleWrap>
@@ -182,7 +182,7 @@ const AboutPage = () => {
           <Gallery itemsPerRow={3} images={imageGallery} />
         </GalleryWrap>
       </GridLayout>
-    </ScaleUp>
+    </>
   );
 };
 

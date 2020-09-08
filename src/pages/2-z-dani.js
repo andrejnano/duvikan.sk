@@ -95,7 +95,7 @@ const PercentaPage = () => {
   } = data.datoCmsPercentaPage;
 
   return (
-    <ScaleUp>
+    <>
       <GridLayout>
         <Title>{title}</Title>
         <Content>
@@ -142,7 +142,7 @@ const PercentaPage = () => {
           </List>
         </Content>
       </GridLayout>
-    </ScaleUp>
+    </>
   );
 };
 

@@ -240,7 +240,7 @@ const BlogPost = ({ data }) => {
   const postUrl = `${siteMetadata.siteUrl}/blog/${slug}/`;
 
   return (
-    <ScaleUp>
+    <>
       <SEO meta={seoMetaTags} />
       <GridLayout>
         <GoBack>
@@ -306,7 +306,7 @@ const BlogPost = ({ data }) => {
           </WhatsappShareButton>
         </SocialButtons>
       </GridLayout>
-    </ScaleUp>
+    </>
   );
 };
 

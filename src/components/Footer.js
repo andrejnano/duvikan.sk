@@ -36,22 +36,24 @@ const SectionSeparator = styled.hr`
 const NavList = styled.nav`
   grid-column: 2/-2;
   margin-top: 2rem;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  /* flex-wrap: wrap; */
+
   @media (min-width: 950px) {
     margin-top: 0rem;
     grid-column: 3/5;
   }
+
   a {
     letter-spacing: 0.2em;
     font-weight: bold;
     text-transform: uppercase;
     font-size: 1.2rem;
-    &:not(:last-of-type) {
-      margin-right: 2em;
-    }
-
-    &:hover {
-      opacity: 0.5;
-    }
+    margin-right: 2em;
   }
 `;
 
@@ -105,12 +107,9 @@ const Footer = () => {
       <FooterWrapper>
         <GridLayout>
           <Copyright>
-            Duvikan {year} {/*<a href="https://anano.dev">@andrejnano</a>*/}
+            <Link to="/">Duvikan {year} {/*<a href="https://anano.dev">@andrejnano</a>*/}</Link>
           </Copyright>
           <NavList>
-            <Link to="/" activeClassName="activePage">
-              Domov
-            </Link>
             <Link to="/blog" activeClassName="activePage">
               Novinky
             </Link>

@@ -174,7 +174,7 @@ const ClenoviaPage = () => {
     members5,
   } = data.page;
   return (
-    <ScaleUp>
+    <>
       <SEO meta={seoMetaTags} />
       <GridLayout>
         <Title>Členovia klubu</Title>
@@ -271,7 +271,7 @@ const ClenoviaPage = () => {
           ))}
         </MemberGrid>
       </GridLayout>
-    </ScaleUp>
+    </>
   );
 };
 
