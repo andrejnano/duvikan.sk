@@ -26,49 +26,6 @@ const HomePage = styled.article`
   }
 `;
 
-const LangSwitch = styled.div`
-  grid-column: 6/7;
-  opacity: 0.5;
-
-  > a {
-    display: block;
-    font-size: 1rem;
-    font-weight: bold;
-    &:hover {
-      opacity: 0.5;
-    }
-  }
-`;
-
-const SocialIcons = styled.div`
-  grid-column: 2/-2;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: flex-start;
-
-  @media (min-width: 950px) {
-    grid-column: 5/6;
-    justify-content: center;
-  }
-
-  /* align-items: center; */
-  padding: 0 2.5%;
-  /* opacity: 0.8; */
-  > a {
-    /* display: inline-block; */
-    font-size: 3rem;
-    padding-right: 1rem;
-    font-weight: bold;
-    margin: 4rem 0 2rem;
-
-    &:hover {
-      opacity: 0.8;
-      color: ${colorScheme.secondary};
-    }
-  }
-`;
-
 const JapaneseSideText = styled.div`
   position: absolute;
   top: 50%;
@@ -304,10 +261,8 @@ const CenteredTextBlock = styled.div`
 const Newsfeed = styled.section`
   position: relative;
   color: #000;
-  background: rgba(255, 255, 255, 1);
   background: #fafafa;
   /* background: ${colorScheme.secondary}; */
-  box-shadow: 3px 3px 3px #ddd;
   z-index: 10;
 
   @media (min-width: 950px) {
@@ -317,35 +272,96 @@ const Newsfeed = styled.section`
 `;
 
 const NewsfeedTitle = styled.h2`
-  /* grid-column: 2/-2;
-  @media (min-width: 950px) {
-    grid-column: 2/4;
-  } */
+  grid-column: 2/-2;
   font-size: 2rem;
   font-weight: bold;
-  margin: -2rem 0 2rem;
-  /* color: #fff; */
+  margin-bottom: 1rem;
 `;
 
 
 const BlogPostGrid = styled.div`
   grid-column: 2/-2;
-  @media (min-width: 700px) {
-    grid-column: 2/4;
-  }
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
   justify-content: flex-start;
   margin: 0;
-  margin-bottom: 4rem;
-  position: relative;
   list-style-type: none;
-  /* background: ${colors.mediumWash}; */
+`;
 
-  .viewMoreLink {
-    margin-top: 1rem;
-    font-size: 1.2rem;
-    font-weight: 400;
+const BlogPostItem = styled.li`
+
+  width: 100%;
+  
+  @media (min-width: 750px) {
+    width: 33.333333%;
+  }
+
+  padding: 1rem;
+  height: 100%;
+
+  > a {
+    display: block;
+    overflow: hidden;
+    border-radius: 5px;
+    border: 2px solid #eeeeee;
+    background: #fff;
+    width: 100%;
+    height: 100%;
+
+    .cover {
+      max-height: 150px;
+      height: 100%;
+
+      img {
+        object-position: center;
+        object-fit: cover;
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        /* filter: sepia(.3) opacity(.9) grayscale(.1); */
+      }
+    }
+
+    .content {
+      height: 100%;
+      padding: 1.5rem;
+      
+      .timePosted {
+        font-size: 1.2rem;
+        font-weight: 400;
+        width: auto;
+        margin: 0;
+        font-feature-settings: 'zero' 0;
+        font-feature-settings: 'tnum' 1;
+      }
+
+      .title {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        font-size: 1.6rem;
+        font-weight: 600;
+        margin: 0;
+      }
+    }
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+`;
+
+const ViewMoreLink = styled.div`
+  grid-column: 2/-2;
+  padding: 1rem 1rem 3rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+
+  > a {
+    font-size: 1.4rem;
+    font-weight: 600;
     color: ${colorScheme.main};
 
     svg {
@@ -363,59 +379,8 @@ const BlogPostGrid = styled.div`
   }
 `;
 
-const BlogPostItem = styled.li`
-  position: relative;
-  width: 100%;
-  margin-bottom: 1rem;
-
-  > a {
-
-    .timePosted {
-      font-size: 1rem;
-      font-weight: 300;
-      width: auto;
-      margin: 0;
-      font-feature-settings: 'zero' 0;
-      font-feature-settings: 'tnum' 1;
-    }
-
-    .title {
-      font-size: 1rem;
-      @media (min-width: 950px) {
-        font-size: 1.4rem;
-      }
-      font-weight: 600;
-      margin: 0;
-    }
-
-    .linkText {
-      margin-left: auto;
-      color: inherit;
-      font-weight: 400;
-      font-size: 1.4rem;
-      display: none;
-      svg {
-        margin-left: 2px;
-        font-size: 1.2em;
-        vertical-align: middle;
-        position: relative;
-        top: -1px;
-        color: inherit;
-      }
-    }
-
-    &:hover {
-      opacity: 0.5;
-    }
-  }
-`;
-
 const FeaturedLinks = styled.div`
   grid-column: 2/-2;
-  @media (min-width: 700px) {
-    grid-column: 4/6;
-    margin-left: 4rem;
-  }
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -513,7 +478,7 @@ const IndexPage = () => {
       posts: allDatoCmsBlogPost(
         filter: { locale: { eq: "sk" } }
         sort: { fields: [publicationDate], order: DESC }
-        limit: 5
+        limit: 3
       ) {
         edges {
           node {
@@ -556,8 +521,6 @@ const IndexPage = () => {
     description,
     seoMetaTags,
     body,
-    firstImageGallery,
-    secondImageGallery,
     backgroundImage,
     highPriorityArticle,
   } = data.page;
@@ -566,7 +529,8 @@ const IndexPage = () => {
     backgroundImage.fluid,
     'radial-gradient(circle, rgba(26,26,26, 0.7) 0%, rgba(0, 0, 0, 1) 90%)',
   ].reverse();
-  const { edges } = data.posts;
+
+  const posts = data.posts.edges;
 
   return (
     <HomePage>
@@ -608,11 +572,7 @@ const IndexPage = () => {
           </GridLayout>
         </HeroSection>
       </BackgroundImage>
-      {/* <PropositionSection>
-        <GridLayout className="grid">
 
-        </GridLayout>
-      </PropositionSection> */}
       <Newsfeed>
         <GridLayout>
           <HighPriorityArticle>
@@ -620,33 +580,41 @@ const IndexPage = () => {
               <FontAwesomeIcon icon={['fab', 'facebook']} />
             </a>
           </HighPriorityArticle>
+
+          <NewsfeedTitle>Novinky</NewsfeedTitle>
+
           <BlogPostGrid>
-            <NewsfeedTitle>Novinky</NewsfeedTitle>
-            {map(edges, post => (
-              <BlogPostItem key={post.node.slug}>
-                <Link to={`/blog/${post.node.slug}/`}>
-                  <div className="timePosted">
-                    <FontAwesomeIcon icon={['far', 'calendar-alt']} />{' '}
-                    <Moment format="DD.MM.YYYY">
-                      {post.node.publicationDate}
-                    </Moment>
-                  </div>
-                  <h3 className="title">{post.node.title}</h3>
-                  <div className="linkText">
-                    Otvoriť článok{' '}
-                    <FontAwesomeIcon icon={['far', 'long-arrow-alt-right']} />{' '}
-                  </div>
-                </Link>
-              </BlogPostItem>
-            ))}
-            <Link className="viewMoreLink" to="/blog">
+            { posts.map( (post) => {
+              return (
+                <BlogPostItem key={post.node.slug}>
+                  <Link to={`/blog/${post.node.slug}/`}>
+                    <Img className="cover" fluid={post.node.cover.fluid} />
+                    <div className="content">
+                      <h3 className="title">{post.node.title}</h3>
+                      <div className="timePosted">
+                        <FontAwesomeIcon icon={['far', 'calendar-alt']} />{' '}
+                        <Moment format="DD.MM.YYYY">
+                          {post.node.publicationDate}
+                        </Moment>
+                      </div>
+                    </div>
+                  </Link>
+                </BlogPostItem>
+              )})
+            }
+          </BlogPostGrid>
+
+          <ViewMoreLink>
+            <Link to="/blog">
               Zobraziť všetky príspevky{' '}
               <FontAwesomeIcon icon={['far', 'long-arrow-alt-right']} />{' '}
             </Link>
-          </BlogPostGrid>
-          <FeaturedLinks>
-            <NewsfeedTitle>Dôležité odkazy</NewsfeedTitle>
+          </ViewMoreLink>
 
+          
+          {/* 
+          <NewsfeedTitle>Dôležité odkazy</NewsfeedTitle>
+          <FeaturedLinks>
             <Link className="featuredLink" to="/about">
               <h3>Náš príbeh</h3>
               <p>História nášho klubu a ciest na Okinawu.</p>
@@ -661,7 +629,7 @@ const IndexPage = () => {
               <h3>Udalosti a akcie</h3>
               <p>Kalendár udalostí - sezóna 2019/2020.</p>
             </Link>
-          </FeaturedLinks>
+          </FeaturedLinks> */}
       
         </GridLayout>
       </Newsfeed>

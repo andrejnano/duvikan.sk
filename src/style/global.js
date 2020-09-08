@@ -13,7 +13,7 @@ html {
   font-feature-settings: 'dlig', 'zero', 'ss01', 'cv05', 'cv10';
   font-feature-settings: 'zero' 0;
   font-kerning: auto;
-  scroll-behavior: smooth;
+  /* scroll-behavior: smooth; */
   text-rendering: optimizelegibility;
   box-sizing: border-box;
 }
