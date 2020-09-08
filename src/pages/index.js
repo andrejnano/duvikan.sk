@@ -166,35 +166,28 @@ const HeroSectionContent = styled.div`
 const HeroLinks = styled.nav`
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
+  flex-wrap: no-wrap;
   justify-content: flex-start;
   margin: 3rem 0;
 
   .cta {
-    display: inline-block;
+    /* display: inline-block; */
     margin: 0 2rem 0 0rem;
-
+    padding: 1rem;
     font-weight: 700;
-    /* text-transform: uppercase; */
     font-size: 16px;
     letter-spacing: -0.011em;
     line-height: 22px;
-
-    /* font-size: 20px;
-    letter-spacing: -0.017em;
-    line-height: 28px; */
-
-    /* color: ${colorScheme.secondary}; */
     background: rgba(0, 0, 0, 0);
     color: #fff;
     border: 2px solid ${colorScheme.secondary};
-    /* border-radius: 1px; */
-
+    border-radius: 5px;
     opacity: 0.9;
+    transition: border 150ms ease, color 150ms ease, background 150ms ease;
 
     &:hover {
       color: ${colorScheme.secondary};
-      background: rgba(255, 255, 255, 0.95);
+      background: rgba(225,225,225,1);
       border-color: #fff;
       opacity: 1;
     }
@@ -214,17 +207,7 @@ const HeroLinks = styled.nav`
         border-color: #fff;
       }
     }
-
-    padding: 1rem;
-    /* border-bottom: 2px solid transparent; */
-    transition: border 250ms ease, color 250ms ease, background 250ms ease;
-
-    svg {
-      display: none;
-      font-size: 20px;
-      vertical-align: middle;
-      margin: 0rem 0.4rem;
-    }
+    
   }
 `;
 
@@ -612,16 +595,13 @@ const IndexPage = () => {
               <div dangerouslySetInnerHTML={{ __html: description }} />
               <HeroLinks>
                 <Link className="cta" to="/about">
-                  Viac o našom klube{' '}
-                  <FontAwesomeIcon icon={['far', 'long-arrow-alt-right']} />
+                  Viac o našom klube
                 </Link>
                 <Link className="cta" to="/treningy">
-                  Rozpis tréningov{' '}
-                  <FontAwesomeIcon icon={['far', 'long-arrow-alt-right']} />
+                  Rozpis tréningov
                 </Link>
                 <Link className="cta" to="/udalosti">
-                  Kalendár akcií{' '}
-                  <FontAwesomeIcon icon={['far', 'long-arrow-alt-right']} />
+                  Kalendár akcií
                 </Link>
               </HeroLinks>
             </HeroSectionContent>
@@ -641,7 +621,7 @@ const IndexPage = () => {
             </a>
           </HighPriorityArticle>
           <BlogPostGrid>
-            <NewsfeedTitle>Najnovšie príspevky</NewsfeedTitle>
+            <NewsfeedTitle>Novinky</NewsfeedTitle>
             {map(edges, post => (
               <BlogPostItem key={post.node.slug}>
                 <Link to={`/blog/${post.node.slug}/`}>
