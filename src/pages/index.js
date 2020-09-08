@@ -232,104 +232,28 @@ const HighPriorityArticle = styled.div`
   grid-column: 2/-2;
   transform: translateY(-100%);
   background: transparent;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
 
   .alertbox {
-    background: ${colorScheme.secondary};
-    /* border: 4px solid ${colorScheme.secondary}; */
-    border-top-right-radius: 3px;
-    border-top-left-radius: 3px;
-    padding: 1.5rem 3rem;
+    background:  #3b5998;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    padding: 1rem 1.5rem;
     display: inline-flex;
     flex-direction: row;
     align-items: center;
-
-    font-size: 14px;
-    letter-spacing: -0.011em;
-    line-height: 22px;
-
+    font-size: 2.5rem;
     color: #fff;
     font-weight: 700;
-    /* box-shadow: ${boxShadow}; */
     transition: color 250ms ease, background 250ms ease;
-    /* box-shadow: inset 0 -3px 3px -3px #000000; */
-    box-shadow: inset 0 -4px 8px -4px rgba(116, 129, 141, 1);
-    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.10);
-
-    > svg {
-      font-weight: 800;
-      font-size: 20px;
-      margin-right: 0.75em;
-      position: relative;
-    }
-
 
     &:hover {
       background: #fff;
-      color: ${colorScheme.secondary};
+      color: #3b5998;
     }
   }
 `;
 
-const PropositionSection = styled.div`
-  border-top: 1px solid #707070;
-  background: #000;
-  position: relative;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: auto;
-  padding: 4rem 0;
-
-  @media (min-width: 950px) {
-    padding: 3rem 0;
-    height: auto;
-    transform: translateY(-100%);
-    background: rgba(26, 26, 26, 0.5);
-    /* temp */
-    background: #fff;
-    color: #000;
-  }
-
-  > .grid {
-    height: 100%;
-
-    .featuredLink {
-      padding-right: 2rem;
-      grid-column: 2/-2;
-      transition: color 125ms ease;
-
-      @media (min-width: 950px) {
-        grid-column: initial;
-        &:first-child {
-          grid-column: 2/3;
-        }
-      }
-
-      h3 {
-        font-size: 16px;
-        letter-spacing: -0.011em;
-        line-height: 22px;
-      }
-
-      p {
-        font-size: 12px;
-        letter-spacing: 0em;
-        line-height: 17px;
-      }
-
-      &:hover {
-        h3 {
-          color: ${colorScheme.secondary};
-        }
-        p {
-          opacity: 0.75;
-        }
-      }
-    }
-  }
-`;
 
 const DarkSeparator = styled.hr`
   width: 100%;
@@ -420,21 +344,11 @@ const NewsfeedTitle = styled.h2`
   /* color: #fff; */
 `;
 
-const FbFeed = styled.div`
-  display: none;
-  grid-column: 4/6;
-
-  > iframe {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-  }
-`;
 
 const BlogPostGrid = styled.div`
   grid-column: 2/-2;
-  @media (min-width: 950px) {
-    grid-column: 2/3;
+  @media (min-width: 700px) {
+    grid-column: 2/4;
   }
   display: flex;
   flex-direction: column;
@@ -446,7 +360,7 @@ const BlogPostGrid = styled.div`
   /* background: ${colors.mediumWash}; */
 
   .viewMoreLink {
-    margin: 1rem;
+    margin-top: 1rem;
     font-size: 1.2rem;
     font-weight: 400;
     color: ${colorScheme.main};
@@ -469,30 +383,15 @@ const BlogPostGrid = styled.div`
 const BlogPostItem = styled.li`
   position: relative;
   width: 100%;
+  margin-bottom: 1rem;
+
   > a {
-    position: relative;
-    padding: 1rem 0;
-    margin-bottom: 0.8rem;
-    background-color: #fff;
-    box-shadow: ${boxShadow};
-    color: inherit;
-    overflow: hidden;
-    display: inline-flex;
-    min-width: 300px;
-    flex-direction: row;
-    align-items: center;
 
     .timePosted {
       font-size: 1rem;
       font-weight: 300;
-      opacity: 0.8;
-      @media (min-width: 950px) {
-        font-size: 1.2rem;
-      }
       width: auto;
       margin: 0;
-      margin-left: 1rem;
-      padding-top: 0.25rem;
       font-feature-settings: 'zero' 0;
       font-feature-settings: 'tnum' 1;
     }
@@ -504,7 +403,6 @@ const BlogPostItem = styled.li`
       }
       font-weight: 600;
       margin: 0;
-      margin-left: 2rem;
     }
 
     .linkText {
@@ -531,8 +429,8 @@ const BlogPostItem = styled.li`
 
 const FeaturedLinks = styled.div`
   grid-column: 2/-2;
-  @media (min-width: 950px) {
-    grid-column: 3/5;
+  @media (min-width: 700px) {
+    grid-column: 4/6;
     margin-left: 4rem;
   }
   display: flex;
@@ -674,18 +572,6 @@ const IndexPage = () => {
   const {
     description,
     seoMetaTags,
-    quickLink1Title,
-    quickLink2Title,
-    quickLink3Title,
-    quickLink1Cover,
-    quickLink2Cover,
-    quickLink3Cover,
-    quickLink1Description,
-    quickLink1LinkText,
-    quickLink2Description,
-    quickLink2LinkText,
-    quickLink3Description,
-    quickLink3LinkText,
     body,
     firstImageGallery,
     secondImageGallery,
@@ -695,7 +581,6 @@ const IndexPage = () => {
 
   const backgroundFluidImageStack = [
     backgroundImage.fluid,
-    // 'radial-gradient(circle, rgba(26,26,26, 0.7) 0%, rgba(26, 26, 26, 1) 90%)',
     'radial-gradient(circle, rgba(26,26,26, 0.7) 0%, rgba(0, 0, 0, 1) 90%)',
   ].reverse();
   const { edges } = data.posts;
@@ -751,11 +636,9 @@ const IndexPage = () => {
       <Newsfeed>
         <GridLayout>
           <HighPriorityArticle>
-            <Link to="/2-z-dani" className="alertbox">
-              <FontAwesomeIcon icon={['far', 'info-circle']} />{' '}
-              {highPriorityArticle.title}
-              {/* <FontAwesomeIcon icon={['far', 'long-arrow-alt-right']} /> */}
-            </Link>
+            <a className="alertbox" title="Otvoriť našu Facebook stránku" href="https://facebook.com/duvikanBratislava">
+              <FontAwesomeIcon icon={['fab', 'facebook']} />
+            </a>
           </HighPriorityArticle>
           <BlogPostGrid>
             <NewsfeedTitle>Najnovšie príspevky</NewsfeedTitle>
@@ -799,32 +682,7 @@ const IndexPage = () => {
               <p>Kalendár udalostí - sezóna 2019/2020.</p>
             </Link>
           </FeaturedLinks>
-          <SocialIcons>
-            <a
-              title="Otvoriť našu Facebook stránku"
-              href="https://facebook.com/duvikanBratislava"
-            >
-              <FontAwesomeIcon icon={['fab', 'facebook']} />
-            </a>
-            <a
-              title="Otvoriť našu Instagram stránku"
-              href="https://facebook.com/duvikanBratislava"
-            >
-              <FontAwesomeIcon icon={['fab', 'instagram']} />
-            </a>
-            <a title="Napíšte nám email" href="mailto:duvikan@gmail.com">
-              <FontAwesomeIcon icon={['fad', 'at']} />
-            </a>
-          </SocialIcons>
-          <FbFeed>
-            {/* <iframe
-              title="fbfeedembed"
-              src="http://www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2FduvikanBratislava/&width=600&colorscheme=light&show_faces=true&border_color&stream=true&header=true&height=300"
-              scrolling="yes"
-              allowTransparency="true"
-              frameBorder="0"
-            ></iframe> */}
-          </FbFeed>
+      
         </GridLayout>
       </Newsfeed>
       <Main>
