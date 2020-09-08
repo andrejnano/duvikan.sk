@@ -38,12 +38,13 @@ const NavList = styled.nav`
   margin-top: 2rem;
 
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  /* flex-wrap: wrap; */
+  flex-direction: column;
+
 
   @media (min-width: 950px) {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     margin-top: 0rem;
     grid-column: 3/5;
   }
@@ -53,7 +54,13 @@ const NavList = styled.nav`
     font-weight: bold;
     text-transform: uppercase;
     font-size: 1.2rem;
-    margin-right: 2em;
+
+    margin-top: 1rem;
+    margin-left: 1rem;
+    @media (min-width: 950px) {
+      margin: 0;
+      margin-right: 2em;
+    }
   }
 `;
 
