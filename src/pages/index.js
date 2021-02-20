@@ -173,6 +173,26 @@ const HighPriorityArticle = styled.div`
   transform: translateY(-100%);
   background: transparent;
   overflow: hidden;
+  display: flex;
+  flex-direction: row;
+
+  .infobox {
+    background: #ee2835;
+    display: inline-flex;
+    font-size: 2rem;
+    padding: 1rem 1.5rem;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    margin-left: 1rem;
+    color: #fff;
+    font-weight: 500;
+    transition: color 250ms ease, background 250ms ease;
+
+    &:hover {
+      background: #fff;
+      color: #ee2835;
+    }
+  }
 
   .alertbox {
     background:  #3b5998;
@@ -476,7 +496,7 @@ const IndexPage = () => {
           }
         }
         backgroundImage {
-          fluid(maxWidth: 4000) {
+          fluid(maxWidth: 1920) {
             ...GatsbyDatoCmsFluid
           }
         }
@@ -495,14 +515,14 @@ const IndexPage = () => {
             title
             slug
             cover {
-              fluid(maxWidth: 720) {
+              fluid(maxWidth: 650) {
                 ...GatsbyDatoCmsFluid
               }
             }
             author {
               name
               photo {
-                fluid(maxWidth: 200) {
+                fluid(maxWidth: 50) {
                   src
                   srcSet
                   base64
@@ -589,6 +609,9 @@ const IndexPage = () => {
             <a className="alertbox" title="Otvoriť našu Facebook stránku" href="https://facebook.com/duvikanBratislava">
               <FontAwesomeIcon icon={['fab', 'facebook']} />
             </a>
+            <Link className="infobox" to="/2-z-dani/">
+              Darujte 2% z Vašich daní za rok 2020.
+            </Link>
           </HighPriorityArticle>
 
           <NewsfeedTitle>Novinky</NewsfeedTitle>
