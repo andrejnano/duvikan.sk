@@ -463,21 +463,6 @@ const IndexPage = () => {
         quickLink1Title
         quickLink2Title
         quickLink3Title
-        quickLink1Cover {
-          fluid(maxWidth: 4000) {
-            ...GatsbyDatoCmsFluid
-          }
-        }
-        quickLink2Cover {
-          fluid(maxWidth: 720) {
-            ...GatsbyDatoCmsFluid
-          }
-        }
-        quickLink3Cover {
-          fluid(maxWidth: 720) {
-            ...GatsbyDatoCmsFluid
-          }
-        }
         quickLink1Description
         quickLink1LinkText
         quickLink2Description
@@ -496,7 +481,7 @@ const IndexPage = () => {
           }
         }
         backgroundImage {
-          fluid(maxWidth: 1920) {
+          fluid(maxWidth: 1920, imgixParams: { auto: "compress" }) {
             ...GatsbyDatoCmsFluid
           }
         }
@@ -515,14 +500,14 @@ const IndexPage = () => {
             title
             slug
             cover {
-              fluid(maxWidth: 650) {
+              fluid(maxWidth: 600, imgixParams: { auto: "compress" }) {
                 ...GatsbyDatoCmsFluid
               }
             }
             author {
               name
               photo {
-                fluid(maxWidth: 50) {
+                fluid(maxWidth: 50, imgixParams: { auto: "compress" }) {
                   src
                   srcSet
                   base64
