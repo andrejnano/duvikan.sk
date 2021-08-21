@@ -69,7 +69,7 @@ const Calendar = styled.div`
 `;
 
 const Day = styled.div`
-  height: 100%;
+  /* height: 100%; */
   flex: 100%;
   &:not(:last-child) {
     padding-right: 2rem;
