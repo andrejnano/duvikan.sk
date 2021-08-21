@@ -149,6 +149,16 @@ const Event = props => {
   );
 };
 
+const NoTrainingsText = styled.div`
+  color: #ccc;
+  padding: 1rem;
+  text-align: center;
+`;
+
+const NoTrainings = () => (
+  <NoTrainingsText>V tento deň nie sú žiadne tréningy.</NoTrainingsText>
+);
+
 const TreningyPage = () => {
   const data = useStaticQuery(graphql`
     query TreningyQuery {
@@ -249,16 +259,52 @@ const TreningyPage = () => {
           }
         }
       }
+      saturdayEvents: allDatoCmsTrainingEvent(
+        filter: { day: { eq: "Sobota" }, locale: { eq: "sk" } }
+        sort: { fields: timeStart }
+      ) {
+        edges {
+          node {
+            day
+            timeStart
+            timeEnd
+            description
+            color {
+              hex
+            }
+          }
+        }
+      }
+      sundayEvents: allDatoCmsTrainingEvent(
+        filter: { day: { eq: "Nedeľa" }, locale: { eq: "sk" } }
+        sort: { fields: timeStart }
+      ) {
+        edges {
+          node {
+            day
+            timeStart
+            timeEnd
+            description
+            color {
+              hex
+            }
+          }
+        }
+      }
     }
   `);
 
   const { title, introText, imageGallery, seoMetaTags } = data.page;
 
+  // workdays
   const mondayEvents = data.mondayEvents.edges;
   const tuesdayEvents = data.tuesdayEvents.edges;
   const wednesdayEvents = data.wednesdayEvents.edges;
   const thursdayEvents = data.thursdayEvents.edges;
   const fridayEvents = data.fridayEvents.edges;
+  // weekend
+  const saturdayEvents = data.saturdayEvents.edges;
+  const sundayEvents = data.sundayEvents.edges;
 
   return (
     <>
@@ -269,7 +315,8 @@ const TreningyPage = () => {
         <Calendar>
           <Day>
             <h4>Pondelok</h4>
-            {map(mondayEvents, event => (
+            {mondayEvents.length == 0 ? <NoTrainings/>
+            : map(mondayEvents, event => (
               <Event
                 key={`${event.node.day} - ${event.node.description}`}
                 start={event.node.timeStart}
@@ -281,7 +328,8 @@ const TreningyPage = () => {
           </Day>
           <Day>
             <h4>Utorok</h4>
-            {map(tuesdayEvents, event => (
+            {tuesdayEvents.length == 0 ? <NoTrainings/>
+            : map(tuesdayEvents, event => (
               <Event
                 key={`${event.node.day} - ${event.node.description}`}
                 start={event.node.timeStart}
@@ -293,7 +341,8 @@ const TreningyPage = () => {
           </Day>
           <Day>
             <h4>Streda</h4>
-            {map(wednesdayEvents, event => (
+            {wednesdayEvents.length == 0 ? <NoTrainings/>
+            : map(wednesdayEvents, event => (
               <Event
                 key={`${event.node.day} - ${event.node.description}`}
                 start={event.node.timeStart}
@@ -305,7 +354,8 @@ const TreningyPage = () => {
           </Day>
           <Day>
             <h4>Štvrtok</h4>
-            {map(thursdayEvents, event => (
+            {thursdayEvents.length == 0 ? <NoTrainings/>
+            : map(thursdayEvents, event => (
               <Event
                 key={`${event.node.day} - ${event.node.description}`}
                 start={event.node.timeStart}
@@ -317,7 +367,8 @@ const TreningyPage = () => {
           </Day>
           <Day>
             <h4>Piatok</h4>
-            {map(fridayEvents, event => (
+            {fridayEvents.length == 0 ? <NoTrainings/>
+            : map(fridayEvents, event => (
               <Event
                 key={`${event.node.day} - ${event.node.description}`}
                 start={event.node.timeStart}
@@ -327,6 +378,38 @@ const TreningyPage = () => {
               />
             ))}
           </Day>
+        </Calendar>
+        <Calendar>
+          <Day>
+            <h4>Sobota</h4>
+            {saturdayEvents.length == 0 ? <NoTrainings/>
+            : map(saturdayEvents, event => (
+              <Event
+                key={`${event.node.day} - ${event.node.description}`}
+                start={event.node.timeStart}
+                end={event.node.timeEnd}
+                description={event.node.description}
+                color={event.node.color.hex}
+              />
+            ))}
+          </Day>
+          <Day>
+            <h4>Nedeľa</h4>
+            {sundayEvents.length == 0 ? <NoTrainings/>
+            : map(sundayEvents, event => (
+              <Event
+                key={`${event.node.day} - ${event.node.description}`}
+                start={event.node.timeStart}
+                end={event.node.timeEnd}
+                description={event.node.description}
+                color={event.node.color.hex}
+              />
+            ))}
+          </Day>
+          {/* To fix the layout of weekand day, 3 empty virtual days are inserted here */}
+          <Day></Day>
+          <Day></Day>
+          <Day></Day>
         </Calendar>
       </GridLayout>
 
