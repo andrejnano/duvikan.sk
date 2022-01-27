@@ -144,7 +144,7 @@ const HeroLinks = styled.nav`
 
     &:hover {
       color: ${colorScheme.secondary};
-      background: rgba(225,225,225,1);
+      background: rgba(225, 225, 225, 1);
       border-color: #fff;
       opacity: 1;
     }
@@ -164,7 +164,6 @@ const HeroLinks = styled.nav`
         border-color: #fff;
       }
     }
-    
   }
 `;
 
@@ -195,7 +194,7 @@ const HighPriorityArticle = styled.div`
   }
 
   .alertbox {
-    background:  #3b5998;
+    background: #3b5998;
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
     padding: 1rem 1.5rem;
@@ -213,7 +212,6 @@ const HighPriorityArticle = styled.div`
     }
   }
 `;
-
 
 const DarkSeparator = styled.hr`
   width: 100%;
@@ -298,7 +296,6 @@ const NewsfeedTitle = styled.h2`
   margin-bottom: 1rem;
 `;
 
-
 const BlogPostGrid = styled.div`
   grid-column: 2/-2;
   display: flex;
@@ -310,9 +307,8 @@ const BlogPostGrid = styled.div`
 `;
 
 const BlogPostItem = styled.li`
-
   width: 100%;
-  
+
   @media (min-width: 750px) {
     width: 33.333333%;
   }
@@ -349,13 +345,13 @@ const BlogPostItem = styled.li`
 
       .excerpt {
         width: 100%;
-        color: rgb(74,85,104);
+        color: rgb(74, 85, 104);
         font-size: 14px;
         font-weight: 400;
         line-height: 18px;
         margin-top: 1rem;
       }
-      
+
       .timePosted {
         font-size: 1.2rem;
         font-weight: 400;
@@ -591,18 +587,22 @@ const IndexPage = () => {
       <Newsfeed>
         <GridLayout>
           <HighPriorityArticle>
-            <a className="alertbox" title="Otvoriť našu Facebook stránku" href="https://facebook.com/duvikanBratislava">
+            <a
+              className="alertbox"
+              title="Otvoriť našu Facebook stránku"
+              href="https://facebook.com/duvikanBratislava"
+            >
               <FontAwesomeIcon icon={['fab', 'facebook']} />
             </a>
             <Link className="infobox" to="/2-z-dani/">
-              Darujte 2% z Vašich daní za rok 2020.
+              Darujte 2% z Vašich daní za rok 2021.
             </Link>
           </HighPriorityArticle>
 
           <NewsfeedTitle>Novinky</NewsfeedTitle>
 
           <BlogPostGrid>
-            { posts.map( (post) => {
+            {posts.map(post => {
               return (
                 <BlogPostItem key={post.node.slug}>
                   <Link to={`/blog/${post.node.slug}/`}>
@@ -621,8 +621,8 @@ const IndexPage = () => {
                     </div>
                   </Link>
                 </BlogPostItem>
-              )})
-            }
+              );
+            })}
           </BlogPostGrid>
 
           <ViewMoreLink>
@@ -632,7 +632,6 @@ const IndexPage = () => {
             </Link>
           </ViewMoreLink>
 
-          
           {/* 
           <NewsfeedTitle>Dôležité odkazy</NewsfeedTitle>
           <FeaturedLinks>
@@ -651,7 +650,6 @@ const IndexPage = () => {
               <p>Kalendár udalostí - sezóna 2019/2020.</p>
             </Link>
           </FeaturedLinks> */}
-      
         </GridLayout>
       </Newsfeed>
       <Main>
